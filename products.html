@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop — Jon Bon</title>
+    <meta name="description" content="Cinematic LUTs, filmmaking guides, and editing templates from travel filmmaker Jon Bon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #0A0A0A;
+            --bg-card:      #111111;
+            --bg-card-2:    #1A1A1A;
+            --text:         #FFFFFF;
+            --text-muted:   #888888;
+            --text-dim:     #444444;
+            --accent:       #FFFFFF;
+            --accent-hover: #E0E0E0;
+            --accent-bg:    rgba(255,255,255,0.07);
+            --warm:         #CCCCCC;
+            --warm-bg:      rgba(255,255,255,0.07);
+            --border:       rgba(255,255,255,0.07);
+            --border-mid:   rgba(255,255,255,0.12);
+            --radius:       12px;
+            --radius-lg:    20px;
+            --max-w:        900px;
+            --font:         'Inter', -apple-system, sans-serif;
+            --trans:        0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: var(--accent-bg); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        /* LAYOUT */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: var(--font); font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: var(--trans); border: none; white-space: nowrap; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border-mid); }
+        .btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+        .btn-warm { background: #333333; color: #FFFFFF; }
+        .btn-warm:hover { background: #444444; transform: translateY(-1px); }
+        .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 8px; }
+
+        /* BADGE */
+        .badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+        .badge-blue { background: rgba(255,255,255,0.07); color: #CCCCCC; border: 1px solid rgba(255,255,255,0.12); }
+        .badge-warm { background: rgba(255,255,255,0.07); color: #CCCCCC; border: 1px solid rgba(255,255,255,0.12); }
+
+        /* PAGE HEADER */
+        .page-header { padding: 72px 24px 56px; max-width: var(--max-w); margin: 0 auto; border-bottom: 1px solid var(--border); }
+        .page-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 12px; }
+        .page-title { font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+        .page-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 520px; }
+
+        /* SHOP TABS */
+        .shop-tabs-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+        .shop-tabs { display: flex; gap: 4px; padding-top: 36px; margin-bottom: 0; background: transparent; border-bottom: 1px solid var(--border); }
+        .shop-tab { padding: 10px 22px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: var(--trans); font-family: var(--font); }
+        .shop-tab:hover { color: var(--text); }
+        .shop-tab.active { color: #FFFFFF; border-bottom-color: #FFFFFF; }
+
+        .shop-pane { display: none; padding: 48px 0 96px; }
+        .shop-pane.active { display: block; }
+
+        /* SECTION LABELS */
+        .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 32px; }
+
+        /* FEATURED PRODUCT */
+        .product-featured { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); margin-bottom: 24px; }
+        .product-featured-img { background: linear-gradient(135deg, #1A1A1A, #222222); display: flex; align-items: center; justify-content: center; font-size: 6rem; min-height: 320px; }
+        .product-featured-body { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+        .product-featured-body h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; }
+        .product-price-lg { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+        .product-featured-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+        .product-features { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+        .product-features li { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .product-features li::before { content: '✓'; color: #FFFFFF; font-weight: 700; font-size: 0.8rem; }
+
+        /* PRODUCTS GRID */
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--trans); }
+        .product-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .product-img { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; }
+        .product-img.blue { background: linear-gradient(135deg, #1A1A1A, #222222); }
+        .product-img.warm { background: linear-gradient(135deg, #161616, #1E1E1E); }
+        .product-img.purple { background: linear-gradient(135deg, #131313, #1C1C1C); }
+        .product-body { padding: 20px 22px 24px; }
+        .product-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 6px; }
+        .product-name { font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+        .product-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+        .product-foot { display: flex; align-items: center; justify-content: space-between; }
+        .product-price { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+
+        /* WHY BUY */
+        .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
+        .why-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 22px; display: flex; gap: 16px; align-items: flex-start; }
+        .why-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .why-card h3 { font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; }
+        .why-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; margin-top: 32px; }
+        .faq-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+        .faq-item:first-child { border-top: 1px solid var(--border); }
+        .faq-item h3 { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+        .faq-item p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .faq-item a { color: #FFFFFF; }
+
+        /* AFFILIATE */
+        .affiliate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .affiliate-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start; text-decoration: none; color: inherit; transition: var(--trans); }
+        .affiliate-card:hover { border-color: rgba(255,255,255,0.15); background: var(--bg-card-2); }
+        .aff-icon { font-size: 2rem; flex-shrink: 0; }
+        .aff-cat { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 3px; }
+        .aff-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 4px; }
+        .aff-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+        .aff-badge { display: inline-block; font-size: 0.68rem; font-weight: 600; background: rgba(255,255,255,0.07); color: #888888; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+
+        /* CTA */
+        .cta-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 80px 24px; text-align: center; }
+        .cta-inner { max-width: 540px; margin: 0 auto; }
+        .cta-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 16px; }
+        .cta-title { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 12px; }
+        .cta-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 28px; }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: 1140px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .product-featured { grid-template-columns: 1fr; }
+            .product-featured-img { min-height: 180px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .affiliate-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+            .nav-links { gap: 0; }
+            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
+        }
+        @media (max-width: 520px) {
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="index.html"         class="nav-link">Home</a></li>
+            <li><a href="index.html#videos"  class="nav-link">Videos</a></li>
+            <li><a href="travel.html"        class="nav-link">Blog</a></li>
+            <li><a href="products.html"      class="nav-link active">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="page-eyebrow">Shop</div>
+    <h1 class="page-title">Resources & Gear</h1>
+    <p class="page-desc">Everything I use to film, edit, and grow — digital products built from real trips, and the gear that's survived every destination.</p>
+</div>
+
+<!-- SHOP TABS -->
+<div class="shop-tabs-wrap">
+    <div class="shop-tabs">
+        <button class="shop-tab active" onclick="switchTab(this,'products')">Digital Products</button>
+        <button class="shop-tab" onclick="switchTab(this,'affiliate')">Gear & Affiliate Links</button>
+    </div>
+</div>
+
+<!-- DIGITAL PRODUCTS -->
+<div class="shop-pane active" id="products">
+    <div class="container">
+
+        <!-- Featured -->
+        <div class="product-featured reveal">
+            <div class="product-featured-img">🎬</div>
+            <div class="product-featured-body">
+                <span class="badge badge-warm">⭐ Best Seller</span>
+                <h2>Cinematic LUT Pack</h2>
+                <div class="product-price-lg">$29.99</div>
+                <p>12 professionally crafted LUTs that give your footage that film-quality look — built from real travel footage. Works in DaVinci Resolve, Premiere Pro, Final Cut Pro, and more.</p>
+                <ul class="product-features">
+                    <li>12 cinematic LUTs for travel & landscape</li>
+                    <li>Compatible with all major editing software</li>
+                    <li>Instant digital download</li>
+                    <li>Free updates included</li>
+                </ul>
+                <button onclick="checkout('lut_pack')" class="btn btn-primary" style="width:fit-content;">Buy Now — $29.99</button>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="products-grid">
+            <div class="product-card reveal" style="transition-delay:0.1s">
+                <div class="product-img blue">✈️</div>
+                <div class="product-body">
+                    <div class="product-type">Guide</div>
+                    <div class="product-name">Travel Filmmaking Guide</div>
+                    <div class="product-desc">50+ pages covering pre-production, storytelling, camera settings, and how to create content that stands out.</div>
+                    <div class="product-foot">
+                        <span class="product-price">$39.99</span>
+                        <button onclick="checkout('filmmaking_guide')" class="btn btn-primary btn-sm">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card reveal" style="transition-delay:0.2s">
+                <div class="product-img warm">🎞️</div>
+                <div class="product-body">
+                    <div class="product-type">Template</div>
+                    <div class="product-name">Creator Editing Workflow</div>
+                    <div class="product-desc">My full editing system — project files, presets, and workflow docs for DaVinci Resolve and Premiere Pro.</div>
+                    <div class="product-foot">
+                        <span class="product-price">$49.99</span>
+                        <button onclick="checkout('editing_workflow')" class="btn btn-primary btn-sm">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card reveal" style="transition-delay:0.3s">
+                <div class="product-img purple">📦</div>
+                <div class="product-body">
+                    <div class="product-type">Bundle</div>
+                    <div class="product-name">Full Creator Bundle</div>
+                    <div class="product-desc">All three products together at a 20% discount. LUT Pack + Filmmaking Guide + Editing Workflow.</div>
+                    <div class="product-foot">
+                        <span class="product-price">$94.99</span>
+                        <button onclick="checkout('creator_bundle')" class="btn btn-warm btn-sm">Best Value</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Buy -->
+        <div style="margin-top: 64px;">
+            <div class="section-eyebrow">Why These Work</div>
+            <h2 class="section-title">Built from Real Trips, Not Theory</h2>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon">📹</div>
+                    <div>
+                        <h3>Battle-Tested</h3>
+                        <p>Every product comes from real filming trips — cold winters, humid jungles, long shooting days. These tools have been proven in the field.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.1s">
+                    <div class="why-icon">🎬</div>
+                    <div>
+                        <h3>Cinematic Quality</h3>
+                        <p>Designed with a filmmaker's eye. Each resource helps you create content that looks and feels premium from day one.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.15s">
+                    <div class="why-icon">💡</div>
+                    <div>
+                        <h3>No Fluff</h3>
+                        <p>Practical and actionable. Built for immediate use in your creative workflow — not padded with filler to justify the price.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.2s">
+                    <div class="why-icon">✨</div>
+                    <div>
+                        <h3>Creator to Creator</h3>
+                        <p>These resources come from someone who knows the real challenges of content creation on the road — because I live it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div style="margin-top: 64px;">
+            <div class="section-eyebrow">Questions</div>
+            <h2 class="section-title">FAQs</h2>
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <h3>What software do I need?</h3>
+                    <p>The LUT Pack works with DaVinci Resolve, Premiere Pro, and Final Cut Pro. Workflow templates are for Resolve and Premiere. The guide is a PDF — works on any device.</p>
+                </div>
+                <div class="faq-item reveal">
+                    <h3>Is there a refund policy?</h3>
+                    <p>Since these are digital products, refunds aren't available after download. Have questions before buying? Email <a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a> — happy to help.</p>
+                </div>
+                <div class="faq-item reveal">
+                    <h3>Can I use these for commercial work?</h3>
+                    <p>Yes. All products are licensed for commercial use — client work, YouTube monetization, branded content. You retain full rights to what you create.</p>
+                </div>
+                <div class="faq-item reveal">
+                    <h3>How fast will I get my files?</h3>
+                    <p>Instantly via email after purchase. You'll have everything you need to start right away.</p>
+                </div>
+                <div class="faq-item reveal">
+                    <h3>Do you offer bundle discounts?</h3>
+                    <p>Yes — buying all three together saves 20%. Email <a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a> for bundle pricing, or grab the bundle card above.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- AFFILIATE LINKS -->
+<div class="shop-pane" id="affiliate">
+    <div class="container">
+        <div class="section-eyebrow">Gear I Actually Use</div>
+        <h2 class="section-title">My Full Kit</h2>
+        <div class="affiliate-grid">
+            <a href="#" class="affiliate-card reveal">
+                <div class="aff-icon">📷</div>
+                <div>
+                    <div class="aff-cat">Camera</div>
+                    <div class="aff-name">Sony ZV-E10 II</div>
+                    <div class="aff-desc">My main travel camera. Lightweight, great autofocus, cinematic 4K. Perfect for solo creators.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.08s">
+                <div class="aff-icon">🎙️</div>
+                <div>
+                    <div class="aff-cat">Audio</div>
+                    <div class="aff-name">DJI Mic 2</div>
+                    <div class="aff-desc">Wireless lavalier that works with any camera. Crystal clear audio for vlogs and interviews.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.12s">
+                <div class="aff-icon">🚁</div>
+                <div>
+                    <div class="aff-cat">Drone</div>
+                    <div class="aff-name">DJI Mini 4 Pro</div>
+                    <div class="aff-desc">The best travel drone. Pocket-sized and shoots stunning 4K aerial footage everywhere.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.16s">
+                <div class="aff-icon">🎬</div>
+                <div>
+                    <div class="aff-cat">Stabilization</div>
+                    <div class="aff-name">DJI RS 4 Gimbal</div>
+                    <div class="aff-desc">Buttery smooth footage on every terrain. Worth every penny for travel filmmaking.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.20s">
+                <div class="aff-icon">💻</div>
+                <div>
+                    <div class="aff-cat">Editing</div>
+                    <div class="aff-name">DaVinci Resolve</div>
+                    <div class="aff-desc">The professional editing software I use for all my videos. The free version is incredibly powerful.</div>
+                    <span class="aff-badge">Free Tool</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.24s">
+                <div class="aff-icon">🎒</div>
+                <div>
+                    <div class="aff-cat">Travel Bag</div>
+                    <div class="aff-name">Peak Design Travel Backpack</div>
+                    <div class="aff-desc">The only bag I travel with. Camera gear, laptop, and 2 weeks of clothes in 45L.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.28s">
+                <div class="aff-icon">📡</div>
+                <div>
+                    <div class="aff-cat">Connectivity</div>
+                    <div class="aff-name">Airalo eSIM</div>
+                    <div class="aff-desc">Affordable data in 190+ countries. Never roam without it — my go-to for every trip.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+            <a href="#" class="affiliate-card reveal" style="transition-delay:0.32s">
+                <div class="aff-icon">🔋</div>
+                <div>
+                    <div class="aff-cat">Accessories</div>
+                    <div class="aff-name">Anker 65W GaN Charger</div>
+                    <div class="aff-desc">One charger for everything. Powers laptop, camera batteries, and phone simultaneously.</div>
+                    <span class="aff-badge">Affiliate Link</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-inner">
+        <div class="cta-eyebrow">Bundle & Save</div>
+        <h2 class="cta-title">Get Everything at Once</h2>
+        <p class="cta-desc">Grab all three digital products together and save 20%. LUT Pack + Filmmaking Guide + Editing Workflow.</p>
+        <a href="mailto:contact@tabasjonbon.com?subject=Full%20Creator%20Bundle" class="btn btn-warm">Get the Bundle →</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function switchTab(btn, id) {
+        document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.shop-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('#' + id + ' .reveal').forEach(el => {
+            el.classList.remove('visible');
+            setTimeout(() => observer.observe(el), 10);
+        });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    async function checkout(productId) {
+        const btn = event.currentTarget;
+        const orig = btn.textContent;
+        btn.textContent = 'Loading...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error(data.error || 'Unknown error');
+            }
+        } catch (err) {
+            alert('Checkout failed: ' + err.message);
+            btn.textContent = orig;
+            btn.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>

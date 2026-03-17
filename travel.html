@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog — Jon Bon</title>
+    <meta name="description" content="Jon Bon's travel blog — stories, photos, and things I've learned from the road.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:         #0A0A0A;
+            --bg-card:    #111111;
+            --bg-card-2:  #1A1A1A;
+            --text:       #FFFFFF;
+            --text-muted: #888888;
+            --text-dim:   #444444;
+            --border:     rgba(255,255,255,0.07);
+            --border-mid: rgba(255,255,255,0.12);
+            --radius:     12px;
+            --radius-lg:  20px;
+            --max-w:      1140px;
+            --font:       'Inter', -apple-system, sans-serif;
+            --trans:      0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+
+        /* LAYOUT */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: var(--trans); border: none; cursor: pointer; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+        .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 8px; }
+
+        /* PAGE HEADER */
+        .page-header { padding: 80px 32px 64px; max-width: var(--max-w); margin: 0 auto; }
+        .page-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 12px; }
+        .page-title { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+        .page-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 480px; }
+
+        /* SECTION */
+        .section { padding: 80px 0; }
+        .section--alt { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 40px; }
+        .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+
+        /* FEATURED ENTRY */
+        .entry-featured { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 24px; }
+        .entry-featured-img { min-height: 400px; background: var(--bg-card-2) center/cover no-repeat; }
+        .entry-featured-body { padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+        .entry-location { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666666; }
+        .entry-featured-body h2 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+        .entry-date { font-size: 0.78rem; color: var(--text-dim); }
+        .entry-featured-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.72; }
+
+        /* ENTRIES GRID */
+        .entries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .entry-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--trans); display: block; text-decoration: none; color: inherit; }
+        .entry-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .entry-thumb { height: 200px; background: var(--bg-card-2) center/cover no-repeat; }
+        .entry-thumb-placeholder { height: 200px; background: var(--bg-card-2); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .entry-body { padding: 22px 24px 26px; }
+        .entry-body h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 10px; line-height: 1.35; }
+        .entry-body p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.62; margin-bottom: 16px; }
+        .entry-meta { display: flex; align-items: center; justify-content: space-between; }
+        .entry-date-sm { font-size: 0.72rem; color: var(--text-dim); }
+        .link-arrow { font-size: 0.82rem; font-weight: 600; color: var(--text); text-decoration: none; transition: var(--trans); }
+        .link-arrow:hover { color: var(--text-muted); }
+
+        /* GALLERY */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .gallery-item { border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/4; background: var(--bg-card-2); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.04); }
+
+        /* VIDEO */
+        .video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; }
+        .video-card h3 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin: 8px 0 10px; }
+        .video-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; max-width: 560px; }
+        .video-embed { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/9; background: #000; }
+        .video-embed iframe { width: 100%; height: 100%; display: block; }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .entry-featured { grid-template-columns: 1fr; }
+            .entry-featured-img { min-height: 260px; }
+            .entries-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0 20px; }
+            .page-header { padding: 56px 20px 40px; }
+            .entries-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+            .nav-inner { padding: 0 20px; }
+            .nav-links { gap: 0; }
+            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="index.html"        class="nav-link">Home</a></li>
+            <li><a href="index.html#videos" class="nav-link">Videos</a></li>
+            <li><a href="travel.html"       class="nav-link active">Blog</a></li>
+            <li><a href="products.html"     class="nav-link">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="page-eyebrow">Travel Blog</div>
+    <h1 class="page-title">From the Journal</h1>
+    <p class="page-desc">Stories, photos, and things I've learned from the road.</p>
+</div>
+
+<!-- FEATURED ENTRY -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="entry-featured reveal">
+            <div class="entry-featured-img" style="background-image: url('Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2948.1.jpg');"></div>
+            <div class="entry-featured-body">
+                <div class="entry-location">📍 Quebec City, Canada</div>
+                <h2>Quebec City in Winter</h2>
+                <div class="entry-date">March 2026</div>
+                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time. The light on those wet stones at golden hour was unforgettable.</p>
+                <a href="post.html?id=quebec" class="btn btn-primary" style="width:fit-content;">Read the Story →</a>
+            </div>
+        </div>
+
+        <!-- ENTRIES GRID -->
+        <div class="entries-grid">
+            <a href="post.html?id=baguio" class="entry-card reveal" style="transition-delay:0.05s">
+                <div class="entry-thumb-placeholder">🌿</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 Baguio City, Philippines</div>
+                    <h3>Baguio City Diaries</h3>
+                    <p>Exploring the misty mountains and cool climate of Baguio. A hidden gem for travelers seeking solace away from the tropical heat.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">March 2026</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=chongqing" class="entry-card reveal" style="transition-delay:0.10s">
+                <div class="entry-thumb-placeholder">🏙️</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 Chongqing, China</div>
+                    <h3>Chongqing Lights</h3>
+                    <p>The vibrant energy of Chongqing at night. Where ancient traditions meet modern megacity architecture along the Yangtze River.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">February 2026</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=newyork" class="entry-card reveal" style="transition-delay:0.15s">
+                <div class="entry-thumb-placeholder">🗽</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 New York, USA</div>
+                    <h3>New York Streets</h3>
+                    <p>From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">January 2026</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=danang" class="entry-card reveal" style="transition-delay:0.20s">
+                <div class="entry-thumb-placeholder">🏖️</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 Da Nang, Vietnam</div>
+                    <h3>Da Nang: Beach & Mountains</h3>
+                    <p>Nestled between mountains and pristine beaches, Da Nang is a photographer's paradise. Golden hour light and vibrant culture.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">December 2025</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=vancouver" class="entry-card reveal" style="transition-delay:0.25s">
+                <div class="entry-thumb-placeholder">🏔️</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 Vancouver, Canada</div>
+                    <h3>Vancouver: Mountains & City</h3>
+                    <p>A perfect blend of urban sophistication and natural wilderness. Mountains, forests, and the best food in Canada.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">November 2025</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=victoria" class="entry-card reveal" style="transition-delay:0.30s">
+                <div class="entry-thumb-placeholder">🌸</div>
+                <div class="entry-body">
+                    <div class="entry-location">📍 Victoria, Canada</div>
+                    <h3>Victoria: Charm & History</h3>
+                    <p>The capital of British Columbia — charming streets, historic architecture, and peaceful waterfront views.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">October 2025</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-eyebrow">Quebec City · March 2026</div>
+        <h2 class="section-title">From the Camera Roll</h2>
+        <div class="gallery-grid reveal">
+            <div class="gallery-item">
+                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2946.1.jpg" alt="Old Quebec street in winter" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2947.1.jpg" alt="Pedestrians in Old Quebec" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2948.1.jpg" alt="Saint-Jean Gate fortress" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.3065.1.jpg" alt="Historic stone house with red door" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEO -->
+<section class="section">
+    <div class="container">
+        <div class="video-card reveal">
+            <div class="section-eyebrow">Latest on YouTube</div>
+            <h3>Watch: Quebec City in Winter</h3>
+            <p>A cinematic walk through the historic streets of Old Quebec — one of North America's most atmospheric cities.</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/cB6dvHjjV-0?start=76"
+                    title="Quebec City in Winter — Jon Bon"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

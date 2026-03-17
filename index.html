@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jon Bon — Travel Filmmaker</title>
+    <meta name="description" content="Travel filmmaker documenting the world through cinematic storytelling. YouTube videos, travel blog, and creator resources.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #0A0A0A;
+            --bg-card:      #111111;
+            --bg-card-2:    #1A1A1A;
+            --text:         #FFFFFF;
+            --text-muted:   #888888;
+            --text-dim:     #444444;
+            --accent:       #FFFFFF;
+            --accent-hover: #E0E0E0;
+            --accent-bg:    rgba(255,255,255,0.07);
+            --warm:         #CCCCCC;
+            --warm-bg:      rgba(255,255,255,0.07);
+            --border:       rgba(255,255,255,0.07);
+            --border-mid:   rgba(255,255,255,0.12);
+            --radius:       12px;
+            --radius-lg:    20px;
+            --max-w:        1140px;
+            --font:         'Inter', -apple-system, sans-serif;
+            --trans:        0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: var(--accent-bg); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        /* LAYOUT */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: var(--font); font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: var(--trans); border: none; white-space: nowrap; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border-mid); }
+        .btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+        .btn-warm { background: #333333; color: #FFFFFF; }
+        .btn-warm:hover { background: #444444; transform: translateY(-1px); }
+        .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 8px; }
+
+        /* BADGE */
+        .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+        .badge-blue { background: rgba(255,255,255,0.07); color: #CCCCCC; border: 1px solid rgba(255,255,255,0.12); }
+        .badge-warm { background: rgba(255,255,255,0.07); color: #CCCCCC; border: 1px solid rgba(255,255,255,0.12); }
+
+        /* HERO */
+        .hero { max-width: var(--max-w); margin: 0 auto; padding: 100px 32px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        .hero-greeting { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .hero-greeting::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--text-dim); }
+        .hero-title { font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 24px; }
+        .hero-title .hi { color: #888888; }
+        .hero-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 36px; max-width: 460px; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero-video-wrap { border-radius: var(--radius-lg); overflow: hidden; background: #000; border: 1px solid var(--border); aspect-ratio: 16/10; box-shadow: 0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04); }
+        .hero-video-wrap iframe { width: 100%; height: 100%; display: block; }
+
+        /* STATS BAR */
+        .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-card); }
+        .stats-bar-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); }
+        .stat-item { padding: 32px 24px; border-right: 1px solid var(--border); text-align: center; }
+        .stat-item:last-child { border-right: none; }
+        .stat-num { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+
+        /* NL BAR */
+        .nl-bar { background: #111111; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .nl-bar-inner { max-width: var(--max-w); margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; gap: 32px; justify-content: space-between; }
+        .nl-text { display: flex; flex-direction: column; gap: 2px; }
+        .nl-text strong { font-size: 0.95rem; font-weight: 700; }
+        .nl-text span { font-size: 0.82rem; color: var(--text-muted); }
+        .nl-form { display: flex; gap: 8px; }
+        .nl-input { padding: 9px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-mid); border-radius: 8px; font-size: 0.875rem; color: var(--text); font-family: var(--font); width: 220px; outline: none; }
+        .nl-input:focus { border-color: var(--accent); }
+        .nl-count { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+
+        /* SECTIONS */
+        .section { padding: 96px 0; }
+        .section--alt { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+        .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+        .see-all { font-size: 0.875rem; font-weight: 600; color: #FFFFFF; text-decoration: none; transition: var(--trans); white-space: nowrap; padding-bottom: 4px; }
+        .see-all:hover { color: #888888; }
+
+        /* HELP CARDS */
+        .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .help-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
+        .help-card:hover { border-color: rgba(255,255,255,0.15); background: var(--bg-card-2); transform: translateY(-3px); }
+        .help-icon { font-size: 2rem; display: block; margin-bottom: 18px; }
+        .help-card h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+        .help-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+        /* VIDEOS */
+        .video-featured { display: grid; grid-template-columns: 1.5fr 1fr; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+        .video-embed-wrap { aspect-ratio: 16/9; background: #000; }
+        .video-embed-wrap iframe { width: 100%; height: 100%; display: block; }
+        .video-featured-info { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+        .video-featured-info .meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .video-featured-info .meta span { font-size: 0.8rem; color: var(--text-muted); }
+        .video-featured-info h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.25; }
+        .video-featured-info p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+        .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
+        .video-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .video-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #000; }
+        .video-thumb--empty { background: #161616; display: flex; align-items: center; justify-content: center; }
+        .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .video-card:hover .video-thumb img { transform: scale(1.05); }
+        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); opacity: 0; transition: var(--trans); }
+        .video-card:hover .play-overlay { opacity: 1; }
+        .play-btn { width: 44px; height: 44px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-btn svg { width: 18px; height: 18px; fill: #111; margin-left: 2px; }
+        .video-info { padding: 16px; }
+        .video-meta { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 6px; }
+        .video-title { font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; margin-bottom: 6px; }
+        .video-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* BLOG */
+        .blog-featured { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+        .blog-featured-img { overflow: hidden; background: var(--bg-card-2); min-height: 360px; }
+        .blog-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .blog-featured-body { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+        .blog-featured-body h3 { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+        .blog-featured-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+        .blog-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+        .blog-item { background: var(--bg-card); display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 20px 22px; text-decoration: none; color: inherit; align-items: start; transition: var(--trans); }
+        .blog-item:hover { background: var(--bg-card-2); }
+        .blog-emoji-thumb { width: 52px; height: 52px; background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .blog-location { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+        .blog-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; margin-bottom: 4px; }
+        .blog-excerpt { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; }
+        .blog-date { font-size: 0.72rem; color: var(--text-dim); }
+
+        /* SHOP */
+        .shop-tabs { display: flex; gap: 4px; margin-bottom: 32px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; }
+        .shop-tab { padding: 8px 20px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; transition: var(--trans); font-family: var(--font); }
+        .shop-tab:hover { color: var(--text); }
+        .shop-tab.active { background: #FFFFFF; color: #000000; }
+        .shop-pane { display: none; }
+        .shop-pane.active { display: block; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .product-card { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--trans); }
+        .product-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .product-img { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; }
+        .product-img.blue { background: linear-gradient(135deg, #1A1A1A, #222222); }
+        .product-img.warm { background: linear-gradient(135deg, #161616, #1E1E1E); }
+        .product-img.purple { background: linear-gradient(135deg, #131313, #1C1C1C); }
+        .product-body { padding: 20px 22px 24px; }
+        .product-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 6px; }
+        .product-name { font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+        .product-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+        .product-foot { display: flex; align-items: center; justify-content: space-between; }
+        .product-price { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+
+        .affiliate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .affiliate-card { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start; text-decoration: none; color: inherit; transition: var(--trans); }
+        .affiliate-card:hover { border-color: rgba(255,255,255,0.15); }
+        .aff-icon { font-size: 2rem; flex-shrink: 0; }
+        .aff-cat { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 3px; }
+        .aff-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 4px; }
+        .aff-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+        .aff-badge { display: inline-block; font-size: 0.68rem; font-weight: 600; background: rgba(255,255,255,0.07); color: #888888; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+
+        /* CTA */
+        .cta-section { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 100px 24px; text-align: center; }
+        .cta-inner { max-width: 560px; margin: 0 auto; }
+        .cta-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 16px; }
+        .cta-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 16px; }
+        .cta-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; }
+        .cta-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .cta-input { padding: 12px 18px; background: var(--bg); border: 1px solid var(--border-mid); border-radius: 10px; font-size: 0.9rem; color: var(--text); font-family: var(--font); min-width: 240px; outline: none; }
+        .cta-input:focus { border-color: var(--accent); }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .hero { grid-template-columns: 1fr; padding: 64px 24px 48px; gap: 40px; }
+            .help-grid { grid-template-columns: 1fr; gap: 12px; }
+            .videos-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-featured { grid-template-columns: 1fr; }
+            .blog-featured-img { min-height: 240px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .affiliate-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .video-featured { grid-template-columns: 1fr; }
+            .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .nl-bar-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .nl-input { width: 100%; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0 20px; }
+            .hero { padding: 48px 20px 40px; }
+            .videos-grid { grid-template-columns: 1fr; }
+            .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+            .nav-inner { padding: 0 20px; }
+            .nav-links { gap: 0; }
+            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#home" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="#home"   class="nav-link active">Home</a></li>
+            <li><a href="#videos" class="nav-link">Videos</a></li>
+            <li><a href="#blog"   class="nav-link">Blog</a></li>
+            <li><a href="#shop"   class="nav-link">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+    <div class="hero">
+        <div>
+            <p class="hero-greeting">Hey, I'm Jon</p>
+            <h1 class="hero-title">
+                Travel filmmaker<br>documenting<br><span class="hi">the world's stories.</span>
+            </h1>
+            <p class="hero-desc">
+                I'm a travel filmmaker documenting cities, cultures, and the stories hiding in between. Every trip becomes a video, a blog post, or a lesson worth sharing. From gear breakdowns and itineraries to the honest, unfiltered moments that don't make the highlight reel.
+            </p>
+            <div class="hero-actions">
+                <a href="#videos" class="btn btn-primary">Watch My Videos</a>
+                <a href="#blog"   class="btn btn-outline">Read the Blog →</a>
+            </div>
+        </div>
+        <div>
+            <div class="hero-video-wrap">
+                <iframe src="https://www.youtube.com/embed/cB6dvHjjV-0?start=76"
+                    title="Quebec City in Winter"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stats-bar-inner">
+        <div class="stat-item">
+            <div class="stat-num">10K+</div>
+            <div class="stat-label">YouTube Subscribers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Videos Published</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Countries Filmed</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">2M+</div>
+            <div class="stat-label">Total Views</div>
+        </div>
+    </div>
+</div>
+
+<!-- NL BAR -->
+<div class="nl-bar">
+    <div class="nl-bar-inner">
+        <div class="nl-text">
+            <strong>Join the Journey Newsletter</strong>
+            <span>New travel stories & behind-the-scenes, every week.</span>
+        </div>
+        <form class="nl-form" onsubmit="handleSub(event)">
+            <input type="email" class="nl-input" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+        </form>
+        <span class="nl-count">Join 1,200+ readers</span>
+    </div>
+</div>
+
+<!-- WHAT I DO -->
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <div>
+                <div class="section-eyebrow">What I Do</div>
+                <h2 class="section-title">How Can I Help You?</h2>
+            </div>
+        </div>
+        <div class="help-grid">
+            <a href="#videos" class="help-card reveal">
+                <span class="help-icon">🎬</span>
+                <h3>Watch My Travel Videos</h3>
+                <p>Cinematic vlogs from around the world — Quebec City, Vietnam, China, Philippines, and more.</p>
+            </a>
+            <a href="#blog" class="help-card reveal" style="transition-delay:0.1s">
+                <span class="help-icon">📖</span>
+                <h3>Read the Travel Blog</h3>
+                <p>Detailed city guides, travel stories, and honest advice from every destination I've visited.</p>
+            </a>
+            <a href="#shop" class="help-card reveal" style="transition-delay:0.2s">
+                <span class="help-icon">🛍️</span>
+                <h3>Creator Resources & Gear</h3>
+                <p>Digital products, LUT packs, and the exact gear & tools I use to film and grow my channel.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="section section--alt" id="videos">
+    <div class="container">
+        <div class="section-head">
+            <div>
+                <div class="section-eyebrow">YouTube</div>
+                <h2 class="section-title">Most Popular Videos</h2>
+            </div>
+            <a href="https://www.youtube.com/@jonbontabas" target="_blank" class="see-all">View All →</a>
+        </div>
+
+        <div class="video-featured reveal">
+            <div class="video-embed-wrap">
+                <iframe src="https://www.youtube.com/embed/cB6dvHjjV-0?start=76"
+                    title="Quebec City in Winter"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="video-featured-info">
+                <div class="meta">
+                    <span>📍 Quebec City, Canada · March 2026</span>
+                    <span class="badge badge-blue">Featured</span>
+                </div>
+                <h3>Quebec City in Winter — A Cinematic Walk</h3>
+                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time.</p>
+                <a href="https://www.youtube.com/@jonbontabas" target="_blank" class="btn btn-primary btn-sm" style="width:fit-content;">Subscribe for More ↗</a>
+            </div>
+        </div>
+
+        <div class="videos-grid">
+            <div class="video-card reveal" style="transition-delay:0.1s">
+                <div class="video-thumb video-thumb--empty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+                </div>
+                <div class="video-info">
+                    <div class="video-meta">📍 Baguio City, Philippines · March 2026</div>
+                    <div class="video-title">Baguio City Diaries — Misty Mountains & Cool Air</div>
+                    <div class="video-desc">Exploring the pine forests and highland charm of the Philippines' summer capital.</div>
+                </div>
+            </div>
+            <div class="video-card reveal" style="transition-delay:0.2s">
+                <div class="video-thumb video-thumb--empty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+                </div>
+                <div class="video-info">
+                    <div class="video-meta">📍 Chongqing, China · February 2026</div>
+                    <div class="video-title">Chongqing Lights — Inside China's Most Vertical City</div>
+                    <div class="video-desc">Neon-lit megacity energy along the Yangtze River where ancient and modern collide.</div>
+                </div>
+            </div>
+            <div class="video-card reveal" style="transition-delay:0.3s">
+                <div class="video-thumb video-thumb--empty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+                </div>
+                <div class="video-info">
+                    <div class="video-meta">📍 New York, USA · January 2026</div>
+                    <div class="video-title">New York Streets — A Filmmaker's City Essay</div>
+                    <div class="video-desc">Times Square to hidden boroughs — capturing NYC's relentless energy on film.</div>
+                </div>
+            </div>
+            <div class="video-card reveal" style="transition-delay:0.4s">
+                <div class="video-thumb video-thumb--empty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+                </div>
+                <div class="video-info">
+                    <div class="video-meta">📍 Da Nang, Vietnam · December 2025</div>
+                    <div class="video-title">Da Nang — Beach, Marble Mountains & Culture</div>
+                    <div class="video-desc">Golden hour over the South China Sea. Da Nang in its full cinematic glory.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="blog">
+    <div class="container">
+        <div class="section-head">
+            <div>
+                <div class="section-eyebrow">Travel Blog</div>
+                <h2 class="section-title">Recent Stories</h2>
+            </div>
+            <a href="travel.html" class="see-all">View All →</a>
+        </div>
+
+        <div class="blog-featured reveal">
+            <div class="blog-featured-img">
+                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2947.1.jpg" alt="Quebec City in Winter" loading="lazy">
+            </div>
+            <div class="blog-featured-body">
+                <span class="badge badge-blue">Latest Entry</span>
+                <h3>Quebec City<br>in Winter</h3>
+                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. One of the most cinematic places I've ever filmed — historic fortifications, charming boutiques, and golden hour on wet stones.</p>
+                <p style="font-size:0.8rem; color:var(--text-dim);">📍 Quebec City · March 2026</p>
+                <a href="post.html?id=quebec" class="btn btn-primary btn-sm" style="width:fit-content;">Read the Story →</a>
+            </div>
+        </div>
+
+        <div class="blog-list">
+            <a href="post.html?id=baguio" class="blog-item reveal">
+                <div class="blog-emoji-thumb">🌿</div>
+                <div>
+                    <div class="blog-location">Baguio City, Philippines</div>
+                    <div class="blog-title">Baguio City Diaries — Cool Mountains & Warm People</div>
+                    <div class="blog-excerpt">Exploring pine forests, strawberry farms, and highland culture of the Philippines' summer capital.</div>
+                    <div class="blog-date">March 2026</div>
+                </div>
+            </a>
+            <a href="post.html?id=chongqing" class="blog-item reveal">
+                <div class="blog-emoji-thumb">🏙️</div>
+                <div>
+                    <div class="blog-location">Chongqing, China</div>
+                    <div class="blog-title">Chongqing Lights — Inside China's Most Vertical City</div>
+                    <div class="blog-excerpt">Where ancient temples sit next to futuristic skylines — China's inland megacity at night.</div>
+                    <div class="blog-date">February 2026</div>
+                </div>
+            </a>
+            <a href="post.html?id=newyork" class="blog-item reveal">
+                <div class="blog-emoji-thumb">🗽</div>
+                <div>
+                    <div class="blog-location">New York, USA</div>
+                    <div class="blog-title">New York Streets — The City That Never Stops</div>
+                    <div class="blog-excerpt">From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on NYC.</div>
+                    <div class="blog-date">January 2026</div>
+                </div>
+            </a>
+            <a href="post.html?id=danang" class="blog-item reveal">
+                <div class="blog-emoji-thumb">🏖️</div>
+                <div>
+                    <div class="blog-location">Da Nang, Vietnam</div>
+                    <div class="blog-title">Da Nang — Where Beaches Meet the Marble Mountains</div>
+                    <div class="blog-excerpt">A photographer's paradise with golden hour light that'll make you want to stay forever.</div>
+                    <div class="blog-date">December 2025</div>
+                </div>
+            </a>
+            <a href="post.html?id=vancouver" class="blog-item reveal">
+                <div class="blog-emoji-thumb">🏔️</div>
+                <div>
+                    <div class="blog-location">Vancouver, Canada</div>
+                    <div class="blog-title">Vancouver — Mountains, Ocean & Urban Wild</div>
+                    <div class="blog-excerpt">Where the Rockies drop straight into a cosmopolitan city with the best food in Canada.</div>
+                    <div class="blog-date">November 2025</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SHOP -->
+<section class="section section--alt" id="shop">
+    <div class="container">
+        <div class="section-head" style="margin-bottom:24px;">
+            <div>
+                <div class="section-eyebrow">Shop</div>
+                <h2 class="section-title">Resources & Gear</h2>
+            </div>
+            <a href="products.html" class="see-all">View All →</a>
+        </div>
+
+        <div class="shop-tabs">
+            <button class="shop-tab active" onclick="switchTab(this,'products')">Digital Products</button>
+            <button class="shop-tab" onclick="switchTab(this,'affiliate')">Gear & Affiliate</button>
+        </div>
+
+        <div class="shop-pane active" id="products">
+            <div class="products-grid">
+                <div class="product-card reveal">
+                    <div class="product-img blue">🎬</div>
+                    <div class="product-body">
+                        <div class="product-type">Filmmaking</div>
+                        <div class="product-name">Cinematic LUT Pack</div>
+                        <div class="product-desc">Professional color grades for travel footage. One-click cinematic look.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$29</span>
+                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card reveal" style="transition-delay:0.1s">
+                    <div class="product-img warm">✈️</div>
+                    <div class="product-body">
+                        <div class="product-type">Travel Planning</div>
+                        <div class="product-name">Travel Filmmaking Guide</div>
+                        <div class="product-desc">Everything I know about filming travel content — gear, technique, storytelling, monetization.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$39</span>
+                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card reveal" style="transition-delay:0.2s">
+                    <div class="product-img purple">🎞️</div>
+                    <div class="product-body">
+                        <div class="product-type">Editing</div>
+                        <div class="product-name">Creator Editing Workflow</div>
+                        <div class="product-desc">My full editing system — project files, presets, and workflow docs for DaVinci & Premiere.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$49</span>
+                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-pane" id="affiliate">
+            <div class="affiliate-grid">
+                <a href="#" class="affiliate-card reveal">
+                    <div class="aff-icon">📷</div>
+                    <div>
+                        <div class="aff-cat">Camera</div>
+                        <div class="aff-name">Sony ZV-E10 II</div>
+                        <div class="aff-desc">My main travel camera. Lightweight, great autofocus, cinematic 4K. Perfect for solo creators.</div>
+                        <span class="aff-badge">Affiliate Link</span>
+                    </div>
+                </a>
+                <a href="#" class="affiliate-card reveal" style="transition-delay:0.08s">
+                    <div class="aff-icon">🎙️</div>
+                    <div>
+                        <div class="aff-cat">Audio</div>
+                        <div class="aff-name">DJI Mic 2</div>
+                        <div class="aff-desc">Wireless lavalier that works with any camera. Crystal clear audio for vlogs.</div>
+                        <span class="aff-badge">Affiliate Link</span>
+                    </div>
+                </a>
+                <a href="#" class="affiliate-card reveal" style="transition-delay:0.12s">
+                    <div class="aff-icon">🚁</div>
+                    <div>
+                        <div class="aff-cat">Drone</div>
+                        <div class="aff-name">DJI Mini 4 Pro</div>
+                        <div class="aff-desc">The best travel drone. Pocket-sized, stunning 4K aerial footage everywhere.</div>
+                        <span class="aff-badge">Affiliate Link</span>
+                    </div>
+                </a>
+                <a href="#" class="affiliate-card reveal" style="transition-delay:0.16s">
+                    <div class="aff-icon">🎒</div>
+                    <div>
+                        <div class="aff-cat">Travel Bag</div>
+                        <div class="aff-name">Peak Design Travel Backpack</div>
+                        <div class="aff-desc">The only bag I travel with. Camera gear, laptop, and 2 weeks of clothes in 45L.</div>
+                        <span class="aff-badge">Affiliate Link</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-inner">
+        <div class="cta-eyebrow">Stay in the Loop</div>
+        <h2 class="cta-title">Join the Journey</h2>
+        <p class="cta-desc">New travel stories, filmmaking tips, and city guides dropped straight to your inbox every week. No spam, ever.</p>
+        <form class="cta-form" onsubmit="handleSub(event)">
+            <input type="email" class="cta-input" placeholder="your@email.com" required>
+            <button type="submit" class="btn btn-primary">Subscribe Free</button>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function switchTab(btn, id) {
+        document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.shop-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('#' + id + ' .reveal').forEach(el => {
+            el.classList.remove('visible');
+            setTimeout(() => observer.observe(el), 10);
+        });
+    }
+
+    function handleSub(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const orig = btn.textContent;
+        btn.textContent = '✓ Subscribed!';
+        e.target.querySelector('input').value = '';
+        setTimeout(() => btn.textContent = orig, 3000);
+    }
+
+    const sections = ['home','videos','blog','shop'];
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        let current = 'home';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= el.offsetTop - 100) current = id;
+        });
+        navLinks.forEach(l => {
+            const href = l.getAttribute('href');
+            l.classList.toggle('active', href === '#' + current);
+        });
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

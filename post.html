@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Loading… — Jon Bon</title>
+    <meta name="description" id="page-desc" content="Read my travel story on Jon Bon's travel diary.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:         #0A0A0A;
+            --bg-card:    #111111;
+            --bg-card-2:  #1A1A1A;
+            --text:       #FFFFFF;
+            --text-muted: #888888;
+            --text-dim:   #444444;
+            --border:     rgba(255,255,255,0.07);
+            --border-mid: rgba(255,255,255,0.12);
+            --radius:     12px;
+            --radius-lg:  20px;
+            --max-w:      720px;
+            --font:       'Inter', -apple-system, sans-serif;
+            --trans:      0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+
+        /* POST HERO */
+        .post-hero { height: 480px; position: relative; overflow: hidden; background: var(--bg-card-2); display: flex; align-items: center; justify-content: center; }
+        .post-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .post-hero-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--text-dim); font-size: 0.82rem; }
+        .post-hero-placeholder svg { opacity: 0.3; }
+        .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.7) 100%); }
+
+        /* NOT FOUND */
+        .not-found { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; text-align: center; padding: 40px; }
+        .not-found h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; }
+        .not-found p { color: var(--text-muted); }
+
+        /* POST */
+        .post-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 96px; }
+
+        .post-header { padding: 56px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+        .post-location { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .post-date { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 16px; }
+        .post-header h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; }
+        .post-intro { font-size: 1.1rem; color: var(--text-muted); line-height: 1.75; }
+
+        /* POST BODY */
+        .post-body { display: flex; flex-direction: column; gap: 24px; }
+        .post-body h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin-top: 16px; }
+        .post-body p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.8; }
+
+        blockquote { border-left: 2px solid rgba(255,255,255,0.15); padding: 20px 24px; margin: 8px 0; background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0; }
+        blockquote p { font-size: 1.05rem; font-style: italic; color: var(--text); line-height: 1.7; margin-bottom: 10px !important; }
+        blockquote span { font-size: 0.78rem; color: var(--text-dim); }
+
+        /* VIDEO */
+        .post-video { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; }
+        .post-video-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .post-video h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .post-video p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; }
+        .video-embed { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/9; background: #000; }
+        .video-embed iframe { width: 100%; height: 100%; display: block; }
+        .video-embed--empty { background: #161616; display: flex; align-items: center; justify-content: center; }
+        .gallery-placeholder { aspect-ratio: 4/3; background: #161616; border-radius: var(--radius); border: 1px dashed rgba(255,255,255,0.08); }
+
+        /* GALLERY */
+        .post-gallery h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); display: block; transition: transform 0.3s ease; }
+        .gallery-grid img:hover { transform: scale(1.02); }
+
+        /* MORE POSTS */
+        .more-posts { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--border); }
+        .more-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .more-posts h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 32px; }
+        .more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .more-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
+        .more-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .more-thumb { height: 140px; background: var(--bg-card-2) center/cover no-repeat; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; }
+        .more-body { padding: 16px 18px 20px; }
+        .more-loc { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555555; margin-bottom: 4px; }
+        .more-title { font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 8px; }
+        .more-date { font-size: 0.72rem; color: var(--text-dim); }
+        .more-cta { text-align: center; margin-top: 32px; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: var(--trans); border: none; cursor: pointer; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: 1140px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .more-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .nav-inner { padding: 0 20px; }
+            .nav-links { gap: 0; }
+            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
+            .post-hero { height: 300px; }
+        }
+        @media (max-width: 520px) {
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="index.html"        class="nav-link">Home</a></li>
+            <li><a href="index.html#videos" class="nav-link">Videos</a></li>
+            <li><a href="travel.html"       class="nav-link active">Blog</a></li>
+            <li><a href="products.html"     class="nav-link">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- DYNAMIC CONTENT -->
+<div id="post-root"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script src="posts.js"></script>
+<script>
+(function () {
+    const params = new URLSearchParams(window.location.search);
+    const id     = params.get('id');
+    const post   = id && POSTS[id];
+    const root   = document.getElementById('post-root');
+
+    /* ── 404 state ── */
+    if (!post) {
+        root.innerHTML = `
+            <div class="not-found">
+                <h1>Post not found</h1>
+                <p>The post you're looking for doesn't exist yet.</p>
+                <a href="travel.html" class="btn btn-primary" style="margin-top:8px;">← Back to Blog</a>
+            </div>`;
+        return;
+    }
+
+    /* ── Page meta ── */
+    document.getElementById('page-title').textContent  = post.title + ' — Jon Bon';
+    document.getElementById('page-desc').setAttribute('content', post.intro || '');
+
+    /* ── Hero ── */
+    let heroHTML;
+    if (post.hero) {
+        heroHTML = `
+            <div class="post-hero">
+                <img class="post-hero-img" src="${post.hero}" alt="${post.title}">
+                <div class="post-hero-overlay"></div>
+            </div>`;
+    } else {
+        heroHTML = `
+            <div class="post-hero">
+                <div class="post-hero-placeholder">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    Add hero photo
+                </div>
+            </div>`;
+    }
+
+    /* ── Body blocks ── */
+    function renderBlock(block) {
+        switch (block.type) {
+            case 'h2':
+                return `<h2>${block.text}</h2>`;
+
+            case 'p':
+                return `<p>${block.text}</p>`;
+
+            case 'blockquote':
+                return `
+                    <blockquote>
+                        <p>"${block.text}"</p>
+                        ${block.author ? `<span>${block.author}</span>` : ''}
+                    </blockquote>`;
+
+            case 'video': {
+                const embed = block.id
+                    ? `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${block.id}" frameborder="0" allowfullscreen></iframe></div>`
+                    : `<div class="video-embed video-embed--empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg></div>`;
+                return `
+                    <div class="post-video reveal">
+                        <div class="post-video-eyebrow">Behind the Lens</div>
+                        <h3>Watch the Cinematic Vlog</h3>
+                        <p>Here's my cinematic vlog from the trip — capturing the mood, the streets, and the people.</p>
+                        ${embed}
+                    </div>`;
+            }
+
+            case 'gallery': {
+                const hasImages = block.images && block.images.length > 0;
+                const gridInner = hasImages
+                    ? block.images.map(img => `<img src="${img.src}" alt="${img.alt}" loading="lazy">`).join('')
+                    : `<div class="gallery-placeholder"></div><div class="gallery-placeholder"></div><div class="gallery-placeholder"></div><div class="gallery-placeholder"></div>`;
+                return `
+                    <div class="post-gallery reveal">
+                        <h3>Visual Journey</h3>
+                        <div class="gallery-grid">${gridInner}</div>
+                    </div>`;
+            }
+
+            default:
+                return '';
+        }
+    }
+
+    const bodyHTML = (post.body || []).map(renderBlock).join('\n');
+
+    /* ── More posts ── */
+    const otherKeys = Object.keys(POSTS).filter(k => k !== id);
+    // Pick up to 3: shuffle deterministically by taking every other entry
+    const picks = otherKeys.length > 3
+        ? [otherKeys[0], otherKeys[Math.floor(otherKeys.length / 2)], otherKeys[otherKeys.length - 1]]
+        : otherKeys.slice(0, 3);
+
+    const moreCards = picks.map(key => {
+        const p = POSTS[key];
+        const thumb = p.hero
+            ? `style="background-image: url('${p.hero}');"`
+            : '';
+        return `
+            <a href="post.html?id=${key}" class="more-card">
+                <div class="more-thumb" ${thumb}>${p.hero ? '' : '🌍'}</div>
+                <div class="more-body">
+                    <div class="more-loc">📍 ${p.location}</div>
+                    <div class="more-title">${p.title}</div>
+                    <div class="more-date">${p.date}</div>
+                </div>
+            </a>`;
+    }).join('');
+
+    const moreHTML = `
+        <div class="more-posts reveal">
+            <div class="more-eyebrow">More from the Journal</div>
+            <h2>Keep Reading</h2>
+            <div class="more-grid">${moreCards}</div>
+            <div class="more-cta">
+                <a href="travel.html" class="btn btn-primary">View All Posts</a>
+            </div>
+        </div>`;
+
+    /* ── Assemble ── */
+    root.innerHTML = `
+        ${heroHTML}
+        <div class="post-wrap">
+            <header class="post-header">
+                <div class="post-location">📍 ${post.location}</div>
+                <div class="post-date">${post.date}</div>
+                <h1>${post.title}</h1>
+                <p class="post-intro">${post.intro}</p>
+            </header>
+            <div class="post-body">
+                ${bodyHTML}
+                ${moreHTML}
+            </div>
+        </div>`;
+
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
