@@ -10,22 +10,117 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; -webkit-font-smoothing: antialiased; }
+
         .card { background: #111111; border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 56px 48px; max-width: 480px; width: 100%; text-align: center; }
-        .icon { font-size: 3.5rem; margin-bottom: 24px; }
-        h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 12px; }
-        p { font-size: 0.95rem; color: #888888; line-height: 1.7; margin-bottom: 32px; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: inherit; font-size: 0.9rem; font-weight: 600; text-decoration: none; background: #FFFFFF; color: #000000; transition: background 0.2s ease; }
-        .btn:hover { background: #E0E0E0; }
-        .divider { width: 40px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 32px; }
+        .icon { font-size: 3rem; margin-bottom: 24px; }
+        h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 8px; }
+        .product-name { font-size: 0.95rem; color: #888888; margin-bottom: 28px; }
+        .divider { width: 40px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 28px; }
+
+        .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px 24px; border-radius: 12px; font-family: inherit; font-size: 0.95rem; font-weight: 700; text-decoration: none; background: #FFFFFF; color: #000000; transition: background 0.2s ease, transform 0.15s ease; border: none; cursor: pointer; }
+        .download-btn:hover { background: #E0E0E0; transform: translateY(-1px); }
+        .download-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .note { font-size: 0.78rem; color: #444444; margin-top: 20px; line-height: 1.6; }
+        .note a { color: #888888; }
+
+        .back-link { display: inline-block; margin-top: 28px; font-size: 0.83rem; color: #555555; text-decoration: none; transition: color 0.2s; }
+        .back-link:hover { color: #888888; }
+
+        /* States */
+        .state { display: none; }
+        .state.active { display: block; }
+
+        /* Loading spinner */
+        .spinner { width: 36px; height: 36px; border: 3px solid rgba(255,255,255,0.1); border-top-color: rgba(255,255,255,0.7); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { font-size: 0.9rem; color: #555555; }
+
+        /* Error */
+        .error-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .error-msg { font-size: 0.9rem; color: #888888; line-height: 1.65; margin-bottom: 24px; }
+        .btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: inherit; font-size: 0.875rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); color: #888888; transition: all 0.2s ease; background: transparent; cursor: pointer; }
+        .btn-outline:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="icon">✅</div>
-        <h1>You're all set!</h1>
-        <div class="divider"></div>
-        <p>Your purchase is confirmed. Check your email for your download link — it should arrive within a few minutes. If not, reach out at <a href="mailto:contact@tabasjonbon.com" style="color:#fff;">contact@tabasjonbon.com</a>.</p>
-        <a href="index.html" class="btn">Back to Home</a>
+
+        <!-- Loading -->
+        <div class="state active" id="stateLoading">
+            <div class="spinner"></div>
+            <p class="loading-text">Verifying your payment…</p>
+        </div>
+
+        <!-- Success -->
+        <div class="state" id="stateSuccess">
+            <div class="icon">✅</div>
+            <h1>You're all set!</h1>
+            <p class="product-name" id="productName"></p>
+            <div class="divider"></div>
+            <button class="download-btn" id="downloadBtn">
+                ↓ Download Your Files
+            </button>
+            <p class="note">
+                This download link is valid for 24 hours.<br>
+                Need help? <a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a>
+            </p>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+
+        <!-- Error -->
+        <div class="state" id="stateError">
+            <div class="error-icon">⚠️</div>
+            <h1>Something went wrong</h1>
+            <p class="error-msg" id="errorMsg">We couldn't verify your payment. If you were charged, please reach out and we'll sort it out immediately.</p>
+            <a href="mailto:contact@tabasjonbon.com" class="btn-outline">Email Support</a>
+            <br>
+            <a href="products.html" class="back-link">← Back to Shop</a>
+        </div>
+
     </div>
+
+<script>
+(async function () {
+    const params    = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+
+    function show(id) {
+        document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function showError(msg) {
+        if (msg) document.getElementById('errorMsg').textContent = msg;
+        show('stateError');
+    }
+
+    if (!sessionId) {
+        showError('No session ID found. If you completed a purchase, please contact support.');
+        return;
+    }
+
+    try {
+        const res  = await fetch('/verify-session?session_id=' + encodeURIComponent(sessionId));
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            showError(data.error || 'Payment verification failed.');
+            return;
+        }
+
+        document.getElementById('productName').textContent = data.productName;
+
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.addEventListener('click', function () {
+            window.location.href = '/download?token=' + encodeURIComponent(data.token);
+        });
+
+        show('stateSuccess');
+    } catch (err) {
+        showError('Network error while verifying payment. Please try again or contact support.');
+    }
+}());
+</script>
 </body>
 </html>

@@ -173,7 +173,20 @@ const POSTS = {
       { type: "p",  text: "I was skeptical of phone grips. Most of them feel like plastic toys that you use once and throw in a drawer. But the Telesin Fun Shot kept coming up in my research for lightweight travel filmmaking — specifically because of the magnetic lens mount system. That got my attention." },
       { type: "p",  text: "I wanted something I could slip into a jacket pocket and still get shots that didn't look like they came from a phone. That's the bar I tested this against." },
       { type: "h2", text: "The Specs That Actually Matter" },
-      { type: "p",  text: "MagSafe-compatible magnetic attachment, universal cold shoe mount on top, 1/4-inch thread on the base for tripod use, and a built-in lens ring for screw-on filters. The grip itself is solid — rubber-coated, good weight distribution, doesn't feel like it'll snap." },
+      { type: "specs", title: "Telesin Fun Shot — Key Specs", highlights: [
+        { value: "MagSafe", label: "Mount Type" },
+        { value: "52mm",    label: "Lens Ring" },
+        { value: "~85g",    label: "Weight" },
+        { value: "iPhone 12+", label: "Compatible" },
+      ], items: [
+        { label: "Attachment",      value: "MagSafe magnetic" },
+        { label: "Lens mount",      value: "52mm screw-on filter ring" },
+        { label: "Top mount",       value: "Universal cold shoe" },
+        { label: "Tripod thread",   value: "1/4\"-20 on base" },
+        { label: "Grip material",   value: "Rubber-coated ABS" },
+        { label: "Compatibility",   value: "iPhone 12 and later" },
+        { label: "In the box",      value: "Grip, wrist strap, lens cloth" },
+      ]},
       { type: "p",  text: "The magnetic lens mount is the standout feature. Swap lenses in seconds without unscrewing anything. For run-and-gun travel filming, that's not a convenience — it's a game changer." },
       { type: "h2", text: "In the Field" },
       { type: "p",  text: "I used this across multiple shoots — handheld street filming, golden hour wide shots, tight interior scenes. The grip gives you a real handle on your phone, which sounds simple but completely changes how steady your footage is. Your wrist has something to anchor against." },
@@ -188,6 +201,40 @@ const POSTS = {
       { type: "p",  text: "You can pick it up on Amazon or directly from Telesin. Affiliate link below — I earn a small commission at no cost to you, which helps keep this blog running. I only recommend gear I actually use." }, // TODO: add your actual affiliate link here
       { type: "gallery", images: [] }, // TODO: add sample shots taken with this grip
       { type: "p",  text: "Mobile filmmaking has come a long way, and tools like this close the gap between phone and camera footage fast. What iPhone accessories are you currently using on your travels? Drop them in the comments — I'm always looking for what other creators are running with." },
+    ],
+  },
+
+  cinematicresolve: {
+    title: "How to Make Your Videos Look Cinematic Using DaVinci Resolve",
+    location: "Tutorial",
+    date: "March 2026",
+    category: "tutorial",
+    tags: ["Tutorial", "DaVinci Resolve", "Color Grading", "Film Emulation", "Cinematic", "PowerGrade"],
+    hero: null, // TODO: add hero — before/after frame showing the cinematic grade applied
+    intro: "Most footage straight out of a camera looks flat, digital, and forgettable. The difference between that and the warm, textured, film-like look you see on professional travel films comes down to one thing: color grading. In this tutorial I'll show you exactly how I use DaVinci Resolve to get a cinematic film emulation look, whether you want to spend money on PowerGrades like Cineprint35 or JP2499, or build something close for free with built-in nodes.",
+    body: [
+      { type: "h2", text: "What We're Building" },
+      { type: "p",  text: "By the end of this, your footage will have the organic grain, lifted shadows, color shifts, and tonal roll-off that make videos feel like they were shot on film. We're talking Cineprint35-style halation, JP2499 DRT contrast curves, and the kind of look that makes people ask what camera you used when you just graded it well." },
+      { type: "p",  text: "I'll cover three paths: using Cineprint35 (paid), using JP2499 DRT (paid), and building a free version using DaVinci's native nodes that gets you 80% of the way there without spending a cent." },
+      { type: "video", id: null }, // TODO: add YouTube video ID
+      { type: "h2", text: "Before You Start" },
+      { type: "p",  text: "You need DaVinci Resolve 18 or later (the free version works for the built-in node workflow). For Cineprint35, you'll need to purchase and install it from Cullen Kelly's site. For JP2499 DRT, grab it from Juan Pablo's Gumroad. All three workflows assume your footage is either flat/log (S-Log, C-Log, V-Log) or at least shot with a neutral picture profile. If you're shooting heavily saturated JPEGs straight out of camera, flatten your picture profile first." },
+      { type: "h2", text: "The Approach" },
+      { type: "p",  text: "Film emulation is not just adding a LUT. Real film has specific characteristics: lifted blacks (shadows never go fully to zero), subtle color crossovers between highlights and shadows, halation (a red glow bleeding around bright edges), and organic grain that's tied to exposure. When you slap a LUT on top of a badly exposed shot, none of that translates. The grade has to work with the image, not just over it." },
+      { type: "p",  text: "The approach here is layered: first, correct your exposure and white balance properly. Then apply your film emulation layer, whether that's a PowerGrade or a custom node tree. Then add grain last. This order matters. Grain on top of a corrected, emulated image looks natural. Grain underneath everything else looks like a filter." },
+      { type: "h2", text: "Step-by-Step" },
+      { type: "p",  text: "Step 1 — Set up your node tree. In the Color page, right-click your first node and label it 'Exposure Fix.' This is where you bring your log footage into a usable range. If you're on S-Log3, apply Sony's official creative LUT here to get to a Rec.709 baseline, or use DaVinci's built-in color space transform (CST) node. Don't skip this. Everything after it depends on starting from a properly transformed image." },
+      { type: "p",  text: "Step 2 — Apply your film emulation. If you're using Cineprint35, import it as a PowerGrade from the Gallery and drop it after your exposure node. It handles halation, contrast, and color science in one go. If you're using JP2499 DRT, apply it through the DaVinci Color Managed workflow by setting it as your output color space. For the free path: add a new serial node, open the Curves panel, and pull the black point of each channel up slightly (R: 0.04, G: 0.03, B: 0.02). This lifts and splits your shadows the way film does." },
+      { type: "p",  text: "Step 3 — Shape your contrast with a custom curve. Add another node after emulation. In the Custom Curves panel, create an S-curve but keep it subtle. The key is protecting the highlights from blowing out while adding depth in the midtones. Film compresses highlights softly rather than clipping hard. Pull the top of your curve slightly left instead of pushing it up." },
+      { type: "p",  text: "Step 4 — Add halation (free method). Add a new parallel node, not serial. In that node, use the Qualifier to isolate the bright highlights. Then go to Blur and add 40-60 pixels of radius. Set the node's blend mode to Screen or drop opacity to around 30. Switch the node's gain to push into the reds slightly. This simulates the red glow that bleeds around bright edges on film. It's subtle but it reads as cinematic immediately." },
+      { type: "p",  text: "Step 5 — Add grain last. Use DaVinci's built-in grain tool under Effects. Size: 3-5, Roughness: 0.4-0.6, Softness: 0.3. Set it to Luma only. Keep it light. The goal is texture you feel more than see. Crank it up and it looks like a preset. Keep it subtle and it looks like film." },
+      { type: "blockquote", text: "The grade is done when you stop noticing it. If you can still see your color work, you went too far.", author: "— Jon Bon" },
+      { type: "h2", text: "Common Mistakes" },
+      { type: "p",  text: "The biggest one: applying film emulation to uncorrected footage. Cineprint35 is not a fix-it tool. If your whites are blown or your blacks are crushed before you apply it, the grade will look wrong. Correct first, emulate second, always. The second mistake is over-graining. Most people apply grain at 3x the level that actually looks good. When in doubt, cut it in half. Third: skipping the node order. If you add grain as a parallel node instead of the last serial node, it composites differently and looks unnatural." },
+      { type: "h2", text: "Take It Further" },
+      { type: "p",  text: "Once you have the base workflow locked, try saving it as your own PowerGrade in the Gallery so you can apply it to any project in one click. You can also explore pairing Cineprint35 with a shot-specific secondary grade that pushes skin tones warmer or cools down skies, keeping the film base but adding your own signature. If you want to go deeper on the free path, look into Resolve's Film Look Creator plugin that shipped in version 18.5 — it handles grain, halation, and bloom in a single dedicated panel." },
+      { type: "gallery", images: [] }, // TODO: add before/after screenshots and screen recordings of the node tree
+      { type: "p",  text: "That's the whole workflow. Whether you go with Cineprint, JP2499, or the free node method, the fundamentals are the same: correct first, emulate second, grain last. What color grading workflow are you currently using? Drop it in the comments." },
     ],
   },
 

@@ -173,9 +173,9 @@
     <div class="container">
 
         <div class="blog-cats" id="blogCats">
-            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge">7</span></button>
+            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge">8</span></button>
             <button class="blog-cat" data-cat="travel">Travel Journal <span class="blog-cat-badge">6</span></button>
-            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge">0</span></button>
+            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge">1</span></button>
             <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge">1</span></button>
         </div>
 
@@ -264,7 +264,19 @@
                     </div>
                 </div>
             </a>
-            <a href="post.html?id=victoria" class="entry-card reveal" style="transition-delay:0.30s" data-category="travel">
+            <a href="post.html?id=cinematicresolve" class="entry-card reveal" style="transition-delay:0.30s" data-category="tutorials">
+                <div class="entry-thumb-placeholder">🎬</div>
+                <div class="entry-body">
+                    <div class="entry-location">🎓 Tutorial</div>
+                    <h3>How to Make Your Videos Look Cinematic Using DaVinci Resolve</h3>
+                    <p>Film emulation in DaVinci Resolve using Cineprint35, JP2499 DRT, or free built-in nodes. Correct first, emulate second, grain last.</p>
+                    <div class="entry-meta">
+                        <span class="entry-date-sm">March 2026</span>
+                        <span class="link-arrow">Read →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="post.html?id=victoria" class="entry-card reveal" style="transition-delay:0.35s" data-category="travel">
                 <div class="entry-thumb-placeholder">🌸</div>
                 <div class="entry-body">
                     <div class="entry-location">📍 Victoria, Canada</div>
@@ -377,13 +389,13 @@
         const cards = document.querySelectorAll('.entry-card[data-category]');
         if (cat === 'all') {
             featured.removeAttribute('data-hidden');
-            cards.forEach(el => el.removeAttribute('data-hidden'));
+            cards.forEach(el => { el.removeAttribute('data-hidden'); el.classList.add('visible'); });
         } else {
             if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
-            else featured.removeAttribute('data-hidden');
+            else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
             cards.forEach(el => {
                 if (el.dataset.category !== cat) el.dataset.hidden = 'true';
-                else el.removeAttribute('data-hidden');
+                else { el.removeAttribute('data-hidden'); el.classList.add('visible'); }
             });
         }
     });

@@ -72,6 +72,20 @@
         blockquote p { font-size: 1.05rem; font-style: italic; color: var(--text); line-height: 1.7; margin-bottom: 10px !important; }
         blockquote span { font-size: 0.78rem; color: var(--text-dim); }
 
+        /* SPECS — Apple-style */
+        .post-specs { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+        .post-specs-header { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); background: var(--bg-card-2); }
+        .post-specs-header h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #555; }
+        .post-specs-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 15px 24px; border-bottom: 1px solid var(--border); background: var(--bg-card); transition: background 0.15s ease; }
+        .post-specs-row:last-child { border-bottom: none; }
+        .post-specs-row:hover { background: var(--bg-card-2); }
+        .post-specs-label { font-size: 0.83rem; color: var(--text-dim); font-weight: 500; flex-shrink: 0; }
+        .post-specs-value { font-size: 0.83rem; color: var(--text); font-weight: 600; text-align: right; line-height: 1.4; }
+        .post-specs-highlight { display: flex; gap: 12px; padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--bg-card); flex-wrap: wrap; }
+        .spec-pill { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: var(--bg-card-2); border: 1px solid var(--border-mid); border-radius: 12px; padding: 14px 18px; flex: 1; min-width: 90px; text-align: center; }
+        .spec-pill-value { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+        .spec-pill-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
+
         /* VIDEO */
         .post-video { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; }
         .post-video-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
@@ -383,6 +397,27 @@
                         <p>"${block.text}"</p>
                         ${block.author ? `<span>${block.author}</span>` : ''}
                     </blockquote>`;
+
+            case 'specs': {
+                const pillsHTML = block.highlights && block.highlights.length
+                    ? `<div class="post-specs-highlight">${block.highlights.map(h => `
+                        <div class="spec-pill">
+                            <span class="spec-pill-value">${h.value}</span>
+                            <span class="spec-pill-label">${h.label}</span>
+                        </div>`).join('')}</div>`
+                    : '';
+                const rowsHTML = (block.items || []).map(item => `
+                    <div class="post-specs-row">
+                        <span class="post-specs-label">${item.label}</span>
+                        <span class="post-specs-value">${item.value}</span>
+                    </div>`).join('');
+                return `
+                    <div class="post-specs">
+                        <div class="post-specs-header"><h3>${block.title || 'Specifications'}</h3></div>
+                        ${pillsHTML}
+                        ${rowsHTML}
+                    </div>`;
+            }
 
             case 'video': {
                 const embed = block.id

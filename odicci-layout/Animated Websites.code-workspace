@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "Animated Websites",
+			"path": ".."
+		},
+		{
+			"name": "Profile-photos-Jonbon",
+			"path": "../Profile-photos-Jonbon"
+		},
+		{
+			"path": "../../cli-main"
+		}
+	],
+	"settings": {}
+}

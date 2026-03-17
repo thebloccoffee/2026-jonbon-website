@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Jon Bon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #0A0A0A;
+            --bg-card:      #111111;
+            --bg-card-2:    #1A1A1A;
+            --text:         #FFFFFF;
+            --text-muted:   #888888;
+            --text-dim:     #444444;
+            --accent:       #FFFFFF;
+            --border:       rgba(255,255,255,0.07);
+            --border-mid:   rgba(255,255,255,0.12);
+            --radius:       12px;
+            --radius-lg:    20px;
+            --max-w:        900px;
+            --font:         'Inter', -apple-system, sans-serif;
+            --trans:        0.2s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+        /* BACK LINK */
+        .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); padding: 32px 24px 0; max-width: var(--max-w); margin: 0 auto; display: block; }
+        .back-link:hover { color: var(--text); }
+
+        /* PRODUCT HERO */
+        .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); margin: 24px auto; max-width: var(--max-w); margin-left: auto; margin-right: auto; }
+        .product-hero-img { display: flex; align-items: center; justify-content: center; font-size: 8rem; min-height: 400px; position: relative; overflow: hidden; }
+        .product-hero-body { padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+
+        .badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; background: rgba(255,255,255,0.07); color: #CCCCCC; border: 1px solid rgba(255,255,255,0.12); width: fit-content; }
+
+        .product-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+        .product-price-lg { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; }
+        .product-tagline { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+
+        .product-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+        .product-features li { font-size: 0.875rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+        .product-features li::before { content: '✓'; color: #FFFFFF; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-family: var(--font); font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: var(--trans); border: none; white-space: nowrap; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+
+        /* DESCRIPTION SECTION */
+        .section { padding: 64px 24px; max-width: var(--max-w); margin: 0 auto; }
+        .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; }
+        .section-body { font-size: 0.925rem; color: var(--text-muted); line-height: 1.8; }
+        .section-body p + p { margin-top: 14px; }
+
+        /* WHAT'S INCLUDED */
+        .includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+        .include-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; display: flex; gap: 14px; align-items: flex-start; }
+        .include-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .include-card h3 { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+        .include-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* MORE GRADES */
+        .more-section { border-top: 1px solid var(--border); padding: 64px 24px; max-width: var(--max-w); margin: 0 auto; }
+        .grades-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+        .grade-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
+        .grade-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-3px); }
+        .grade-card-img { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .grade-card-body { padding: 18px 20px 22px; }
+        .grade-card-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 5px; }
+        .grade-card-name { font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em; margin-bottom: 6px; }
+        .grade-card-price { font-size: 1rem; font-weight: 800; color: var(--text); }
+        .grade-card.current { border-color: rgba(255,255,255,0.2); opacity: 0.5; pointer-events: none; }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: 1140px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .product-hero { grid-template-columns: 1fr; }
+            .product-hero-img { min-height: 200px; }
+            .product-hero-body { padding: 32px 28px; }
+            .includes-grid { grid-template-columns: 1fr; }
+            .grades-row { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+            .nav-links { gap: 0; }
+            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
+        }
+        @media (max-width: 520px) {
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="index.html"         class="nav-link">Home</a></li>
+            <li><a href="index.html#videos"  class="nav-link">Videos</a></li>
+            <li><a href="travel.html"        class="nav-link">Blog</a></li>
+            <li><a href="products.html"      class="nav-link active">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div style="max-width: 900px; margin: 0 auto; padding: 32px 24px 0;">
+    <a href="products.html" class="back-link" style="padding: 0; display: inline-flex;">← Back to Shop</a>
+</div>
+
+<!-- PRODUCT HERO -->
+<div style="max-width: 900px; margin: 24px auto; padding: 0 24px;">
+    <div class="product-hero" id="productHero">
+        <div class="product-hero-img" id="productImg"></div>
+        <div class="product-hero-body">
+            <span class="badge" id="productBadge"></span>
+            <h1 class="product-title" id="productTitle"></h1>
+            <div class="product-price-lg" id="productPrice"></div>
+            <p class="product-tagline" id="productTagline"></p>
+            <ul class="product-features" id="productFeatures"></ul>
+            <button class="btn btn-primary" id="buyBtn" onclick="handleBuy()"></button>
+        </div>
+    </div>
+</div>
+
+<!-- FULL DESCRIPTION -->
+<div class="section" id="descSection">
+    <div class="section-eyebrow" id="descEyebrow">About This Product</div>
+    <h2 class="section-title" id="descTitle"></h2>
+    <div class="section-body" id="descBody"></div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<div style="max-width: 900px; margin: 0 auto; padding: 0 24px 64px;">
+    <div class="section-eyebrow">What You Get</div>
+    <h2 class="section-title" style="margin-bottom: 0;">Everything Included</h2>
+    <div class="includes-grid" id="includesGrid"></div>
+</div>
+
+<!-- MORE PRODUCTS -->
+<div class="more-section">
+    <div class="section-eyebrow">More from the Shop</div>
+    <h2 class="section-title" style="margin-bottom: 0;">Browse All Products</h2>
+    <div class="grades-row" id="gradesRow"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const PRODUCTS = {
+        grandma_grade: {
+            badge: '⭐ Best Seller',
+            title: 'How to Make Millions Before Grandma Dies Grade',
+            price: '$29.99',
+            checkoutId: 'grandma_grade',
+            emoji: '🎬',
+            imgBg: 'linear-gradient(135deg, #1A1008, #2E1F0A)',
+            tagline: 'A cinematic color grade inspired by the warm, emotionally rich tones of the film. Recreate that golden, tender look in your own footage.',
+            features: [
+                'Film-accurate cinematic color grade',
+                'Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro',
+                'Instant digital download',
+                'Free updates included',
+                'Step-by-step application guide',
+            ],
+            descTitle: 'Golden, Warm, and Deeply Human',
+            descBody: `<p>How to Make Millions Before Grandma Dies is one of the most visually striking films of recent years — a story told through warm amber light, soft shadows, and a color palette that feels like a memory fading at the edges. This grade captures exactly that.</p>
+<p>Whether you're shooting family documentary footage, travel vlogs, or narrative short films, this LUT brings that unmistakable warm-orange-teal contrast that makes every frame feel like it belongs in a film festival.</p>
+<p>Built and tested across multiple camera profiles — Sony S-Log2/3, Canon C-Log, ARRI LogC, and standard Rec.709. Includes a base LUT and two intensity variants (subtle and full film look).</p>`,
+            includes: [
+                { icon: '🎞️', title: '3 LUT Variants', desc: 'Base, subtle, and full-look versions for flexible grading.' },
+                { icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },
+                { icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },
+                { icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' },
+            ],
+        },
+        past_lives_grade: {
+            badge: '🎞️ Film Grade',
+            title: 'The Past Lives Grade',
+            price: '$24.99',
+            checkoutId: 'past_lives_grade',
+            emoji: '🌸',
+            imgBg: 'linear-gradient(135deg, #0D0D14, #171724)',
+            tagline: 'Soft, muted, and bittersweet. Capture the quiet, nostalgic warmth of Past Lives in your own footage.',
+            features: [
+                'Film-accurate desaturated warmth',
+                'Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro',
+                'Instant digital download',
+                'Free updates included',
+                'Step-by-step application guide',
+            ],
+            descTitle: 'Quiet Light, Lingering Feeling',
+            descBody: `<p>Past Lives is defined by restraint — a color palette that never shouts, but stays with you long after the credits roll. Muted greens, cool shadows, skin tones preserved with just enough warmth. It's a look that says "this moment matters" without ever overdoing it.</p>
+<p>This grade is perfect for intimate storytelling: travel footage that feels personal, documentary work, couples content, or any project where the emotion should come from the frame itself — not from oversaturated color.</p>
+<p>Tested on Sony S-Log2/3, Fuji F-Log, Canon C-Log, and Rec.709. Includes three variants from barely-there to fully cinematic.</p>`,
+            includes: [
+                { icon: '🎞️', title: '3 LUT Variants', desc: 'Subtle, standard, and cinematic intensity levels.' },
+                { icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },
+                { icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },
+                { icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' },
+            ],
+        },
+        maze_runner_grade: {
+            badge: '🌲 Film Grade',
+            title: 'The Maze Runner Grade',
+            price: '$24.99',
+            checkoutId: 'maze_runner_grade',
+            emoji: '🌫️',
+            imgBg: 'linear-gradient(135deg, #0A0F0A, #131A13)',
+            tagline: 'Gritty, desaturated, and tense. Bring the dark, dystopian look of The Maze Runner to your edits.',
+            features: [
+                'Film-accurate dystopian color grade',
+                'Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro',
+                'Instant digital download',
+                'Free updates included',
+                'Step-by-step application guide',
+            ],
+            descTitle: 'Dark, Gritty, and Relentless',
+            descBody: `<p>The Maze Runner's visual language is built on contrast and dread — crushed blacks, cool desaturated midtones, just enough green in the shadows to feel like something is wrong. It's a grade that makes every environment feel hostile and every frame feel urgent.</p>
+<p>This LUT is ideal for action content, outdoor adventure footage, cinematic short films, and any project that needs edge. The kind of grade that makes even a run through a forest feel like a survival situation.</p>
+<p>Tested on Sony S-Log2/3, Canon C-Log, Blackmagic Film, and Rec.709. Includes three strength variants so you can dial in exactly how intense you want to go.</p>`,
+            includes: [
+                { icon: '🎞️', title: '3 LUT Variants', desc: 'Mild, standard, and crushed intensity levels.' },
+                { icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },
+                { icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },
+                { icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' },
+            ],
+        },
+    };
+
+    const ALL_GRADES = [
+        { id: 'grandma_grade', name: 'How to Make Millions Before Grandma Dies Grade', price: '$29.99', emoji: '🎬', imgBg: 'linear-gradient(135deg, #1A1008, #2E1F0A)' },
+        { id: 'past_lives_grade', name: 'The Past Lives Grade', price: '$24.99', emoji: '🌸', imgBg: 'linear-gradient(135deg, #0D0D14, #171724)' },
+        { id: 'maze_runner_grade', name: 'The Maze Runner Grade', price: '$24.99', emoji: '🌫️', imgBg: 'linear-gradient(135deg, #0A0F0A, #131A13)' },
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || 'grandma_grade';
+    const product = PRODUCTS[id];
+
+    if (!product) {
+        window.location.href = 'products.html';
+    }
+
+    // Populate hero
+    document.title = product.title + ' — Jon Bon';
+    document.getElementById('productImg').style.background = product.imgBg;
+    document.getElementById('productImg').textContent = product.emoji;
+    document.getElementById('productBadge').textContent = product.badge;
+    document.getElementById('productTitle').textContent = product.title;
+    document.getElementById('productPrice').textContent = product.price;
+    document.getElementById('productTagline').textContent = product.tagline;
+    document.getElementById('buyBtn').textContent = 'Buy Now — ' + product.price;
+
+    const featuresEl = document.getElementById('productFeatures');
+    product.features.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        featuresEl.appendChild(li);
+    });
+
+    // Description
+    document.getElementById('descTitle').textContent = product.descTitle;
+    document.getElementById('descBody').innerHTML = product.descBody;
+
+    // Includes
+    const includesEl = document.getElementById('includesGrid');
+    product.includes.forEach(item => {
+        includesEl.innerHTML += `
+            <div class="include-card">
+                <div class="include-icon">${item.icon}</div>
+                <div>
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                </div>
+            </div>`;
+    });
+
+    // More grades
+    const gradesEl = document.getElementById('gradesRow');
+    ALL_GRADES.forEach(g => {
+        const isCurrent = g.id === id;
+        gradesEl.innerHTML += `
+            <a href="product.html?id=${g.id}" class="grade-card${isCurrent ? ' current' : ''}">
+                <div class="grade-card-img" style="background: ${g.imgBg};">${g.emoji}</div>
+                <div class="grade-card-body">
+                    <div class="grade-card-type">Color Grade${isCurrent ? ' · Current' : ''}</div>
+                    <div class="grade-card-name">${g.name}</div>
+                    <div class="grade-card-price">${g.price}</div>
+                </div>
+            </a>`;
+    });
+
+    async function handleBuy() {
+        const btn = document.getElementById('buyBtn');
+        const orig = btn.textContent;
+        btn.textContent = 'Loading...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId: product.checkoutId }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error(data.error || 'Unknown error');
+            }
+        } catch (err) {
+            alert('Checkout failed: ' + err.message);
+            btn.textContent = orig;
+            btn.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -254,6 +254,17 @@
             .c-card-thumb { height: 130px; }
         }
 
+        /* ROLLING GALLERY */
+        .rolling-gallery { overflow: hidden; padding: 48px 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .rolling-track { display: flex; gap: 14px; width: max-content; animation: galleryScroll 35s linear infinite; }
+        .rolling-track:hover { animation-play-state: paused; }
+        .rolling-photo { height: 210px; border-radius: 16px; overflow: hidden; flex-shrink: 0; }
+        .rolling-photo img { height: 100%; width: auto; object-fit: cover; display: block; }
+        @keyframes galleryScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: none; }
@@ -368,6 +379,15 @@
     </div>
 </div>
 
+<!-- ROLLING GALLERY -->
+<div class="rolling-gallery">
+    <div class="rolling-track" id="rollingTrack">
+        <!-- Add your gallery photos to /assets/images/gallery/ then reference them here -->
+        <!-- Example: <div class="rolling-photo"><img src="assets/images/gallery/gallery-01.png" alt=""></div> -->
+        <!-- Placeholder items shown until photos are added -->
+    </div>
+</div>
+
 <!-- WHAT I DO -->
 <section class="section">
     <div class="container">
@@ -439,10 +459,10 @@
         </div>
 
         <div class="blog-cats" id="blogCats">
-            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge" id="catCountAll">6</span></button>
+            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge" id="catCountAll">8</span></button>
             <button class="blog-cat" data-cat="travel">Travel Journal <span class="blog-cat-badge" id="catCountTravel">5</span></button>
-            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge" id="catCountTutorials">0</span></button>
-            <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge" id="catCountGear">0</span></button>
+            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge" id="catCountTutorials">1</span></button>
+            <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge" id="catCountGear">1</span></button>
         </div>
 
         <div class="blog-featured reveal" data-category="travel">
@@ -504,6 +524,24 @@
                     <div class="blog-date">November 2025</div>
                 </div>
             </a>
+            <a href="post.html?id=telesingrip" class="blog-item reveal" data-category="gear">
+                <div class="blog-emoji-thumb">📱</div>
+                <div>
+                    <div class="blog-location">Gear Review</div>
+                    <div class="blog-title">Telesin Fun Shot Magnetic Grip — iPhone Filmmaking Upgrade</div>
+                    <div class="blog-excerpt">The iPhone grip that changed how I shoot on the go. Honest review after real-world use.</div>
+                    <div class="blog-date">October 2025</div>
+                </div>
+            </a>
+            <a href="post.html?id=cinematicresolve" class="blog-item reveal" data-category="tutorials">
+                <div class="blog-emoji-thumb">🎬</div>
+                <div>
+                    <div class="blog-location">Tutorial</div>
+                    <div class="blog-title">How to Make Your Videos Look Cinematic Using DaVinci Resolve</div>
+                    <div class="blog-excerpt">Film emulation using Cineprint35, JP2499 DRT, or free built-in nodes. Correct first, emulate second, grain last.</div>
+                    <div class="blog-date">March 2026</div>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -520,28 +558,58 @@
         </div>
 
         <div class="shop-tabs">
-            <button class="shop-tab active" onclick="switchTab(this,'products')">Digital Products</button>
-            <button class="shop-tab" onclick="switchTab(this,'affiliate')">Gear & Affiliate</button>
+            <button class="shop-tab active" onclick="switchTab(this,'luts')">Colorgrading</button>
+            <button class="shop-tab" onclick="switchTab(this,'guides')">Field Guides</button>
+            <button class="shop-tab" onclick="switchTab(this,'gear')">My Gear</button>
         </div>
 
-        <div class="shop-pane active" id="products">
+        <div class="shop-pane active" id="luts">
             <div class="products-grid">
-                <div class="product-card reveal">
+                <a href="product.html?id=grandma_grade" class="product-card reveal" style="text-decoration:none;color:inherit;">
                     <div class="product-img blue">🎬</div>
                     <div class="product-body">
-                        <div class="product-type">Filmmaking</div>
-                        <div class="product-name">Cinematic LUT Pack</div>
-                        <div class="product-desc">Professional color grades for travel footage. One-click cinematic look.</div>
+                        <div class="product-type">Color Grade</div>
+                        <div class="product-name">How to Make Millions Before Grandma Dies Grade</div>
+                        <div class="product-desc">Warm, golden, emotionally rich tones inspired by the film. One-click cinematic look.</div>
                         <div class="product-foot">
-                            <span class="product-price">$29</span>
-                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                            <span class="product-price">$29.99</span>
+                            <span class="btn btn-primary btn-sm">View →</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:0.1s">
+                </a>
+                <a href="product.html?id=past_lives_grade" class="product-card reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
+                    <div class="product-img warm">🌸</div>
+                    <div class="product-body">
+                        <div class="product-type">Color Grade</div>
+                        <div class="product-name">The Past Lives Grade</div>
+                        <div class="product-desc">Soft, muted, and bittersweet. The quiet nostalgic warmth of Past Lives in your footage.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$24.99</span>
+                            <span class="btn btn-primary btn-sm">View →</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="product.html?id=maze_runner_grade" class="product-card reveal" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
+                    <div class="product-img purple">🌫️</div>
+                    <div class="product-body">
+                        <div class="product-type">Color Grade</div>
+                        <div class="product-name">The Maze Runner Grade</div>
+                        <div class="product-desc">Gritty, desaturated, and tense. The dark dystopian look of The Maze Runner.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$24.99</span>
+                            <span class="btn btn-primary btn-sm">View →</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="shop-pane" id="guides">
+            <div class="products-grid">
+                <div class="product-card reveal">
                     <div class="product-img warm">✈️</div>
                     <div class="product-body">
-                        <div class="product-type">Travel Planning</div>
+                        <div class="product-type">Guide</div>
                         <div class="product-name">Travel Filmmaking Guide</div>
                         <div class="product-desc">Everything I know about filming travel content — gear, technique, storytelling, monetization.</div>
                         <div class="product-foot">
@@ -550,10 +618,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="product-card reveal" style="transition-delay:0.2s">
+                <div class="product-card reveal" style="transition-delay:0.1s">
                     <div class="product-img purple">🎞️</div>
                     <div class="product-body">
-                        <div class="product-type">Editing</div>
+                        <div class="product-type">Template</div>
                         <div class="product-name">Creator Editing Workflow</div>
                         <div class="product-desc">My full editing system — project files, presets, and workflow docs for DaVinci & Premiere.</div>
                         <div class="product-foot">
@@ -562,10 +630,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="product-card reveal" style="transition-delay:0.2s">
+                    <div class="product-img blue">📦</div>
+                    <div class="product-body">
+                        <div class="product-type">Bundle</div>
+                        <div class="product-name">Full Creator Bundle</div>
+                        <div class="product-desc">All three products at 20% off. LUT Pack + Filmmaking Guide + Editing Workflow.</div>
+                        <div class="product-foot">
+                            <span class="product-price">$94</span>
+                            <a href="products.html" class="btn btn-warm btn-sm">Best Value</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="shop-pane" id="affiliate">
+        <div class="shop-pane" id="gear">
             <div class="affiliate-grid">
                 <a href="#" class="affiliate-card reveal">
                     <div class="aff-icon">📷</div>
@@ -671,13 +751,13 @@
         const items = document.querySelectorAll('.blog-item[data-category]');
         if (cat === 'all') {
             featured.removeAttribute('data-hidden');
-            items.forEach(el => el.removeAttribute('data-hidden'));
+            items.forEach(el => { el.removeAttribute('data-hidden'); el.classList.add('visible'); });
         } else {
-            featured.dataset.hidden = featured.dataset.category !== cat ? 'true' : '';
-            if (featured.dataset.hidden !== 'true') featured.removeAttribute('data-hidden');
+            if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
+            else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
             items.forEach(el => {
                 if (el.dataset.category !== cat) el.dataset.hidden = 'true';
-                else el.removeAttribute('data-hidden');
+                else { el.removeAttribute('data-hidden'); el.classList.add('visible'); }
             });
         }
     });
@@ -692,6 +772,18 @@
             setTimeout(() => observer.observe(el), 10);
         });
     }
+
+    // Rolling gallery — duplicate track for seamless loop
+    (function() {
+        const track = document.getElementById('rollingTrack');
+        if (!track) return;
+        const photos = track.querySelectorAll('.rolling-photo');
+        if (photos.length === 0) return;
+        // Clone all photos and append for seamless infinite scroll
+        photos.forEach(photo => {
+            track.appendChild(photo.cloneNode(true));
+        });
+    })();
 
     function handleSub(e) {
         e.preventDefault();

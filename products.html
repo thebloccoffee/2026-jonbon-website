@@ -200,32 +200,104 @@
 <!-- SHOP TABS -->
 <div class="shop-tabs-wrap">
     <div class="shop-tabs">
-        <button class="shop-tab active" onclick="switchTab(this,'products')">Digital Products</button>
-        <button class="shop-tab" onclick="switchTab(this,'affiliate')">Gear & Affiliate Links</button>
+        <button class="shop-tab active" onclick="switchTab(this,'luts')">LUT Packs</button>
+        <button class="shop-tab" onclick="switchTab(this,'guides')">Field Guides</button>
+        <button class="shop-tab" onclick="switchTab(this,'gear')">My Gear</button>
     </div>
 </div>
 
-<!-- DIGITAL PRODUCTS -->
-<div class="shop-pane active" id="products">
+<!-- LUT PACKS -->
+<div class="shop-pane active" id="luts">
     <div class="container">
 
         <!-- Featured -->
-        <div class="product-featured reveal">
+        <a href="product.html?id=grandma_grade" class="product-featured reveal" style="text-decoration:none;color:inherit;cursor:pointer;">
             <div class="product-featured-img">🎬</div>
             <div class="product-featured-body">
                 <span class="badge badge-warm">⭐ Best Seller</span>
-                <h2>Cinematic LUT Pack</h2>
+                <h2>How to Make Millions Before Grandma Dies Grade</h2>
                 <div class="product-price-lg">$29.99</div>
-                <p>12 professionally crafted LUTs that give your footage that film-quality look — built from real travel footage. Works in DaVinci Resolve, Premiere Pro, Final Cut Pro, and more.</p>
+                <p>A cinematic color grade inspired by the warm, emotionally rich tones of the film. Recreate that golden, tender look in your own footage — works in DaVinci Resolve, Premiere Pro, Final Cut Pro, and more.</p>
                 <ul class="product-features">
-                    <li>12 cinematic LUTs for travel & landscape</li>
+                    <li>Film-accurate cinematic color grade</li>
                     <li>Compatible with all major editing software</li>
                     <li>Instant digital download</li>
                     <li>Free updates included</li>
                 </ul>
-                <button onclick="checkout('lut_pack')" class="btn btn-primary" style="width:fit-content;">Buy Now — $29.99</button>
+                <span class="btn btn-primary" style="width:fit-content;">View Product →</span>
+            </div>
+        </a>
+
+        <!-- More Grades -->
+        <div class="products-grid" style="margin-top: 24px;">
+            <a href="product.html?id=past_lives_grade" class="product-card reveal" style="text-decoration:none;color:inherit;">
+                <div class="product-img blue">🎞️</div>
+                <div class="product-body">
+                    <div class="product-type">Color Grade</div>
+                    <div class="product-name">The Past Lives Grade</div>
+                    <div class="product-desc">Soft, muted, and bittersweet. Capture the quiet, nostalgic warmth of Past Lives in your own footage.</div>
+                    <div class="product-foot">
+                        <span class="product-price">$24.99</span>
+                        <span class="btn btn-primary btn-sm">View →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="product.html?id=maze_runner_grade" class="product-card reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
+                <div class="product-img warm">🌫️</div>
+                <div class="product-body">
+                    <div class="product-type">Color Grade</div>
+                    <div class="product-name">The Maze Runner Grade</div>
+                    <div class="product-desc">Gritty, desaturated, and tense. Bring the dark, dystopian look of The Maze Runner to your edits.</div>
+                    <div class="product-foot">
+                        <span class="product-price">$24.99</span>
+                        <span class="btn btn-primary btn-sm">View →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Why Buy -->
+        <div style="margin-top: 64px;">
+            <div class="section-eyebrow">Why These Work</div>
+            <h2 class="section-title">Built from Real Trips, Not Theory</h2>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon">📹</div>
+                    <div>
+                        <h3>Battle-Tested</h3>
+                        <p>Every LUT comes from real filming trips — cold winters, humid jungles, long shooting days. Proven in the field, not just on a test chart.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.1s">
+                    <div class="why-icon">🎬</div>
+                    <div>
+                        <h3>Cinematic Quality</h3>
+                        <p>Designed with a filmmaker's eye. Each LUT helps your footage look and feel premium from the very first clip.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.15s">
+                    <div class="why-icon">💡</div>
+                    <div>
+                        <h3>One-Click Results</h3>
+                        <p>Drop it on your footage and it just works. No tweaking required — though every LUT is fully adjustable to your taste.</p>
+                    </div>
+                </div>
+                <div class="why-card reveal" style="transition-delay:0.2s">
+                    <div class="why-icon">✨</div>
+                    <div>
+                        <h3>Creator to Creator</h3>
+                        <p>Made by someone who edits travel videos weekly — not a stock pack from a studio that's never been on location.</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+    </div>
+</div>
+
+<!-- FIELD GUIDES -->
+<div class="shop-pane" id="guides">
+    <div class="container">
 
         <!-- Grid -->
         <div class="products-grid">
@@ -267,42 +339,6 @@
             </div>
         </div>
 
-        <!-- Why Buy -->
-        <div style="margin-top: 64px;">
-            <div class="section-eyebrow">Why These Work</div>
-            <h2 class="section-title">Built from Real Trips, Not Theory</h2>
-            <div class="why-grid">
-                <div class="why-card reveal">
-                    <div class="why-icon">📹</div>
-                    <div>
-                        <h3>Battle-Tested</h3>
-                        <p>Every product comes from real filming trips — cold winters, humid jungles, long shooting days. These tools have been proven in the field.</p>
-                    </div>
-                </div>
-                <div class="why-card reveal" style="transition-delay:0.1s">
-                    <div class="why-icon">🎬</div>
-                    <div>
-                        <h3>Cinematic Quality</h3>
-                        <p>Designed with a filmmaker's eye. Each resource helps you create content that looks and feels premium from day one.</p>
-                    </div>
-                </div>
-                <div class="why-card reveal" style="transition-delay:0.15s">
-                    <div class="why-icon">💡</div>
-                    <div>
-                        <h3>No Fluff</h3>
-                        <p>Practical and actionable. Built for immediate use in your creative workflow — not padded with filler to justify the price.</p>
-                    </div>
-                </div>
-                <div class="why-card reveal" style="transition-delay:0.2s">
-                    <div class="why-icon">✨</div>
-                    <div>
-                        <h3>Creator to Creator</h3>
-                        <p>These resources come from someone who knows the real challenges of content creation on the road — because I live it.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- FAQ -->
         <div style="margin-top: 64px;">
             <div class="section-eyebrow">Questions</div>
@@ -334,8 +370,8 @@
     </div>
 </div>
 
-<!-- AFFILIATE LINKS -->
-<div class="shop-pane" id="affiliate">
+<!-- MY GEAR -->
+<div class="shop-pane" id="gear">
     <div class="container">
         <div class="section-eyebrow">Gear I Actually Use</div>
         <h2 class="section-title">My Full Kit</h2>
