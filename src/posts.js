@@ -388,4 +388,133 @@ const POSTS = {
       ]
   },
 
+  "lunar-new-year-parade-in-vancouver-chinatown": {
+      "emoji": "🌍",
+      "excerpt": "Every year, Vancouver Chinatown comes alive for Lunar New Year. I showed up with my camera to document it and ended up staying longer than I planned.",
+      "featured": true,
+      "title": "Lunar New Year Parade in Vancouver Chinatown",
+      "location": "",
+      "date": "March 2026",
+      "category": "travel",
+      "tags": [],
+      "hero": "posts/lunar-new-year-parade-in-vancouver-chinatown/846eaa4c76f1.png",
+      "intro": "There is a specific kind of energy that happens when a whole community decides to celebrate together in the street. I felt it the moment I turned onto Pender Street in Vancouver Chinatown on Lunar New Year. The sidewalks were already packed. Red lanterns hung across the road. Somewhere ahead of me, a drum was going. I had my camera with me and no real plan, which is usually when I get the best footage.",
+      "body": [
+          {
+              "type": "h2",
+              "text": "Showing Up"
+          },
+          {
+              "type": "p",
+              "text": "I got there early, before the parade started. That is usually the best time to shoot. People are still moving around, finding their spots, talking to each other. The light was flat and grey, which is pretty normal for Vancouver in February, but the red and gold everywhere made up for it. Vendors were setting up. Kids were already in their spots along the curb."
+          },
+          {
+              "type": "p",
+              "text": "Vancouver Chinatown is one of the oldest in North America and you can feel that history when you walk through it. The buildings have that old character. The signs are layered in a way that takes years to build up. During Lunar New Year it all gets lit up and decorated and it feels like the neighborhood is at its best version of itself."
+          },
+          {
+              "type": "h2",
+              "text": "The Parade"
+          },
+          {
+              "type": "p",
+              "text": "When the parade started, the sound hit first. Drums and cymbals and firecrackers going off in quick bursts. The lion dancers came through and the crowd pushed forward. Everyone had their phones up. I was trying to hold my position and keep the camera steady at the same time, which is harder than it sounds when the person next to you is really excited and also very tall."
+          },
+          {
+              "type": "p",
+              "text": "The lions moved in a way that felt almost alive. The dancers inside them were working hard, you could see it in how the costumes moved. They stopped at different storefronts along the route to do the blessing ceremony, and each time they did, people gathered around and watched quietly for a moment before the drums picked back up."
+          },
+          {
+              "type": "p",
+              "text": "Community groups marched through too. Older folks in traditional dress, kids from local schools, dragon teams moving in long waves down the street. It went on for a while and I did not mind at all."
+          },
+          {
+              "type": "h2",
+              "text": "Filming in a Crowd"
+          },
+          {
+              "type": "p",
+              "text": "Shooting in a packed street parade is always a challenge. You cannot set up a tripod. You are moving with the crowd or against it. The light changes every few seconds as clouds pass. I spent most of the time just reacting, trying to stay close enough to the action without getting in anyone's way."
+          },
+          {
+              "type": "p",
+              "text": "What I kept coming back to was the faces. The kids watching the lion dancers with their mouths open. The older people who have probably seen this parade every year for decades but are still locked in on it. Those are the shots I wanted. The parade itself is spectacular but the people watching it tell the real story."
+          },
+          {
+              "type": "blockquote",
+              "text": "The parade is worth filming. The people watching it are worth filming more.",
+              "author": "— Jon Bon"
+          },
+          {
+              "type": "h2",
+              "text": "The Sounds and the Food"
+          },
+          {
+              "type": "p",
+              "text": "Firecrackers are loud. I knew this going in but I was still not fully prepared for how loud they were in an enclosed street with buildings on both sides. Every time a string went off I flinched. By the end of the day I had gotten used to it, which felt like a small personal achievement."
+          },
+          {
+              "type": "p",
+              "text": "After the parade wound down I walked around and ate. That part needs no documentation, just participation. Chinatown has good food and Lunar New Year is a good excuse to try more of it than you normally would."
+          },
+          {
+              "type": "gallery",
+              "images": [
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/846eaa4c76f1.png",
+                      "alt": "Vancouver Chinatown decorated for Lunar New Year",
+                      "caption": "Pender Street dressed up for the Spring Festival."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/f3ee6c6b40e9.jpg",
+                      "alt": "Lion dance performers in the parade",
+                      "caption": "The lion dancers working their way down the route."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/6dff68ee0844.jpg",
+                      "alt": "Crowd watching the Lunar New Year parade",
+                      "caption": "Everyone lined up along the curb waiting for the parade to pass."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/4a94920609e6.jpg",
+                      "alt": "Dragon team marching through Chinatown",
+                      "caption": "A dragon team moving through the street."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/443aafff1075.jpg",
+                      "alt": "Red lanterns hanging over the street",
+                      "caption": "Red lanterns across Pender Street."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/73542118bdbf.jpg",
+                      "alt": "Firecrackers going off during the celebration",
+                      "caption": "Firecrackers. Loud ones."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/efc379d2727c.jpg",
+                      "alt": "Community groups in the Lunar New Year parade",
+                      "caption": "Community groups representing the neighborhood."
+                  },
+                  {
+                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/731b18cbd24f.jpg",
+                      "alt": "Vancouver Chinatown during Spring Festival",
+                      "caption": "Chinatown at its best."
+                  }
+              ]
+          },
+          {
+              "type": "h2",
+              "text": "Worth Showing Up For"
+          },
+          {
+              "type": "p",
+              "text": "Lunar New Year in Vancouver Chinatown is one of those events that is easy to say you will go to and then skip when the day comes and it is cold and raining. Do not skip it. The energy is real and the parade is genuinely good. Bring a camera if you have one. If not, just be there. Some things are better experienced than filmed anyway."
+          },
+          {
+              "type": "p",
+              "text": "Happy New Year to everyone who celebrates. See you at the next one."
+          }
+      ]
+  },
+
 };
