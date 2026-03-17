@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Loading… — Jon Bon</title>
     <meta name="description" id="page-desc" content="Read my travel story on Jon Bon's travel diary.">
+    <link rel="canonical" id="page-canonical" href="https://tabasjonbon.com/travel.html">
+    <!-- Open Graph -->
+    <meta property="og:type"        content="article">
+    <meta property="og:site_name"   content="Jon Bon">
+    <meta property="og:title"       id="og-title"       content="Jon Bon — Travel Blog">
+    <meta property="og:description" id="og-description" content="Stories, photos, and things I've learned from the road.">
+    <meta property="og:url"         id="og-url"         content="https://tabasjonbon.com/travel.html">
+    <meta property="og:image"       id="og-image"       content="https://tabasjonbon.com/assets/og-default.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@jonbontabas">
+    <meta name="twitter:title"       id="tw-title"       content="Jon Bon — Travel Blog">
+    <meta name="twitter:description" id="tw-description" content="Stories, photos, and things I've learned from the road.">
+    <meta name="twitter:image"       id="tw-image"       content="https://tabasjonbon.com/assets/og-default.jpg">
+    <!-- JSON-LD structured data (updated by JS) -->
+    <script type="application/ld+json" id="page-jsonld">{}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -327,11 +343,26 @@
     function buildShareHTML(title) {
         const url = window.location.href;
         const tw = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+        const fb = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+        const li = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+        const rd = 'https://www.reddit.com/submit?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title);
         return `
             <div class="post-share">
                 <span class="post-share-label">Share</span>
                 <button class="share-btn" id="copyLinkBtn">🔗 Copy Link</button>
                 <a href="${tw}" target="_blank" rel="noopener" class="share-btn">𝕏 Post</a>
+                <a href="${fb}" target="_blank" rel="noopener" class="share-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+                    Facebook
+                </a>
+                <a href="${li}" target="_blank" rel="noopener" class="share-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="${rd}" target="_blank" rel="noopener" class="share-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.74c.69 0 1.25.56 1.25 1.25a1.25 1.25 0 0 1-2.5 0c0-.69.56-1.25 1.25-1.25zm-10 0c.69 0 1.25.56 1.25 1.25a1.25 1.25 0 0 1-2.5 0c0-.69.56-1.25 1.25-1.25zM12 6.5c2.66 0 5.15.99 7.01 2.78.56-.23 1.17-.36 1.81-.36 2.61 0 4.73 2.12 4.73 4.73 0 1.79-.99 3.35-2.45 4.18-.08 3.93-4.11 7.17-9.1 7.17-4.99 0-9.02-3.24-9.1-7.17C3.44 16.99 2.45 15.43 2.45 13.65c0-2.61 2.12-4.73 4.73-4.73.64 0 1.25.13 1.81.36A10.52 10.52 0 0 1 12 6.5zm0 1.5c-2.3 0-4.44.87-6.04 2.31l-.02.02C5.27 10.92 4.5 11.67 4.5 12.5c0 .9.73 1.63 1.63 1.63.27 0 .52-.07.74-.19C7.5 15.77 9.6 17.5 12 17.5s4.5-1.73 5.13-4.06c.22.12.47.19.74.19.9 0 1.63-.73 1.63-1.63 0-.83-.77-1.58-1.44-2.67A8.5 8.5 0 0 0 12 8zm-2.5 3.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-5.25 4.5h5.5l-.55 1H9.75l-.5-1z"/></svg>
+                    Reddit
+                </a>
             </div>`;
     }
 
@@ -363,8 +394,38 @@
     }
 
     /* ── Page meta ── */
-    document.getElementById('page-title').textContent  = post.title + ' — Jon Bon';
-    document.getElementById('page-desc').setAttribute('content', post.intro || '');
+    const pageTitle = post.title.trim() + ' — Jon Bon';
+    const pageDesc  = (post.excerpt || post.intro || '').slice(0, 160);
+    const pageUrl   = 'https://tabasjonbon.com/post.html?id=' + id;
+    const pageImage = post.hero
+        ? 'https://tabasjonbon.com/' + post.hero
+        : 'https://tabasjonbon.com/assets/og-default.jpg';
+
+    document.getElementById('page-title').textContent = pageTitle;
+    document.getElementById('page-desc').setAttribute('content', pageDesc);
+    document.getElementById('page-canonical').setAttribute('href', pageUrl);
+
+    document.getElementById('og-title').setAttribute('content', pageTitle);
+    document.getElementById('og-description').setAttribute('content', pageDesc);
+    document.getElementById('og-url').setAttribute('content', pageUrl);
+    document.getElementById('og-image').setAttribute('content', pageImage);
+
+    document.getElementById('tw-title').setAttribute('content', pageTitle);
+    document.getElementById('tw-description').setAttribute('content', pageDesc);
+    document.getElementById('tw-image').setAttribute('content', pageImage);
+
+    document.getElementById('page-jsonld').textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title.trim(),
+        "description": pageDesc,
+        "image": pageImage,
+        "url": pageUrl,
+        "datePublished": post.date,
+        "author": { "@type": "Person", "name": "Jon Bon", "url": "https://tabasjonbon.com" },
+        "publisher": { "@type": "Person", "name": "Jon Bon", "url": "https://tabasjonbon.com" },
+        "keywords": (post.tags || []).join(', ')
+    });
 
     /* ── Hero ── */
     let heroHTML;

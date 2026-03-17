@@ -288,6 +288,7 @@
         }
 
         const entries = Object.entries(POSTS)
+            .filter(([, p]) => p.hidden !== true)
             .sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
 
         // Update filter badge counts dynamically
