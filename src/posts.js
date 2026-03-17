@@ -117,27 +117,52 @@ const POSTS = {
   },
 
   newyork: {
-    // ── CMS FIELDS ──────────────────────────────────────────────
-    emoji:    "🗽",
-    excerpt:  "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
-    featured: true,
-    // ────────────────────────────────────────────────────────────
-    title:    "New York Streets",
-    location: "New York, USA",
-    date:     "January 2026",
-    category: "travel",
-    tags:     ["Travel", "USA", "Street Photography", "Urban"],
-    hero:     null, // TODO: add your New York hero photo path
-    intro:    "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
-    body: [
-      { type: "h2", text: "The City as a Character" },
-      { type: "p",  text: "New York doesn't need an introduction. What surprised me as a filmmaker was how the city almost directs itself — you point the camera anywhere and something interesting is happening." },
-      { type: "video", id: null }, // TODO: add your New York YouTube video ID
-      { type: "h2", text: "Where to Film" },
-      { type: "p",  text: "Beyond the obvious landmarks, the real gold is in the outer boroughs. Bushwick for street art, Flushing for culture, the Rockaways for something completely unexpected." },
-      { type: "gallery", images: [] }, // TODO: add your New York photos
-      { type: "p",  text: "New York is humbling and inspiring in equal measure. Safe travels." },
-    ],
+      "emoji": "🗽",
+      "excerpt": "",
+      "featured": true,
+      "title": "New York Streets",
+      "location": "New York, USA",
+      "date": "January 2026",
+      "category": "travel",
+      "tags": [
+          "Travel",
+          "USA",
+          "Street Photography",
+          "Urban"
+      ],
+      "hero": null,
+      "intro": "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
+      "body": [
+          {
+              "type": "h2",
+              "text": "The City as a Character"
+          },
+          {
+              "type": "p",
+              "text": "New York doesn't need an introduction. What surprised me as a filmmaker was how the city almost directs itself — you point the camera anywhere and something interesting is happening."
+          },
+          {
+              "type": "video",
+              "id": null
+          },
+          {
+              "type": "h2",
+              "text": "Where to Film"
+          },
+          {
+              "type": "p",
+              "text": "Beyond the obvious landmarks, the real gold is in the outer boroughs. Bushwick for street art, Flushing for culture, the Rockaways for something completely unexpected."
+          },
+          {
+              "type": "gallery",
+              "images": []
+          },
+          {
+              "type": "p",
+              "text": "New York is humbling and inspiring in equal measure. Safe travels."
+          }
+      ],
+      "hidden": false
   },
 
   danang: {
@@ -460,11 +485,6 @@ const POSTS = {
           {
               "type": "gallery",
               "images": [
-                  {
-                      "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/846eaa4c76f1.png",
-                      "alt": "Vancouver Chinatown decorated for Lunar New Year",
-                      "caption": "Pender Street dressed up for the Spring Festival."
-                  },
                   {
                       "src": "posts/lunar-new-year-parade-in-vancouver-chinatown/f3ee6c6b40e9.jpg",
                       "alt": "Lion dance performers in the parade",
