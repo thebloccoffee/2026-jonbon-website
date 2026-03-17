@@ -269,6 +269,39 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: none; }
 
+        /* PRODUCT MODAL */
+        .product-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+        .product-modal-overlay.open { opacity: 1; pointer-events: all; }
+        .product-modal { background: #111111; border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; width: 100%; max-width: 660px; max-height: 90vh; overflow-y: auto; position: relative; transform: translateY(16px); transition: transform 0.25s ease; }
+        .product-modal-overlay.open .product-modal { transform: translateY(0); }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1; }
+        .modal-close:hover { background: rgba(255,255,255,0.15); }
+        .modal-hero { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 5rem; border-radius: 20px 20px 0 0; }
+        .modal-content { padding: 28px 32px 36px; }
+        .modal-badge { font-size: 0.75rem; font-weight: 600; color: #999; margin-bottom: 8px; }
+        .modal-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 8px; }
+        .modal-price { font-size: 1.4rem; font-weight: 800; margin-bottom: 14px; }
+        .modal-tagline { font-size: 0.9rem; color: #888; line-height: 1.65; margin-bottom: 20px; }
+        .modal-features { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 24px; }
+        .modal-features li { font-size: 0.85rem; color: #888; display: flex; align-items: center; gap: 8px; }
+        .modal-features li::before { content: '✓'; color: #fff; font-weight: 700; font-size: 0.8rem; }
+        .modal-desc { font-size: 0.875rem; color: #888; line-height: 1.7; margin-bottom: 24px; }
+        .modal-desc p { margin-bottom: 10px; }
+        .modal-desc p:last-child { margin-bottom: 0; }
+        .modal-included-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 12px; }
+        .modal-included-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+        .modal-included-item { background: #1A1A1A; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 16px; }
+        .modal-included-icon { font-size: 1.3rem; margin-bottom: 6px; }
+        .modal-included-item h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 3px; }
+        .modal-included-item p { font-size: 0.78rem; color: #888; line-height: 1.4; margin: 0; }
+        .modal-buy { width: 100%; justify-content: center; padding: 14px; font-size: 1rem; }
+        @media (max-width: 600px) {
+            .product-modal { max-height: 100vh; border-radius: 16px 16px 0 0; align-self: flex-end; }
+            .product-modal-overlay { align-items: flex-end; padding: 0; }
+            .modal-included-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 24px 20px 32px; }
+        }
+
         /* RESPONSIVE */
         @media (max-width: 960px) {
             .hero { grid-template-columns: 1fr; padding: 64px 24px 48px; gap: 40px; }
@@ -565,7 +598,7 @@
 
         <div class="shop-pane active" id="luts">
             <div class="products-grid">
-                <a href="product.html?id=grandma_grade" class="product-card reveal" style="text-decoration:none;color:inherit;">
+                <a href="products.html?product=grandma_grade" class="product-card reveal" style="text-decoration:none;color:inherit;">
                     <div class="product-img blue">🎬</div>
                     <div class="product-body">
                         <div class="product-type">Color Grade</div>
@@ -577,7 +610,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="product.html?id=past_lives_grade" class="product-card reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
+                <a href="products.html?product=past_lives_grade" class="product-card reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
                     <div class="product-img warm">🌸</div>
                     <div class="product-body">
                         <div class="product-type">Color Grade</div>
@@ -589,7 +622,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="product.html?id=maze_runner_grade" class="product-card reveal" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
+                <a href="products.html?product=maze_runner_grade" class="product-card reveal" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
                     <div class="product-img purple">🌫️</div>
                     <div class="product-body">
                         <div class="product-type">Color Grade</div>
@@ -606,42 +639,42 @@
 
         <div class="shop-pane" id="guides">
             <div class="products-grid">
-                <div class="product-card reveal">
+                <a href="products.html?product=filmmaking_guide" class="product-card reveal" style="text-decoration:none;color:inherit;">
                     <div class="product-img warm">✈️</div>
                     <div class="product-body">
                         <div class="product-type">Guide</div>
                         <div class="product-name">Travel Filmmaking Guide</div>
                         <div class="product-desc">Everything I know about filming travel content — gear, technique, storytelling, monetization.</div>
                         <div class="product-foot">
-                            <span class="product-price">$39</span>
-                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                            <span class="product-price">$39.99</span>
+                            <span class="btn btn-primary btn-sm">View →</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:0.1s">
+                </a>
+                <a href="products.html?product=editing_workflow" class="product-card reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
                     <div class="product-img purple">🎞️</div>
                     <div class="product-body">
                         <div class="product-type">Template</div>
                         <div class="product-name">Creator Editing Workflow</div>
                         <div class="product-desc">My full editing system — project files, presets, and workflow docs for DaVinci & Premiere.</div>
                         <div class="product-foot">
-                            <span class="product-price">$49</span>
-                            <a href="products.html" class="btn btn-primary btn-sm">Get it</a>
+                            <span class="product-price">$49.99</span>
+                            <span class="btn btn-primary btn-sm">View →</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:0.2s">
+                </a>
+                <a href="products.html?product=creator_bundle" class="product-card reveal" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
                     <div class="product-img blue">📦</div>
                     <div class="product-body">
                         <div class="product-type">Bundle</div>
                         <div class="product-name">Full Creator Bundle</div>
                         <div class="product-desc">All three products at 20% off. LUT Pack + Filmmaking Guide + Editing Workflow.</div>
                         <div class="product-foot">
-                            <span class="product-price">$94</span>
-                            <a href="products.html" class="btn btn-warm btn-sm">Best Value</a>
+                            <span class="product-price">$94.99</span>
+                            <span class="btn btn-warm btn-sm">Best Value →</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -739,7 +772,125 @@
     </div>
 </footer>
 
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="product-modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="product-modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-hero" id="modalHero"></div>
+        <div class="modal-content">
+            <div class="modal-badge" id="modalBadge"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-price" id="modalPrice"></div>
+            <p class="modal-tagline" id="modalTagline"></p>
+            <ul class="modal-features" id="modalFeatures"></ul>
+            <div class="modal-desc" id="modalDesc"></div>
+            <div class="modal-included-title">What's Included</div>
+            <div class="modal-included-grid" id="modalIncluded"></div>
+            <button class="btn btn-primary modal-buy" id="modalBuy">Buy Now</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    const PRODUCTS = {
+        filmmaking_guide: {
+            badge: '📖 Digital Guide', title: 'Travel Filmmaking Guide', price: '$39.99', checkoutId: 'filmmaking_guide',
+            emoji: '✈️', imgBg: 'linear-gradient(135deg, #0A0A14, #14142A)',
+            tagline: '50+ pages covering pre-production, storytelling, camera settings, and how to create travel content that actually stands out.',
+            features: ['50+ page PDF guide','Pre-production & trip planning system','Camera settings for travel footage','Storytelling frameworks for YouTube','Monetization & growth strategies','Instant digital download'],
+            descBody: '<p>This isn\'t a generic "how to use your camera" guide. It\'s the system I actually use — from planning a trip with content in mind, to capturing the right shots on location, to turning raw footage into a video people actually watch all the way through.</p><p>Covers gear selection and packing, shot lists for every type of location, my exact camera settings for travel scenarios, the storytelling structure I use for every video, and the YouTube-specific strategies that drive views and subscribers.</p>',
+            includes: [{ icon: '📄', title: '50+ Page PDF', desc: 'Fully designed, readable on any device.' },{ icon: '🎯', title: 'Shot List Templates', desc: 'Pre-built shot lists for cities, nature, and adventure.' },{ icon: '📊', title: 'YouTube Growth Framework', desc: 'Title, thumbnail, and retention strategy guide.' },{ icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' }],
+        },
+        editing_workflow: {
+            badge: '🎞️ Template Pack', title: 'Creator Editing Workflow', price: '$49.99', checkoutId: 'editing_workflow',
+            emoji: '🎞️', imgBg: 'linear-gradient(135deg, #0F0A00, #1E1400)',
+            tagline: 'My full editing system — project files, presets, and workflow docs for DaVinci Resolve and Premiere Pro.',
+            features: ['DaVinci Resolve project template','Premiere Pro project template','Custom node presets & color pipeline','Audio mixing workflow','Export settings for YouTube','Instant digital download'],
+            descBody: '<p>Stop rebuilding your timeline from scratch every time. This is my complete editing system — the same project structure, color pipeline, and export settings I use for every video on the channel.</p><p>Includes a fully set-up DaVinci Resolve project with custom nodes for color grading, audio tracks pre-labeled and routed, and a finishing workflow that gets your video export-ready in a fraction of the time.</p>',
+            includes: [{ icon: '🎬', title: 'DaVinci Resolve Template', desc: 'Full project with nodes, tracks, and color pipeline set up.' },{ icon: '🎬', title: 'Premiere Pro Template', desc: 'Identical structure for Premiere users.' },{ icon: '📄', title: 'Workflow Guide PDF', desc: 'Explains every decision and how to adapt it to your style.' },{ icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' }],
+        },
+        creator_bundle: {
+            badge: '📦 Best Value', title: 'Full Creator Bundle', price: '$94.99', checkoutId: 'creator_bundle',
+            emoji: '📦', imgBg: 'linear-gradient(135deg, #0A0A0A, #1C1C1C)',
+            tagline: 'All three digital products together at a 20% discount. LUT Pack + Filmmaking Guide + Editing Workflow.',
+            features: ['How to Make Millions Before Grandma Dies Grade','Travel Filmmaking Guide (50+ pages)','Creator Editing Workflow (Resolve + Premiere)','20% off vs. buying separately','Instant digital download','Free updates on all products'],
+            descBody: '<p>The Full Creator Bundle gives you every tool in one shot — color grades that make your footage look cinematic, a complete filmmaking guide to shoot better on location, and the editing workflow that turns raw clips into finished videos efficiently.</p><p>Buying all three separately costs $119.97. The bundle brings that down to $94.99 — saving you 20%.</p>',
+            includes: [{ icon: '🎞️', title: 'All Color Grades', desc: 'Every film-inspired LUT grade in the shop.' },{ icon: '📄', title: 'Travel Filmmaking Guide', desc: '50+ page PDF covering the full content creation system.' },{ icon: '🎬', title: 'Editing Workflow Templates', desc: 'DaVinci Resolve + Premiere Pro project templates.' },{ icon: '💰', title: '20% Bundle Discount', desc: 'Save $25 vs. buying each product separately.' }],
+        },
+        grandma_grade: {
+            badge: '⭐ Best Seller', title: 'How to Make Millions Before Grandma Dies Grade', price: '$29.99', checkoutId: 'grandma_grade',
+            emoji: '🎬', imgBg: 'linear-gradient(135deg, #1A1008, #2E1F0A)',
+            tagline: 'A cinematic color grade inspired by the warm, emotionally rich tones of the film. Recreate that golden, tender look in your own footage.',
+            features: ['Film-accurate cinematic color grade','Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro','Instant digital download','Free updates included','Step-by-step application guide'],
+            descBody: '<p>How to Make Millions Before Grandma Dies is one of the most visually striking films of recent years — a story told through warm amber light, soft shadows, and a color palette that feels like a memory fading at the edges. This grade captures exactly that.</p><p>Built and tested across multiple camera profiles — Sony S-Log2/3, Canon C-Log, ARRI LogC, and standard Rec.709. Includes a base LUT and two intensity variants.</p>',
+            includes: [{ icon: '🎞️', title: '3 LUT Variants', desc: 'Base, subtle, and full-look versions for flexible grading.' },{ icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },{ icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },{ icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' }],
+        },
+        past_lives_grade: {
+            badge: '🎞️ Film Grade', title: 'The Past Lives Grade', price: '$24.99', checkoutId: 'past_lives_grade',
+            emoji: '🌸', imgBg: 'linear-gradient(135deg, #0D0D14, #171724)',
+            tagline: 'Soft, muted, and bittersweet. Capture the quiet, nostalgic warmth of Past Lives in your own footage.',
+            features: ['Film-accurate desaturated warmth','Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro','Instant digital download','Free updates included','Step-by-step application guide'],
+            descBody: '<p>Past Lives is defined by restraint — a color palette that never shouts, but stays with you long after the credits roll. Muted greens, cool shadows, skin tones preserved with just enough warmth.</p><p>Perfect for intimate storytelling: travel footage that feels personal, documentary work, couples content, or any project where the emotion should come from the frame itself. Tested on Sony S-Log2/3, Fuji F-Log, Canon C-Log, and Rec.709.</p>',
+            includes: [{ icon: '🎞️', title: '3 LUT Variants', desc: 'Subtle, standard, and cinematic intensity levels.' },{ icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },{ icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },{ icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' }],
+        },
+        maze_runner_grade: {
+            badge: '🌲 Film Grade', title: 'The Maze Runner Grade', price: '$24.99', checkoutId: 'maze_runner_grade',
+            emoji: '🌫️', imgBg: 'linear-gradient(135deg, #0A0F0A, #131A13)',
+            tagline: 'Gritty, desaturated, and tense. Bring the dark, dystopian look of The Maze Runner to your edits.',
+            features: ['Film-accurate dystopian color grade','Compatible with DaVinci Resolve, Premiere Pro, Final Cut Pro','Instant digital download','Free updates included','Step-by-step application guide'],
+            descBody: '<p>The Maze Runner\'s visual language is built on contrast and dread — crushed blacks, cool desaturated midtones, just enough green in the shadows to feel like something is wrong.</p><p>Ideal for action content, outdoor adventure footage, cinematic short films, and any project that needs edge. Tested on Sony S-Log2/3, Canon C-Log, Blackmagic Film, and Rec.709.</p>',
+            includes: [{ icon: '🎞️', title: '3 LUT Variants', desc: 'Mild, standard, and crushed intensity levels.' },{ icon: '📄', title: 'Application Guide', desc: 'PDF walkthrough for DaVinci Resolve, Premiere Pro, and Final Cut Pro.' },{ icon: '🎨', title: 'Color Reference Stills', desc: 'Before/after sample images to match your grade.' },{ icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' }],
+        },
+    };
+
+    function openModal(id) {
+        const p = PRODUCTS[id];
+        if (!p) return;
+        document.getElementById('modalHero').style.background = p.imgBg;
+        document.getElementById('modalHero').textContent = p.emoji;
+        document.getElementById('modalBadge').textContent = p.badge;
+        document.getElementById('modalTitle').textContent = p.title;
+        document.getElementById('modalPrice').textContent = p.price;
+        document.getElementById('modalTagline').textContent = p.tagline;
+        document.getElementById('modalFeatures').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+        document.getElementById('modalDesc').innerHTML = p.descBody;
+        document.getElementById('modalIncluded').innerHTML = p.includes.map(i => `<div class="modal-included-item"><div class="modal-included-icon">${i.icon}</div><h4>${i.title}</h4><p>${i.desc}</p></div>`).join('');
+        const buyBtn = document.getElementById('modalBuy');
+        buyBtn.onclick = function() { checkout(p.checkoutId); };
+        document.getElementById('productModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('productModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+        if (e.target === document.getElementById('productModal')) closeModal();
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    async function checkout(productId) {
+        const btn = document.getElementById('modalBuy');
+        const orig = btn.textContent;
+        btn.textContent = 'Loading...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('/create-checkout-session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productId }) });
+            const data = await res.json();
+            if (data.url) { window.location.href = data.url; }
+            else { throw new Error(data.error || 'Unknown error'); }
+        } catch (err) {
+            alert('Checkout failed: ' + err.message);
+            btn.textContent = orig;
+            btn.disabled = false;
+        }
+    }
+
     // Blog category filter
     document.getElementById('blogCats').addEventListener('click', function(e) {
         const btn = e.target.closest('.blog-cat');
