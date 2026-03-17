@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="src/theme.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -157,6 +158,7 @@
             <li><a href="travel.html"       class="nav-link active">Blog</a></li>
             <li><a href="products.html"     class="nav-link">Shop</a></li>
             <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button></li>
         </ul>
     </div>
 </nav>
@@ -172,123 +174,17 @@
 <section class="section" style="padding-top: 0;">
     <div class="container">
 
+        <!-- ── CMS: filter badge counts are set dynamically from posts.js ── -->
         <div class="blog-cats" id="blogCats">
-            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge">8</span></button>
-            <button class="blog-cat" data-cat="travel">Travel Journal <span class="blog-cat-badge">6</span></button>
-            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge">1</span></button>
-            <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge">1</span></button>
+            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge">—</span></button>
+            <button class="blog-cat" data-cat="travel">Travel Journal <span class="blog-cat-badge">—</span></button>
+            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge">—</span></button>
+            <button class="blog-cat" data-cat="gear">Gear &amp; Affiliates <span class="blog-cat-badge">—</span></button>
         </div>
 
-        <div class="entry-featured reveal" data-category="travel">
-            <div class="entry-featured-img" style="background-image: url('Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2948.1.jpg');"></div>
-            <div class="entry-featured-body">
-                <div class="entry-location">📍 Quebec City, Canada</div>
-                <h2>Quebec City in Winter</h2>
-                <div class="entry-date">March 2026</div>
-                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time. The light on those wet stones at golden hour was unforgettable.</p>
-                <a href="post.html?id=quebec" class="btn btn-primary" style="width:fit-content;">Read the Story →</a>
-            </div>
-        </div>
-
-        <!-- ENTRIES GRID -->
-        <div class="entries-grid">
-            <a href="post.html?id=baguio" class="entry-card reveal" style="transition-delay:0.05s" data-category="travel">
-                <div class="entry-thumb-placeholder">🌿</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 Baguio City, Philippines</div>
-                    <h3>Baguio City Diaries</h3>
-                    <p>Exploring the misty mountains and cool climate of Baguio. A hidden gem for travelers seeking solace away from the tropical heat.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">March 2026</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=chongqing" class="entry-card reveal" style="transition-delay:0.10s" data-category="travel">
-                <div class="entry-thumb-placeholder">🏙️</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 Chongqing, China</div>
-                    <h3>Chongqing Lights</h3>
-                    <p>The vibrant energy of Chongqing at night. Where ancient traditions meet modern megacity architecture along the Yangtze River.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">February 2026</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=newyork" class="entry-card reveal" style="transition-delay:0.15s" data-category="travel">
-                <div class="entry-thumb-placeholder">🗽</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 New York, USA</div>
-                    <h3>New York Streets</h3>
-                    <p>From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">January 2026</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=danang" class="entry-card reveal" style="transition-delay:0.20s" data-category="travel">
-                <div class="entry-thumb-placeholder">🏖️</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 Da Nang, Vietnam</div>
-                    <h3>Da Nang: Beach & Mountains</h3>
-                    <p>Nestled between mountains and pristine beaches, Da Nang is a photographer's paradise. Golden hour light and vibrant culture.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">December 2025</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=vancouver" class="entry-card reveal" style="transition-delay:0.25s" data-category="travel">
-                <div class="entry-thumb-placeholder">🏔️</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 Vancouver, Canada</div>
-                    <h3>Vancouver: Mountains & City</h3>
-                    <p>A perfect blend of urban sophistication and natural wilderness. Mountains, forests, and the best food in Canada.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">November 2025</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=telesingrip" class="entry-card reveal" style="transition-delay:0.05s" data-category="gear">
-                <div class="entry-thumb-placeholder">📱</div>
-                <div class="entry-body">
-                    <div class="entry-location">📦 Gear Review</div>
-                    <h3>Telesin Fun Shot Magnetic Grip</h3>
-                    <p>The iPhone filmmaking grip that changed how I shoot on the go. Honest review after real-world use.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">October 2025</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=cinematicresolve" class="entry-card reveal" style="transition-delay:0.30s" data-category="tutorials">
-                <div class="entry-thumb-placeholder">🎬</div>
-                <div class="entry-body">
-                    <div class="entry-location">🎓 Tutorial</div>
-                    <h3>How to Make Your Videos Look Cinematic Using DaVinci Resolve</h3>
-                    <p>Film emulation in DaVinci Resolve using Cineprint35, JP2499 DRT, or free built-in nodes. Correct first, emulate second, grain last.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">March 2026</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-            <a href="post.html?id=victoria" class="entry-card reveal" style="transition-delay:0.35s" data-category="travel">
-                <div class="entry-thumb-placeholder">🌸</div>
-                <div class="entry-body">
-                    <div class="entry-location">📍 Victoria, Canada</div>
-                    <h3>Victoria: Charm & History</h3>
-                    <p>The capital of British Columbia — charming streets, historic architecture, and peaceful waterfront views.</p>
-                    <div class="entry-meta">
-                        <span class="entry-date-sm">October 2025</span>
-                        <span class="link-arrow">Read →</span>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <!-- ── CMS: rendered dynamically from posts.js ── -->
+        <div id="featuredEntry"></div>
+        <div class="entries-grid" id="entriesGrid"></div>
     </div>
 </section>
 
@@ -370,13 +266,92 @@
     </div>
 </footer>
 
+<script src="src/posts.js"></script>
 <script>
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
         });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── CMS: Render posts from posts.js ─────────────────────────────────
+    (function () {
+        // Map post category → data-category attribute used by the filter
+        function filterCat(category) {
+            return category === 'tutorial' ? 'tutorials' : category;
+        }
+        // Location prefix icon per category
+        function locIcon(category) {
+            if (category === 'gear')     return '📦';
+            if (category === 'tutorial') return '🎓';
+            return '📍';
+        }
+
+        const entries = Object.entries(POSTS)
+            .sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
+
+        // Update filter badge counts dynamically
+        const counts = { all: entries.length, travel: 0, tutorials: 0, gear: 0 };
+        entries.forEach(([, p]) => {
+            const c = filterCat(p.category);
+            if (c in counts) counts[c]++;
+        });
+        document.querySelectorAll('#blogCats .blog-cat').forEach(btn => {
+            const badge = btn.querySelector('.blog-cat-badge');
+            if (badge && btn.dataset.cat in counts) badge.textContent = counts[btn.dataset.cat];
+        });
+
+        // Identify hero post (featuredHero: true) — falls back to first post
+        const heroIdx = entries.findIndex(([, p]) => p.featuredHero);
+        const [heroId, heroPost] = heroIdx >= 0 ? entries[heroIdx] : entries[0];
+        const gridEntries = entries.filter(([id]) => id !== heroId);
+
+        // Render featured/hero entry
+        const featuredEl = document.getElementById('featuredEntry');
+        if (featuredEl && heroPost) {
+            const imgStyle = heroPost.hero ? `style="background-image: url('${heroPost.hero}');"` : '';
+            const imgInner = heroPost.hero ? '' : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem;">${heroPost.emoji || '📸'}</div>`;
+            featuredEl.innerHTML = `
+                <div class="entry-featured reveal" data-category="${filterCat(heroPost.category)}">
+                    <div class="entry-featured-img" ${imgStyle}>${imgInner}</div>
+                    <div class="entry-featured-body">
+                        <div class="entry-location">${locIcon(heroPost.category)} ${heroPost.location}</div>
+                        <h2>${heroPost.title}</h2>
+                        <div class="entry-date">${heroPost.date}</div>
+                        <p>${heroPost.excerpt || heroPost.intro}</p>
+                        <a href="post.html?id=${heroId}" class="btn btn-primary" style="width:fit-content;">Read the Story →</a>
+                    </div>
+                </div>`;
+        }
+
+        // Render grid cards
+        const gridEl = document.getElementById('entriesGrid');
+        if (gridEl) {
+            gridEl.innerHTML = gridEntries.map(([id, p], i) => {
+                const delay = (i * 0.05).toFixed(2);
+                const thumb = p.hero
+                    ? `<div class="entry-thumb" style="background-image: url('${p.hero}');"></div>`
+                    : `<div class="entry-thumb-placeholder">${p.emoji || '📸'}</div>`;
+                return `
+                <a href="post.html?id=${id}" class="entry-card reveal" style="transition-delay:${delay}s" data-category="${filterCat(p.category)}">
+                    ${thumb}
+                    <div class="entry-body">
+                        <div class="entry-location">${locIcon(p.category)} ${p.location}</div>
+                        <h3>${p.title}</h3>
+                        <p>${p.excerpt || p.intro}</p>
+                        <div class="entry-meta">
+                            <span class="entry-date-sm">${p.date}</span>
+                            <span class="link-arrow">Read →</span>
+                        </div>
+                    </div>
+                </a>`;
+            }).join('');
+        }
+
+        // Observe all newly rendered reveal elements
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })();
+    // ────────────────────────────────────────────────────────────────────
 
     // Blog category filter
     document.getElementById('blogCats').addEventListener('click', function(e) {
@@ -388,11 +363,13 @@
         const featured = document.querySelector('.entry-featured[data-category]');
         const cards = document.querySelectorAll('.entry-card[data-category]');
         if (cat === 'all') {
-            featured.removeAttribute('data-hidden');
+            if (featured) featured.removeAttribute('data-hidden');
             cards.forEach(el => { el.removeAttribute('data-hidden'); el.classList.add('visible'); });
         } else {
-            if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
-            else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
+            if (featured) {
+                if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
+                else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
+            }
             cards.forEach(el => {
                 if (el.dataset.category !== cat) el.dataset.hidden = 'true';
                 else { el.removeAttribute('data-hidden'); el.classList.add('visible'); }

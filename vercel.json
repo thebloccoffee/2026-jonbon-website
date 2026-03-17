@@ -7,8 +7,9 @@
       "config": {
         "includeFiles": [
           "*.html",
-          "posts.js",
-          "Website Assets/**",
+          "src/**",
+          "assets/**",
+          "posts/**",
           "downloads/**"
         ]
       }

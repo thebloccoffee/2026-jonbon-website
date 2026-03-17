@@ -1,31 +1,49 @@
 /**
- * BLOG POSTS DATA
- * ─────────────────────────────────────────────────────
- * To add a new post:
- *   1. Copy an existing entry below
- *   2. Give it a unique key (e.g. "tokyo")
- *   3. Fill in the fields
- *   4. Add a card for it in travel.html
+ * BLOG POSTS DATA  ── Single source of truth for all blog content
+ * ─────────────────────────────────────────────────────────────────
+ * HOW TO ADD A NEW POST:
+ *   1. Copy an existing entry below and give it a unique key (e.g. "tokyo")
+ *   2. Fill in all fields — at minimum: title, location, date, category, intro, emoji, excerpt
+ *   3. Set  featuredHero: true  on whichever post should be the big hero card
+ *      (only one post at a time; remove it from the previous hero post)
+ *   4. Set  featured: false  to hide a post from the home page (it still shows on travel.html)
+ *   5. That's it — both travel.html and index.html update automatically
  *
- * Body block types:
+ * CMS FIELD REFERENCE:
+ *   emoji        {string}  — emoji icon for cards without a hero photo
+ *   excerpt      {string}  — 1–2 sentence card description shown on listing pages
+ *   featuredHero {boolean} — true = this post is the large hero card (one at a time)
+ *   featured     {boolean} — false = hide from home page blog section (default: true)
+ *   hero         {string|null} — path to hero image, or null if not yet available
+ *   category     {string}  — "travel" | "gear" | "tutorial"
+ *   tags         {Array}   — keyword tags
+ *
+ * BODY BLOCK TYPES:
  *   { type: "h2",         text: "Section Title" }
  *   { type: "p",          text: "Paragraph text here." }
  *   { type: "blockquote", text: "Quote text.", author: "— Attribution" }
  *   { type: "video",      id: "YOUTUBE_VIDEO_ID" }
- *   { type: "gallery",    images: [{ src: "path/to/img.jpg", alt: "description" }] }
- * ─────────────────────────────────────────────────────
+ *   { type: "gallery",    images: [{ src: "path.jpg", alt: "description", caption: "..." }] }
+ *   { type: "specs",      title: "...", highlights: [...], items: [...] }
+ * ─────────────────────────────────────────────────────────────────
  */
 
 const POSTS = {
 
   quebec: {
-    title: "Quebec City in Winter",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:       "❄️",
+    excerpt:     "Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications and a city that feels frozen beautifully in time.",
+    featuredHero: true,
+    featured:    true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Quebec City in Winter",
     location: "Quebec City, Canada",
-    date: "March 2026",
+    date:     "March 2026",
     category: "travel",
-    tags: ["Travel", "Canada", "Winter", "Filmmaking", "Street Photography"],
-    hero: "Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2948.1.jpg",
-    intro: "Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time.",
+    tags:     ["Travel", "Canada", "Winter", "Filmmaking", "Street Photography"],
+    hero:     "posts/quebec/Still%202026-03-05%20234021_1.2948.1.jpg",
+    intro:    "Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time.",
     body: [
       { type: "h2", text: "First Impressions" },
       { type: "p",  text: "Old Quebec in winter is unlike anywhere I've filmed. The stone walls of the fortifications are dusted with snow, the narrow streets quiet and cinematic. It's one of the few places where the cold actually adds to the beauty rather than taking away from it." },
@@ -37,23 +55,28 @@ const POSTS = {
       { type: "h2", text: "Practical Notes" },
       { type: "p",  text: "Battery life drops fast in the cold — bring spares and keep them in an inside pocket. The best light is just after sunrise when the streets are still empty." },
       { type: "gallery", images: [
-        { src: "Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2946.1.jpg", alt: "Old Quebec street in winter", caption: "The cobblestone streets of Old Quebec, dusted with snow and completely empty at dawn." },
-        { src: "Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2947.1.jpg", alt: "Pedestrians in Old Quebec", caption: "Locals moving through the narrow streets under a heavy winter sky." },
-        { src: "Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2948.1.jpg", alt: "Saint-Jean Gate fortress", caption: "The Saint-Jean Gate — one of the last remaining fortification gates in North America." },
-        { src: "Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.3065.1.jpg", alt: "Historic stone house with red door", caption: "A classic Old Quebec facade. The red door against grey stone is a recurring visual motif in the city." },
+        { src: "posts/quebec/Still%202026-03-05%20234021_1.2946.1.jpg", alt: "Old Quebec street in winter", caption: "The cobblestone streets of Old Quebec, dusted with snow and completely empty at dawn." },
+        { src: "posts/quebec/Still%202026-03-05%20234021_1.2947.1.jpg", alt: "Pedestrians in Old Quebec", caption: "Locals moving through the narrow streets under a heavy winter sky." },
+        { src: "posts/quebec/Still%202026-03-05%20234021_1.2948.1.jpg", alt: "Saint-Jean Gate fortress", caption: "The Saint-Jean Gate — one of the last remaining fortification gates in North America." },
+        { src: "posts/quebec/Still%202026-03-05%20234021_1.3065.1.jpg", alt: "Historic stone house with red door", caption: "A classic Old Quebec facade. The red door against grey stone is a recurring visual motif in the city." },
       ]},
       { type: "p",  text: "If you're a filmmaker or content creator, Quebec City in winter deserves a spot on your list. Safe travels — see you in the next story." },
     ],
   },
 
   baguio: {
-    title: "Baguio City Diaries",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🌿",
+    excerpt:  "Exploring the misty mountains and cool climate of Baguio City. A hidden gem for filmmakers seeking solace away from the tropical heat.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Baguio City Diaries",
     location: "Baguio City, Philippines",
-    date: "March 2026",
+    date:     "March 2026",
     category: "travel",
-    tags: ["Travel", "Philippines", "Mountains", "Filmmaking"],
-    hero: null, // TODO: add your Baguio hero photo path
-    intro: "Stepping into Baguio City felt like stepping into another world. After months of filming in bustling metropolis cities, the cool mountain air and misty peaks offered a different kind of beauty — subtle, contemplative, and deeply cinematic.",
+    tags:     ["Travel", "Philippines", "Mountains", "Filmmaking"],
+    hero:     null, // TODO: add your Baguio hero photo path
+    intro:    "Stepping into Baguio City felt like stepping into another world. After months of filming in bustling metropolis cities, the cool mountain air and misty peaks offered a different kind of beauty — subtle, contemplative, and deeply cinematic.",
     body: [
       { type: "h2", text: "Finding Solace in the Mountains" },
       { type: "p",  text: "The first thing you notice about Baguio is the temperature. At 5,000 feet above sea level, the city's climate is refreshingly cool — unusual for the Philippines. The light filtering through the fog created the kind of atmospheric scenes cinematographers dream about." },
@@ -70,13 +93,18 @@ const POSTS = {
   },
 
   chongqing: {
-    title: "Chongqing Lights",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🏙️",
+    excerpt:  "Neon-lit megacity energy along the Yangtze River where ancient and modern collide. China's most vertical city at night.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Chongqing Lights",
     location: "Chongqing, China",
-    date: "February 2026",
+    date:     "February 2026",
     category: "travel",
-    tags: ["Travel", "China", "Night Photography", "Urban", "Filmmaking"],
-    hero: null, // TODO: add your Chongqing hero photo path
-    intro: "Neon-lit megacity energy along the Yangtze River where ancient and modern collide. Chongqing is unlike any city I've ever filmed.",
+    tags:     ["Travel", "China", "Night Photography", "Urban", "Filmmaking"],
+    hero:     null, // TODO: add your Chongqing hero photo path
+    intro:    "Neon-lit megacity energy along the Yangtze River where ancient and modern collide. Chongqing is unlike any city I've ever filmed.",
     body: [
       { type: "h2", text: "China's Most Vertical City" },
       { type: "p",  text: "Chongqing sprawls across mountains and river valleys, making it one of the most visually complex cities on earth. There's no such thing as a flat street here — everything is stairs, bridges, and elevated walkways." },
@@ -89,13 +117,18 @@ const POSTS = {
   },
 
   newyork: {
-    title: "New York Streets",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🗽",
+    excerpt:  "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "New York Streets",
     location: "New York, USA",
-    date: "January 2026",
+    date:     "January 2026",
     category: "travel",
-    tags: ["Travel", "USA", "Street Photography", "Urban"],
-    hero: null, // TODO: add your New York hero photo path
-    intro: "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
+    tags:     ["Travel", "USA", "Street Photography", "Urban"],
+    hero:     null, // TODO: add your New York hero photo path
+    intro:    "From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on the city that never sleeps.",
     body: [
       { type: "h2", text: "The City as a Character" },
       { type: "p",  text: "New York doesn't need an introduction. What surprised me as a filmmaker was how the city almost directs itself — you point the camera anywhere and something interesting is happening." },
@@ -108,13 +141,18 @@ const POSTS = {
   },
 
   danang: {
-    title: "Da Nang — Beach, Marble Mountains & Culture",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🏖️",
+    excerpt:  "Nestled between mountains and pristine beaches, Da Nang is a photographer's paradise. Golden hour light over the South China Sea.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Da Nang — Beach, Marble Mountains & Culture",
     location: "Da Nang, Vietnam",
-    date: "December 2025",
+    date:     "December 2025",
     category: "travel",
-    tags: ["Travel", "Vietnam", "Beach", "Photography"],
-    hero: null, // TODO: add your Da Nang hero photo path
-    intro: "Golden hour over the South China Sea. Da Nang in its full cinematic glory — beaches, mountains, and a city that moves at exactly the right pace.",
+    tags:     ["Travel", "Vietnam", "Beach", "Photography"],
+    hero:     null, // TODO: add your Da Nang hero photo path
+    intro:    "Golden hour over the South China Sea. Da Nang in its full cinematic glory — beaches, mountains, and a city that moves at exactly the right pace.",
     body: [
       { type: "h2", text: "A Photographer's Paradise" },
       { type: "p",  text: "Da Nang sits between two of Vietnam's most compelling landscapes — the ocean to the east and the Marble Mountains to the south. The light here is extraordinary, especially in the early morning and late afternoon." },
@@ -127,13 +165,18 @@ const POSTS = {
   },
 
   vancouver: {
-    title: "Vancouver — Mountains, Ocean & Urban Wild",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🏔️",
+    excerpt:  "A perfect blend of urban sophistication and natural wilderness. Mountains, ocean, forests, and the best food in Canada.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Vancouver — Mountains, Ocean & Urban Wild",
     location: "Vancouver, Canada",
-    date: "November 2025",
+    date:     "November 2025",
     category: "travel",
-    tags: ["Travel", "Canada", "Nature", "Urban", "Filmmaking"],
-    hero: null, // TODO: add your Vancouver hero photo path
-    intro: "Where the Rockies drop straight into a cosmopolitan city with the best food in Canada.",
+    tags:     ["Travel", "Canada", "Nature", "Urban", "Filmmaking"],
+    hero:     null, // TODO: add your Vancouver hero photo path
+    intro:    "Where the Rockies drop straight into a cosmopolitan city with the best food in Canada.",
     body: [
       { type: "h2", text: "The Most Scenic City in North America" },
       { type: "p",  text: "Vancouver is absurdly photogenic. Mountains behind the skyline, ocean in front, Stanley Park on the edge of downtown — it's the kind of place that makes you want to keep the camera rolling constantly." },
@@ -144,13 +187,18 @@ const POSTS = {
   },
 
   victoria: {
-    title: "Victoria — Charm & History",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🌸",
+    excerpt:  "The capital of British Columbia — charming streets, historic architecture, and peaceful waterfront views.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Victoria — Charm & History",
     location: "Victoria, Canada",
-    date: "October 2025",
+    date:     "October 2025",
     category: "travel",
-    tags: ["Travel", "Canada", "Architecture", "History"],
-    hero: null, // TODO: add your Victoria hero photo path
-    intro: "The capital of British Columbia offers charming streets, historic architecture, and peaceful waterfront views.",
+    tags:     ["Travel", "Canada", "Architecture", "History"],
+    hero:     null, // TODO: add your Victoria hero photo path
+    intro:    "The capital of British Columbia offers charming streets, historic architecture, and peaceful waterfront views.",
     body: [
       { type: "h2", text: "A Quieter Kind of Beautiful" },
       { type: "p",  text: "Victoria moves slower than Vancouver, and that's exactly why I loved filming there. The Inner Harbour, Chinatown, and the Fairmont Empress are all worth your time and your lens." },
@@ -161,13 +209,18 @@ const POSTS = {
   },
 
   telesingrip: {
-    title: "Telesin Fun Shot Magnetic Grip — iPhone Filmmaking Upgrade",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "📱",
+    excerpt:  "The iPhone filmmaking grip that changed how I shoot on the go. Honest review after real-world use.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "Telesin Fun Shot Magnetic Grip — iPhone Filmmaking Upgrade",
     location: "Gear Review",
-    date: "October 2025",
+    date:     "October 2025",
     category: "gear",
-    tags: ["Gear", "iPhone", "Mobile Filmmaking", "Review", "Affiliate"],
-    hero: null, // TODO: add hero photo — clean product shot or you holding it
-    intro: "I've been looking for a way to get more cinematic shots from my iPhone without lugging extra gear. The Telesin Fun Shot Magnetic Grip changed how I film on the go — here's my honest take after using it on real trips.",
+    tags:     ["Gear", "iPhone", "Mobile Filmmaking", "Review", "Affiliate"],
+    hero:     null, // TODO: add hero photo — clean product shot or you holding it
+    intro:    "I've been looking for a way to get more cinematic shots from my iPhone without lugging extra gear. The Telesin Fun Shot Magnetic Grip changed how I film on the go — here's my honest take after using it on real trips.",
     body: [
       { type: "h2", text: "Why I Picked This Up" },
       { type: "p",  text: "I was skeptical of phone grips. Most of them feel like plastic toys that you use once and throw in a drawer. But the Telesin Fun Shot kept coming up in my research for lightweight travel filmmaking — specifically because of the magnetic lens mount system. That got my attention." },
@@ -205,13 +258,18 @@ const POSTS = {
   },
 
   cinematicresolve: {
-    title: "How to Make Your Videos Look Cinematic Using DaVinci Resolve",
+    // ── CMS FIELDS ──────────────────────────────────────────────
+    emoji:    "🎬",
+    excerpt:  "Film emulation in DaVinci Resolve using Cineprint35, JP2499 DRT, or free built-in nodes. Correct first, emulate second, grain last.",
+    featured: true,
+    // ────────────────────────────────────────────────────────────
+    title:    "How to Make Your Videos Look Cinematic Using DaVinci Resolve",
     location: "Tutorial",
-    date: "March 2026",
+    date:     "March 2026",
     category: "tutorial",
-    tags: ["Tutorial", "DaVinci Resolve", "Color Grading", "Film Emulation", "Cinematic", "PowerGrade"],
-    hero: null, // TODO: add hero — before/after frame showing the cinematic grade applied
-    intro: "Most footage straight out of a camera looks flat, digital, and forgettable. The difference between that and the warm, textured, film-like look you see on professional travel films comes down to one thing: color grading. In this tutorial I'll show you exactly how I use DaVinci Resolve to get a cinematic film emulation look, whether you want to spend money on PowerGrades like Cineprint35 or JP2499, or build something close for free with built-in nodes.",
+    tags:     ["Tutorial", "DaVinci Resolve", "Color Grading", "Film Emulation", "Cinematic", "PowerGrade"],
+    hero:     null, // TODO: add hero — before/after frame showing the cinematic grade applied
+    intro:    "Most footage straight out of a camera looks flat, digital, and forgettable. The difference between that and the warm, textured, film-like look you see on professional travel films comes down to one thing: color grading. In this tutorial I'll show you exactly how I use DaVinci Resolve to get a cinematic film emulation look, whether you want to spend money on PowerGrades like Cineprint35 or JP2499, or build something close for free with built-in nodes.",
     body: [
       { type: "h2", text: "What We're Building" },
       { type: "p",  text: "By the end of this, your footage will have the organic grain, lifted shadows, color shifts, and tonal roll-off that make videos feel like they were shot on film. We're talking Cineprint35-style halation, JP2499 DRT contrast curves, and the kind of look that makes people ask what camera you used when you just graded it well." },
@@ -236,6 +294,98 @@ const POSTS = {
       { type: "gallery", images: [] }, // TODO: add before/after screenshots and screen recordings of the node tree
       { type: "p",  text: "That's the whole workflow. Whether you go with Cineprint, JP2499, or the free node method, the fundamentals are the same: correct first, emulate second, grain last. What color grading workflow are you currently using? Drop it in the comments." },
     ],
+  },
+
+  tofino: {
+      "emoji": "🌍",
+      "excerpt": "We flew into Tofino on a seaplane from Vancouver and spent two days watching blue hours, sunsets, and surfers at Cox Bay. Here is what it was like.",
+      "featured": true,
+      "title": "Tofino ",
+      "location": "",
+      "date": "February 19, 2026",
+      "category": "travel",
+      "tags": [
+          "tofino",
+          "vancouver",
+          "vancouver island",
+          "vancouver bc",
+          "bc travel"
+      ],
+      "hero": "posts/tofino/4404a5051885.png",
+      "intro": "Tofino hits different when you arrive by seaplane. The moment you lift off from Vancouver Harbour and the city disappears behind you, something shifts. By the time you are flying low over the coast and the Pacific comes into view, you already feel like you are somewhere else entirely.",
+      "body": [
+          {
+              "type": "h2",
+              "text": "The Seaplane Ride In"
+          },
+          {
+              "type": "p",
+              "text": "The flight from Vancouver to Tofino takes about an hour by seaplane. I have taken a lot of scenic flights over the years but this one stood out. You cross the Strait of Georgia, fly over the mountains of Vancouver Island, and then the west coast opens up below you. Dense forest meeting the Pacific. It is the kind of view that makes you put the camera down and just look."
+          },
+          {
+              "type": "h2",
+              "text": "Tin Wis and McKenzie Beach"
+          },
+          {
+              "type": "p",
+              "text": "We stayed at the Best Western Tin Wis, which sits right on McKenzie Beach, the former name for that stretch of shoreline. The location is hard to beat. You walk out the door and you are already on the sand. No long walks, no parking lots. Just the beach."
+          },
+          {
+              "type": "p",
+              "text": "We caught the blue hour from right there in front of the hotel. The light went from golden to deep blue in about twenty minutes and the whole beach had this calm, almost still quality to it. No wind. Just the sound of the water."
+          },
+          {
+              "type": "blockquote",
+              "text": "Some places earn their reputation. Tofino is one of them.",
+              "author": "— Jon Bon"
+          },
+          {
+              "type": "h2",
+              "text": "Cox Bay at Sunset"
+          },
+          {
+              "type": "p",
+              "text": "Cox Bay is a short drive from Tin Wis and it is where the surfers are. We got there as the sun was going down and there were still people out in the water, riding the last waves of the day. Watching surfers against a Tofino sunset is exactly as good as it sounds. It is one of those things that is hard to film well because the real version is better than anything you will capture."
+          },
+          {
+              "type": "gallery",
+              "images": [
+                  {
+                      "src": "posts/tofino/d419112ab734.png",
+                      "alt": "Aerial view flying into Tofino",
+                      "caption": "Flying into Tofino over the Pacific coastline by seaplane."
+                  },
+                  {
+                      "src": "posts/tofino/25d273648829.png",
+                      "alt": "Blue hour at McKenzie Beach",
+                      "caption": "Blue hour right outside Tin Wis at McKenzie Beach."
+                  },
+                  {
+                      "src": "posts/tofino/3c104b5d40c9.png",
+                      "alt": "Tofino beach at low tide",
+                      "caption": "The beach at low tide, quiet and wide open."
+                  },
+                  {
+                      "src": "posts/tofino/a48db4ce38c8.png",
+                      "alt": "Cox Bay during sunset",
+                      "caption": "Cox Bay as the sun goes down."
+                  },
+                  {
+                      "src": "posts/tofino/4404a5051885.png",
+                      "alt": "Surfers at Cox Bay during sunset",
+                      "caption": "Surfers catching the last waves of the day."
+                  }
+              ]
+          },
+          {
+              "type": "h2",
+              "text": "Worth the Trip"
+          },
+          {
+              "type": "p",
+              "text": "Two days in Tofino is not enough, but it is enough to understand why people keep coming back. The seaplane ride in, the beach right outside your door, the surfers at Cox Bay as the sky turns orange. It all adds up. If you get the chance to go, take it. And if you can, take the seaplane."
+          }
+      ]
   },
 
 };

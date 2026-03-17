@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="src/theme.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -132,6 +133,7 @@
             <li><a href="travel.html"        class="nav-link">Blog</a></li>
             <li><a href="products.html"      class="nav-link active">Shop</a></li>
             <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button></li>
         </ul>
     </div>
 </nav>
@@ -216,8 +218,93 @@
 
 <script>
     const PRODUCTS = {
+        filmmaking_guide: {
+            badge: '📖 Digital Guide',
+            category: 'guide',
+            title: 'Travel Filmmaking Guide',
+            price: '$39.99',
+            checkoutId: 'filmmaking_guide',
+            emoji: '✈️',
+            imgBg: 'linear-gradient(135deg, #0A0A14, #14142A)',
+            tagline: '50+ pages covering pre-production, storytelling, camera settings, and how to create travel content that actually stands out.',
+            features: [
+                '50+ page PDF guide',
+                'Pre-production & trip planning system',
+                'Camera settings for travel footage',
+                'Storytelling frameworks for YouTube',
+                'Monetization & growth strategies',
+                'Instant digital download',
+            ],
+            descTitle: 'Everything I Know About Travel Filmmaking',
+            descBody: `<p>This isn't a generic "how to use your camera" guide. It's the system I actually use — from planning a trip with content in mind, to capturing the right shots on location, to turning raw footage into a video people actually watch all the way through.</p>
+<p>Covers gear selection and packing, shot lists for every type of location, my exact camera settings for travel scenarios, the storytelling structure I use for every video, and the YouTube-specific strategies that drive views and subscribers.</p>
+<p>Whether you're just starting out or already making travel content but want to level up the quality and consistency, this guide gives you the complete framework from start to finish.</p>`,
+            includes: [
+                { icon: '📄', title: '50+ Page PDF', desc: 'Fully designed, readable on any device.' },
+                { icon: '🎯', title: 'Shot List Templates', desc: 'Pre-built shot lists for cities, nature, and adventure.' },
+                { icon: '📊', title: 'YouTube Growth Framework', desc: 'Title, thumbnail, and retention strategy guide.' },
+                { icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' },
+            ],
+        },
+        editing_workflow: {
+            badge: '🎞️ Template Pack',
+            category: 'guide',
+            title: 'Creator Editing Workflow',
+            price: '$49.99',
+            checkoutId: 'editing_workflow',
+            emoji: '🎞️',
+            imgBg: 'linear-gradient(135deg, #0F0A00, #1E1400)',
+            tagline: 'My full editing system — project files, presets, and workflow docs for DaVinci Resolve and Premiere Pro.',
+            features: [
+                'DaVinci Resolve project template',
+                'Premiere Pro project template',
+                'Custom node presets & color pipeline',
+                'Audio mixing workflow',
+                'Export settings for YouTube',
+                'Instant digital download',
+            ],
+            descTitle: 'The Exact Workflow Behind Every Video',
+            descBody: `<p>Stop rebuilding your timeline from scratch every time. This is my complete editing system — the same project structure, color pipeline, and export settings I use for every video on the channel.</p>
+<p>Includes a fully set-up DaVinci Resolve project with custom nodes for color grading, audio tracks pre-labeled and routed, and a finishing workflow that gets your video export-ready in a fraction of the time. A Premiere Pro version is included with identical structure.</p>
+<p>Also comes with a workflow guide explaining every decision — why the timeline is organized the way it is, how I approach the rough cut vs. color pass, and the exact export settings that look best on YouTube.</p>`,
+            includes: [
+                { icon: '🎬', title: 'DaVinci Resolve Template', desc: 'Full project with nodes, tracks, and color pipeline set up.' },
+                { icon: '🎬', title: 'Premiere Pro Template', desc: 'Identical structure for Premiere users.' },
+                { icon: '📄', title: 'Workflow Guide PDF', desc: 'Explains every decision and how to adapt it to your style.' },
+                { icon: '♾️', title: 'Lifetime Access', desc: 'One-time purchase. Free updates forever.' },
+            ],
+        },
+        creator_bundle: {
+            badge: '📦 Best Value',
+            category: 'bundle',
+            title: 'Full Creator Bundle',
+            price: '$94.99',
+            checkoutId: 'creator_bundle',
+            emoji: '📦',
+            imgBg: 'linear-gradient(135deg, #0A0A0A, #1C1C1C)',
+            tagline: 'All three digital products together at a 20% discount. LUT Pack + Filmmaking Guide + Editing Workflow.',
+            features: [
+                'How to Make Millions Before Grandma Dies Grade',
+                'Travel Filmmaking Guide (50+ pages)',
+                'Creator Editing Workflow (Resolve + Premiere)',
+                '20% off vs. buying separately',
+                'Instant digital download',
+                'Free updates on all products',
+            ],
+            descTitle: 'Everything You Need to Create Great Travel Videos',
+            descBody: `<p>The Full Creator Bundle gives you every tool in one shot — color grades that make your footage look cinematic, a complete filmmaking guide to shoot better on location, and the editing workflow that turns raw clips into finished videos efficiently.</p>
+<p>Buying all three separately costs $119.97. The bundle brings that down to $94.99 — saving you 20% and giving you a complete, end-to-end system.</p>
+<p>Whether you're a solo creator just building your workflow or someone who's been making videos for years and wants to tighten up every stage of the process, this bundle covers the full pipeline from shoot to publish.</p>`,
+            includes: [
+                { icon: '🎞️', title: 'All Color Grades', desc: 'Every film-inspired LUT grade in the shop.' },
+                { icon: '📄', title: 'Travel Filmmaking Guide', desc: '50+ page PDF covering the full content creation system.' },
+                { icon: '🎬', title: 'Editing Workflow Templates', desc: 'DaVinci Resolve + Premiere Pro project templates.' },
+                { icon: '💰', title: '20% Bundle Discount', desc: 'Save $25 vs. buying each product separately.' },
+            ],
+        },
         grandma_grade: {
             badge: '⭐ Best Seller',
+            category: 'grade',
             title: 'How to Make Millions Before Grandma Dies Grade',
             price: '$29.99',
             checkoutId: 'grandma_grade',
@@ -244,6 +331,7 @@
         },
         past_lives_grade: {
             badge: '🎞️ Film Grade',
+            category: 'grade',
             title: 'The Past Lives Grade',
             price: '$24.99',
             checkoutId: 'past_lives_grade',
@@ -270,6 +358,7 @@
         },
         maze_runner_grade: {
             badge: '🌲 Film Grade',
+            category: 'grade',
             title: 'The Maze Runner Grade',
             price: '$24.99',
             checkoutId: 'maze_runner_grade',
@@ -296,10 +385,13 @@
         },
     };
 
-    const ALL_GRADES = [
-        { id: 'grandma_grade', name: 'How to Make Millions Before Grandma Dies Grade', price: '$29.99', emoji: '🎬', imgBg: 'linear-gradient(135deg, #1A1008, #2E1F0A)' },
-        { id: 'past_lives_grade', name: 'The Past Lives Grade', price: '$24.99', emoji: '🌸', imgBg: 'linear-gradient(135deg, #0D0D14, #171724)' },
-        { id: 'maze_runner_grade', name: 'The Maze Runner Grade', price: '$24.99', emoji: '🌫️', imgBg: 'linear-gradient(135deg, #0A0F0A, #131A13)' },
+    const ALL_PRODUCTS = [
+        { id: 'grandma_grade',    name: 'How to Make Millions Before Grandma Dies Grade', price: '$29.99', emoji: '🎬', imgBg: 'linear-gradient(135deg, #1A1008, #2E1F0A)',  type: 'Color Grade' },
+        { id: 'past_lives_grade', name: 'The Past Lives Grade',                            price: '$24.99', emoji: '🌸', imgBg: 'linear-gradient(135deg, #0D0D14, #171724)', type: 'Color Grade' },
+        { id: 'maze_runner_grade',name: 'The Maze Runner Grade',                           price: '$24.99', emoji: '🌫️', imgBg: 'linear-gradient(135deg, #0A0F0A, #131A13)', type: 'Color Grade' },
+        { id: 'filmmaking_guide', name: 'Travel Filmmaking Guide',                         price: '$39.99', emoji: '✈️', imgBg: 'linear-gradient(135deg, #0A0A14, #14142A)', type: 'Guide' },
+        { id: 'editing_workflow', name: 'Creator Editing Workflow',                        price: '$49.99', emoji: '🎞️', imgBg: 'linear-gradient(135deg, #0F0A00, #1E1400)', type: 'Template' },
+        { id: 'creator_bundle',   name: 'Full Creator Bundle',                             price: '$94.99', emoji: '📦', imgBg: 'linear-gradient(135deg, #0A0A0A, #1C1C1C)', type: 'Bundle' },
     ];
 
     const params = new URLSearchParams(window.location.search);
@@ -327,7 +419,9 @@
         featuresEl.appendChild(li);
     });
 
-    // Description
+    // Description — dynamic eyebrow label
+    const eyebrowMap = { grade: 'About This Grade', guide: 'About This Guide', bundle: 'About the Bundle' };
+    document.getElementById('descEyebrow').textContent = eyebrowMap[product.category] || 'About This Product';
     document.getElementById('descTitle').textContent = product.descTitle;
     document.getElementById('descBody').innerHTML = product.descBody;
 
@@ -344,15 +438,14 @@
             </div>`;
     });
 
-    // More grades
+    // More products — show all except current
     const gradesEl = document.getElementById('gradesRow');
-    ALL_GRADES.forEach(g => {
-        const isCurrent = g.id === id;
+    ALL_PRODUCTS.filter(g => g.id !== id).forEach(g => {
         gradesEl.innerHTML += `
-            <a href="product.html?id=${g.id}" class="grade-card${isCurrent ? ' current' : ''}">
+            <a href="product.html?id=${g.id}" class="grade-card">
                 <div class="grade-card-img" style="background: ${g.imgBg};">${g.emoji}</div>
                 <div class="grade-card-body">
-                    <div class="grade-card-type">Color Grade${isCurrent ? ' · Current' : ''}</div>
+                    <div class="grade-card-type">${g.type}</div>
                     <div class="grade-card-name">${g.name}</div>
                     <div class="grade-card-price">${g.price}</div>
                 </div>

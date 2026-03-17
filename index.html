@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="src/theme.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -343,6 +344,7 @@
             <li><a href="#blog"   class="nav-link">Blog</a></li>
             <li><a href="#shop"   class="nav-link">Shop</a></li>
             <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button></li>
         </ul>
     </div>
 </nav>
@@ -456,7 +458,7 @@
         <div class="section-head">
             <div>
                 <div class="section-eyebrow">YouTube</div>
-                <h2 class="section-title">Most Popular Videos</h2>
+                <h2 class="section-title">Recent Uploads</h2>
             </div>
             <a href="https://www.youtube.com/@jonbontabas" target="_blank" class="see-all">View All →</a>
         </div>
@@ -498,84 +500,9 @@
             <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge" id="catCountGear">1</span></button>
         </div>
 
-        <div class="blog-featured reveal" data-category="travel">
-            <div class="blog-featured-img">
-                <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2947.1.jpg" alt="Quebec City in Winter" loading="lazy">
-            </div>
-            <div class="blog-featured-body">
-                <span class="badge badge-blue">Latest Entry</span>
-                <h3>Quebec City<br>in Winter</h3>
-                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. One of the most cinematic places I've ever filmed — historic fortifications, charming boutiques, and golden hour on wet stones.</p>
-                <p style="font-size:0.8rem; color:var(--text-dim);">📍 Quebec City · March 2026</p>
-                <a href="post.html?id=quebec" class="btn btn-primary btn-sm" style="width:fit-content;">Read the Story →</a>
-            </div>
-        </div>
-
-        <div class="blog-list">
-            <a href="post.html?id=baguio" class="blog-item reveal" data-category="travel">
-                <div class="blog-emoji-thumb">🌿</div>
-                <div>
-                    <div class="blog-location">Baguio City, Philippines</div>
-                    <div class="blog-title">Baguio City Diaries — Cool Mountains & Warm People</div>
-                    <div class="blog-excerpt">Exploring pine forests, strawberry farms, and highland culture of the Philippines' summer capital.</div>
-                    <div class="blog-date">March 2026</div>
-                </div>
-            </a>
-            <a href="post.html?id=chongqing" class="blog-item reveal" data-category="travel">
-                <div class="blog-emoji-thumb">🏙️</div>
-                <div>
-                    <div class="blog-location">Chongqing, China</div>
-                    <div class="blog-title">Chongqing Lights — Inside China's Most Vertical City</div>
-                    <div class="blog-excerpt">Where ancient temples sit next to futuristic skylines — China's inland megacity at night.</div>
-                    <div class="blog-date">February 2026</div>
-                </div>
-            </a>
-            <a href="post.html?id=newyork" class="blog-item reveal" data-category="travel">
-                <div class="blog-emoji-thumb">🗽</div>
-                <div>
-                    <div class="blog-location">New York, USA</div>
-                    <div class="blog-title">New York Streets — The City That Never Stops</div>
-                    <div class="blog-excerpt">From Times Square chaos to quiet Brooklyn moments — a filmmaker's honest take on NYC.</div>
-                    <div class="blog-date">January 2026</div>
-                </div>
-            </a>
-            <a href="post.html?id=danang" class="blog-item reveal" data-category="travel">
-                <div class="blog-emoji-thumb">🏖️</div>
-                <div>
-                    <div class="blog-location">Da Nang, Vietnam</div>
-                    <div class="blog-title">Da Nang — Where Beaches Meet the Marble Mountains</div>
-                    <div class="blog-excerpt">A photographer's paradise with golden hour light that'll make you want to stay forever.</div>
-                    <div class="blog-date">December 2025</div>
-                </div>
-            </a>
-            <a href="post.html?id=vancouver" class="blog-item reveal" data-category="travel">
-                <div class="blog-emoji-thumb">🏔️</div>
-                <div>
-                    <div class="blog-location">Vancouver, Canada</div>
-                    <div class="blog-title">Vancouver — Mountains, Ocean & Urban Wild</div>
-                    <div class="blog-excerpt">Where the Rockies drop straight into a cosmopolitan city with the best food in Canada.</div>
-                    <div class="blog-date">November 2025</div>
-                </div>
-            </a>
-            <a href="post.html?id=telesingrip" class="blog-item reveal" data-category="gear">
-                <div class="blog-emoji-thumb">📱</div>
-                <div>
-                    <div class="blog-location">Gear Review</div>
-                    <div class="blog-title">Telesin Fun Shot Magnetic Grip — iPhone Filmmaking Upgrade</div>
-                    <div class="blog-excerpt">The iPhone grip that changed how I shoot on the go. Honest review after real-world use.</div>
-                    <div class="blog-date">October 2025</div>
-                </div>
-            </a>
-            <a href="post.html?id=cinematicresolve" class="blog-item reveal" data-category="tutorials">
-                <div class="blog-emoji-thumb">🎬</div>
-                <div>
-                    <div class="blog-location">Tutorial</div>
-                    <div class="blog-title">How to Make Your Videos Look Cinematic Using DaVinci Resolve</div>
-                    <div class="blog-excerpt">Film emulation using Cineprint35, JP2499 DRT, or free built-in nodes. Correct first, emulate second, grain last.</div>
-                    <div class="blog-date">March 2026</div>
-                </div>
-            </a>
-        </div>
+        <!-- ── CMS: rendered dynamically from posts.js ── -->
+        <div id="blogFeatured"></div>
+        <div class="blog-list" id="blogList"></div>
     </div>
 </section>
 
@@ -772,6 +699,8 @@
     </div>
 </footer>
 
+<script src="src/posts.js"></script>
+
 <!-- PRODUCT MODAL -->
 <div id="productModal" class="product-modal-overlay" onclick="handleOverlayClick(event)">
     <div class="product-modal">
@@ -891,6 +820,79 @@
         }
     }
 
+    // ── CMS: Render blog section from posts.js ──────────────────────────
+    (function () {
+        // Map post category → data-category attribute used by the filter
+        function filterCat(category) {
+            return category === 'tutorial' ? 'tutorials' : category;
+        }
+        function locIcon(category) {
+            if (category === 'gear')     return '📦';
+            if (category === 'tutorial') return '🎓';
+            return '📍';
+        }
+
+        // Only posts with featured !== false appear on the home page
+        const entries = Object.entries(POSTS)
+            .filter(([, p]) => p.featured !== false)
+            .sort(([, a], [, b]) => new Date(b.date) - new Date(a.date));
+
+        // Update filter badge counts
+        const counts = { all: entries.length, travel: 0, tutorials: 0, gear: 0 };
+        entries.forEach(([, p]) => {
+            const c = filterCat(p.category);
+            if (c in counts) counts[c]++;
+        });
+        const idMap = { all: 'catCountAll', travel: 'catCountTravel', tutorials: 'catCountTutorials', gear: 'catCountGear' };
+        Object.entries(idMap).forEach(([cat, id]) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = counts[cat];
+        });
+
+        // Identify hero post (featuredHero: true) — falls back to first post
+        const heroIdx = entries.findIndex(([, p]) => p.featuredHero);
+        const [heroId, heroPost] = heroIdx >= 0 ? entries[heroIdx] : entries[0];
+        const listEntries = entries.filter(([id]) => id !== heroId);
+
+        // Render featured hero card
+        const featuredEl = document.getElementById('blogFeatured');
+        if (featuredEl && heroPost) {
+            const imgContent = heroPost.hero
+                ? `<img src="${heroPost.hero}" alt="${heroPost.title}" loading="lazy">`
+                : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem;">${heroPost.emoji || '📸'}</div>`;
+            featuredEl.innerHTML = `
+                <div class="blog-featured reveal" data-category="${filterCat(heroPost.category)}">
+                    <div class="blog-featured-img">${imgContent}</div>
+                    <div class="blog-featured-body">
+                        <span class="badge badge-blue">Latest Entry</span>
+                        <h3>${heroPost.title}</h3>
+                        <p>${heroPost.intro}</p>
+                        <p style="font-size:0.8rem; color:var(--text-dim);">${locIcon(heroPost.category)} ${heroPost.location} · ${heroPost.date}</p>
+                        <a href="post.html?id=${heroId}" class="btn btn-primary btn-sm" style="width:fit-content;">Read the Story →</a>
+                    </div>
+                </div>`;
+        }
+
+        // Render list items
+        const listEl = document.getElementById('blogList');
+        if (listEl) {
+            listEl.innerHTML = listEntries.map(([id, p]) => `
+                <a href="post.html?id=${id}" class="blog-item reveal" data-category="${filterCat(p.category)}">
+                    <div class="blog-emoji-thumb">${p.emoji || '📸'}</div>
+                    <div>
+                        <div class="blog-location">${p.location}</div>
+                        <div class="blog-title">${p.title}</div>
+                        <div class="blog-excerpt">${p.excerpt || p.intro}</div>
+                        <div class="blog-date">${p.date}</div>
+                    </div>
+                </a>`).join('');
+        }
+
+        // Note: reveal elements are observed by the observer.observe loop at the
+        // bottom of this script, which runs after observer is defined.
+    })();
+    // ────────────────────────────────────────────────────────────────────
+
     // Blog category filter
     document.getElementById('blogCats').addEventListener('click', function(e) {
         const btn = e.target.closest('.blog-cat');
@@ -901,11 +903,13 @@
         const featured = document.querySelector('.blog-featured[data-category]');
         const items = document.querySelectorAll('.blog-item[data-category]');
         if (cat === 'all') {
-            featured.removeAttribute('data-hidden');
+            if (featured) featured.removeAttribute('data-hidden');
             items.forEach(el => { el.removeAttribute('data-hidden'); el.classList.add('visible'); });
         } else {
-            if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
-            else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
+            if (featured) {
+                if (featured.dataset.category !== cat) featured.dataset.hidden = 'true';
+                else { featured.removeAttribute('data-hidden'); featured.classList.add('visible'); }
+            }
             items.forEach(el => {
                 if (el.dataset.category !== cat) el.dataset.hidden = 'true';
                 else { el.removeAttribute('data-hidden'); el.classList.add('visible'); }
