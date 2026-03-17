@@ -153,6 +153,15 @@
         .blog-excerpt { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; }
         .blog-date { font-size: 0.72rem; color: var(--text-dim); }
 
+        /* BLOG CATEGORIES */
+        .blog-cats { display: flex; gap: 4px; margin-bottom: 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; flex-wrap: wrap; }
+        .blog-cat { padding: 7px 18px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; transition: var(--trans); font-family: var(--font); }
+        .blog-cat:hover { color: var(--text); }
+        .blog-cat.active { background: var(--bg-card-2); color: var(--text); border: 1px solid var(--border-mid); }
+        .blog-cat-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--border-mid); color: var(--text-dim); border-radius: 20px; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; margin-left: 5px; vertical-align: middle; }
+        .blog-featured[data-hidden="true"],
+        .blog-item[data-hidden="true"] { display: none; }
+
         /* SHOP */
         .shop-tabs { display: flex; gap: 4px; margin-bottom: 32px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; }
         .shop-tab { padding: 8px 20px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; transition: var(--trans); font-family: var(--font); }
@@ -205,6 +214,45 @@
         .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
         .footer-col a:hover { color: var(--text); }
         .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* 3D CAROUSEL */
+        .carousel-outer { overflow: hidden; border-radius: var(--radius-lg); padding: 24px 0 8px; }
+        .carousel-scene { perspective: 1100px; height: 320px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .carousel-stage { position: relative; width: 100%; height: 280px; transform-style: preserve-3d; }
+        .c-card {
+            position: absolute; left: 50%; top: 0;
+            width: 340px; height: 255px; margin-left: -170px;
+            border-radius: 14px; overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease, box-shadow 0.45s ease;
+            background: var(--bg-card-2); border: 1px solid var(--border);
+            text-decoration: none; color: inherit; display: block; user-select: none;
+            will-change: transform, opacity;
+        }
+        .c-card.is-active { box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+        .c-card-thumb { width: 100%; height: 175px; overflow: hidden; background: #1a1a1a; position: relative; flex-shrink: 0; }
+        .c-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .c-thumb-empty { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; background: linear-gradient(135deg, #181818, #222); }
+        .c-play-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.28); }
+        .c-play-circle { width: 36px; height: 36px; background: rgba(255,255,255,0.93); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .c-play-circle svg { width: 14px; height: 14px; fill: #111; margin-left: 2px; }
+        .c-card-info { padding: 10px 13px 0; }
+        .c-card-meta { font-size: 0.63rem; color: var(--text-dim); margin-bottom: 4px; line-height: 1.4; }
+        .c-card-title { font-size: 0.82rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 4px; }
+        .c-card-desc { font-size: 0.71rem; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .carousel-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
+        .carousel-dots { display: flex; gap: 6px; }
+        .carousel-dot { width: 6px; height: 6px; border-radius: 3px; background: var(--text-dim); cursor: pointer; transition: all 0.3s ease; border: none; padding: 0; }
+        .carousel-dot.active { width: 20px; background: var(--text); }
+        .carousel-btns { display: flex; gap: 8px; }
+        .carousel-btn { width: 40px; height: 40px; background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 50%; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--trans); font-family: var(--font); }
+        .carousel-btn:hover { background: var(--bg-card-2); border-color: rgba(255,255,255,0.22); }
+        @media (max-width: 600px) {
+            .carousel-scene { height: 240px; }
+            .carousel-stage { height: 210px; }
+            .c-card { width: 240px; height: 185px; margin-left: -120px; }
+            .c-card-thumb { height: 130px; }
+        }
 
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -287,12 +335,12 @@
 <div class="stats-bar">
     <div class="stats-bar-inner">
         <div class="stat-item">
-            <div class="stat-num">10K+</div>
+            <div class="stat-num">957</div>
             <div class="stat-label">YouTube Subscribers</div>
         </div>
         <div class="stat-item">
-            <div class="stat-num">50+</div>
-            <div class="stat-label">Videos Published</div>
+            <div class="stat-num">16K+</div>
+            <div class="stat-label">Instagram Followers</div>
         </div>
         <div class="stat-item">
             <div class="stat-num">20+</div>
@@ -300,7 +348,7 @@
         </div>
         <div class="stat-item">
             <div class="stat-num">2M+</div>
-            <div class="stat-label">Total Views</div>
+            <div class="stat-label">Views Across Platforms</div>
         </div>
     </div>
 </div>
@@ -316,7 +364,7 @@
             <input type="email" class="nl-input" placeholder="your@email.com" required>
             <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
         </form>
-        <span class="nl-count">Join 1,200+ readers</span>
+        <span class="nl-count">Join 84+ readers</span>
     </div>
 </div>
 
@@ -360,64 +408,19 @@
             <a href="https://www.youtube.com/@jonbontabas" target="_blank" class="see-all">View All →</a>
         </div>
 
-        <div class="video-featured reveal">
-            <div class="video-embed-wrap">
-                <iframe src="https://www.youtube.com/embed/cB6dvHjjV-0?start=76"
-                    title="Quebec City in Winter"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+        <div class="carousel-outer reveal">
+            <div class="carousel-scene">
+                <div class="carousel-stage" id="carouselStage"></div>
             </div>
-            <div class="video-featured-info">
-                <div class="meta">
-                    <span>📍 Quebec City, Canada · March 2026</span>
-                    <span class="badge badge-blue">Featured</span>
-                </div>
-                <h3>Quebec City in Winter — A Cinematic Walk</h3>
-                <p>Walking the cobblestone streets of Old Quebec under a moody winter sky. Historic fortifications, charming boutiques, and a city that feels frozen beautifully in time.</p>
-                <a href="https://www.youtube.com/@jonbontabas" target="_blank" class="btn btn-primary btn-sm" style="width:fit-content;">Subscribe for More ↗</a>
-            </div>
-        </div>
-
-        <div class="videos-grid">
-            <div class="video-card reveal" style="transition-delay:0.1s">
-                <div class="video-thumb video-thumb--empty">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
-                </div>
-                <div class="video-info">
-                    <div class="video-meta">📍 Baguio City, Philippines · March 2026</div>
-                    <div class="video-title">Baguio City Diaries — Misty Mountains & Cool Air</div>
-                    <div class="video-desc">Exploring the pine forests and highland charm of the Philippines' summer capital.</div>
-                </div>
-            </div>
-            <div class="video-card reveal" style="transition-delay:0.2s">
-                <div class="video-thumb video-thumb--empty">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
-                </div>
-                <div class="video-info">
-                    <div class="video-meta">📍 Chongqing, China · February 2026</div>
-                    <div class="video-title">Chongqing Lights — Inside China's Most Vertical City</div>
-                    <div class="video-desc">Neon-lit megacity energy along the Yangtze River where ancient and modern collide.</div>
-                </div>
-            </div>
-            <div class="video-card reveal" style="transition-delay:0.3s">
-                <div class="video-thumb video-thumb--empty">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
-                </div>
-                <div class="video-info">
-                    <div class="video-meta">📍 New York, USA · January 2026</div>
-                    <div class="video-title">New York Streets — A Filmmaker's City Essay</div>
-                    <div class="video-desc">Times Square to hidden boroughs — capturing NYC's relentless energy on film.</div>
-                </div>
-            </div>
-            <div class="video-card reveal" style="transition-delay:0.4s">
-                <div class="video-thumb video-thumb--empty">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
-                </div>
-                <div class="video-info">
-                    <div class="video-meta">📍 Da Nang, Vietnam · December 2025</div>
-                    <div class="video-title">Da Nang — Beach, Marble Mountains & Culture</div>
-                    <div class="video-desc">Golden hour over the South China Sea. Da Nang in its full cinematic glory.</div>
+            <div class="carousel-bottom">
+                <div class="carousel-dots" id="carouselDots"></div>
+                <div class="carousel-btns">
+                    <button class="carousel-btn" id="carouselPrev" aria-label="Previous">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="carousel-btn" id="carouselNext" aria-label="Next">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -429,13 +432,20 @@
     <div class="container">
         <div class="section-head">
             <div>
-                <div class="section-eyebrow">Travel Blog</div>
+                <div class="section-eyebrow">Blog</div>
                 <h2 class="section-title">Recent Stories</h2>
             </div>
             <a href="travel.html" class="see-all">View All →</a>
         </div>
 
-        <div class="blog-featured reveal">
+        <div class="blog-cats" id="blogCats">
+            <button class="blog-cat active" data-cat="all">All <span class="blog-cat-badge" id="catCountAll">6</span></button>
+            <button class="blog-cat" data-cat="travel">Travel Journal <span class="blog-cat-badge" id="catCountTravel">5</span></button>
+            <button class="blog-cat" data-cat="tutorials">Tutorials <span class="blog-cat-badge" id="catCountTutorials">0</span></button>
+            <button class="blog-cat" data-cat="gear">Gear & Affiliates <span class="blog-cat-badge" id="catCountGear">0</span></button>
+        </div>
+
+        <div class="blog-featured reveal" data-category="travel">
             <div class="blog-featured-img">
                 <img src="Website%20Assets/PHOTOS/Still%202026-03-05%20234021_1.2947.1.jpg" alt="Quebec City in Winter" loading="lazy">
             </div>
@@ -449,7 +459,7 @@
         </div>
 
         <div class="blog-list">
-            <a href="post.html?id=baguio" class="blog-item reveal">
+            <a href="post.html?id=baguio" class="blog-item reveal" data-category="travel">
                 <div class="blog-emoji-thumb">🌿</div>
                 <div>
                     <div class="blog-location">Baguio City, Philippines</div>
@@ -458,7 +468,7 @@
                     <div class="blog-date">March 2026</div>
                 </div>
             </a>
-            <a href="post.html?id=chongqing" class="blog-item reveal">
+            <a href="post.html?id=chongqing" class="blog-item reveal" data-category="travel">
                 <div class="blog-emoji-thumb">🏙️</div>
                 <div>
                     <div class="blog-location">Chongqing, China</div>
@@ -467,7 +477,7 @@
                     <div class="blog-date">February 2026</div>
                 </div>
             </a>
-            <a href="post.html?id=newyork" class="blog-item reveal">
+            <a href="post.html?id=newyork" class="blog-item reveal" data-category="travel">
                 <div class="blog-emoji-thumb">🗽</div>
                 <div>
                     <div class="blog-location">New York, USA</div>
@@ -476,7 +486,7 @@
                     <div class="blog-date">January 2026</div>
                 </div>
             </a>
-            <a href="post.html?id=danang" class="blog-item reveal">
+            <a href="post.html?id=danang" class="blog-item reveal" data-category="travel">
                 <div class="blog-emoji-thumb">🏖️</div>
                 <div>
                     <div class="blog-location">Da Nang, Vietnam</div>
@@ -485,7 +495,7 @@
                     <div class="blog-date">December 2025</div>
                 </div>
             </a>
-            <a href="post.html?id=vancouver" class="blog-item reveal">
+            <a href="post.html?id=vancouver" class="blog-item reveal" data-category="travel">
                 <div class="blog-emoji-thumb">🏔️</div>
                 <div>
                     <div class="blog-location">Vancouver, Canada</div>
@@ -650,6 +660,28 @@
 </footer>
 
 <script>
+    // Blog category filter
+    document.getElementById('blogCats').addEventListener('click', function(e) {
+        const btn = e.target.closest('.blog-cat');
+        if (!btn) return;
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.blog-cat').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const featured = document.querySelector('.blog-featured[data-category]');
+        const items = document.querySelectorAll('.blog-item[data-category]');
+        if (cat === 'all') {
+            featured.removeAttribute('data-hidden');
+            items.forEach(el => el.removeAttribute('data-hidden'));
+        } else {
+            featured.dataset.hidden = featured.dataset.category !== cat ? 'true' : '';
+            if (featured.dataset.hidden !== 'true') featured.removeAttribute('data-hidden');
+            items.forEach(el => {
+                if (el.dataset.category !== cat) el.dataset.hidden = 'true';
+                else el.removeAttribute('data-hidden');
+            });
+        }
+    });
+
     function switchTab(btn, id) {
         document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.shop-pane').forEach(p => p.classList.remove('active'));
@@ -690,6 +722,140 @@
         });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 3D AXIS CAROUSEL
+    (function () {
+        const videos = [
+            { thumb: 'https://img.youtube.com/vi/cB6dvHjjV-0/maxresdefault.jpg', emoji: null,  meta: '📍 Quebec City, Canada · March 2026',        title: 'Quebec City in Winter — A Cinematic Walk',               desc: 'Walking the cobblestone streets of Old Quebec under a moody winter sky.',                                          href: 'post.html?id=quebec' },
+            { thumb: null, emoji: '🌿', meta: '📍 Baguio City, Philippines · March 2026',   title: 'Baguio City Diaries — Misty Mountains & Cool Air',       desc: 'Exploring the pine forests and highland charm of the Philippines\' summer capital.',                                href: 'post.html?id=baguio' },
+            { thumb: null, emoji: '🏙️', meta: '📍 Chongqing, China · February 2026',        title: 'Chongqing Lights — Inside China\'s Most Vertical City',  desc: 'Neon-lit megacity energy along the Yangtze River where ancient and modern collide.',                               href: 'post.html?id=chongqing' },
+            { thumb: null, emoji: '🗽', meta: '📍 New York, USA · January 2026',             title: 'New York Streets — A Filmmaker\'s City Essay',           desc: 'Times Square to hidden boroughs — capturing NYC\'s relentless energy on film.',                                   href: 'post.html?id=newyork' },
+            { thumb: null, emoji: '🏖️', meta: '📍 Da Nang, Vietnam · December 2025',        title: 'Da Nang — Beach, Marble Mountains & Culture',            desc: 'Golden hour over the South China Sea. Da Nang in its full cinematic glory.',                                      href: 'post.html?id=danang' },
+        ];
+
+        const isMobile = () => window.innerWidth <= 600;
+
+        // Position configs: [far-left, left, center, right, far-right]
+        const POS_DESKTOP = [
+            { x: -560, z: -130, rotY:  36, scale: 0.62, opacity: 0.38 },
+            { x: -305, z:  -60, rotY:  20, scale: 0.80, opacity: 0.74 },
+            { x:    0, z:   60, rotY:   0, scale: 1.00, opacity: 1.00 },
+            { x:  305, z:  -60, rotY: -20, scale: 0.80, opacity: 0.74 },
+            { x:  560, z: -130, rotY: -36, scale: 0.62, opacity: 0.38 },
+        ];
+        const POS_MOBILE = [
+            { x: -340, z: -100, rotY:  36, scale: 0.60, opacity: 0.30 },
+            { x: -195, z:  -50, rotY:  22, scale: 0.78, opacity: 0.68 },
+            { x:    0, z:   50, rotY:   0, scale: 1.00, opacity: 1.00 },
+            { x:  195, z:  -50, rotY: -22, scale: 0.78, opacity: 0.68 },
+            { x:  340, z: -100, rotY: -36, scale: 0.60, opacity: 0.30 },
+        ];
+
+        const stage   = document.getElementById('carouselStage');
+        const dotsEl  = document.getElementById('carouselDots');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const n = videos.length;
+        let active = 0;
+
+        // Build cards
+        videos.forEach((v, i) => {
+            const card = document.createElement('a');
+            card.className = 'c-card';
+            card.href = v.href;
+            card.innerHTML =
+                '<div class="c-card-thumb">' +
+                    (v.thumb
+                        ? '<img src="' + v.thumb + '" alt="' + v.title + '" loading="lazy">'
+                        : '<div class="c-thumb-empty">' + (v.emoji || '🎬') + '</div>') +
+                    '<div class="c-play-icon"><div class="c-play-circle"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>' +
+                '</div>' +
+                '<div class="c-card-info">' +
+                    '<div class="c-card-meta">' + v.meta + '</div>' +
+                    '<div class="c-card-title">' + v.title + '</div>' +
+                    '<div class="c-card-desc">' + v.desc + '</div>' +
+                '</div>';
+            stage.appendChild(card);
+        });
+
+        // Build dots
+        videos.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+            dot.addEventListener('click', function () { active = i; update(); });
+            dotsEl.appendChild(dot);
+        });
+
+        function getOffset(i) {
+            let off = i - active;
+            if (off > n / 2)  off -= n;
+            if (off < -n / 2) off += n;
+            return off;
+        }
+
+        function update() {
+            const posData = isMobile() ? POS_MOBILE : POS_DESKTOP;
+            const cards = stage.querySelectorAll('.c-card');
+            cards.forEach(function (card, i) {
+                const off = getOffset(i);
+                const idx = Math.max(-2, Math.min(2, off));
+                const p   = posData[idx + 2];
+                const hidden = Math.abs(off) > 2;
+                card.style.transform = 'translateX(' + p.x + 'px) translateZ(' + p.z + 'px) rotateY(' + p.rotY + 'deg) scale(' + p.scale + ')';
+                card.style.opacity = hidden ? '0' : String(p.opacity);
+                card.style.zIndex  = String(5 - Math.abs(idx));
+                card.style.pointerEvents = hidden ? 'none' : 'auto';
+                card.classList.toggle('is-active', off === 0);
+            });
+            dotsEl.querySelectorAll('.carousel-dot').forEach(function (dot, i) {
+                dot.classList.toggle('active', i === active);
+            });
+        }
+
+        prevBtn.addEventListener('click', function () { active = (active - 1 + n) % n; update(); });
+        nextBtn.addEventListener('click', function () { active = (active + 1) % n; update(); });
+
+        // Drag / swipe / tap support
+        let startX = 0, startY = 0, dragging = false, tapped = false;
+        stage.addEventListener('mousedown',  function (e) { startX = e.clientX; startY = e.clientY; dragging = true; tapped = false; });
+        stage.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; startY = e.touches[0].clientY; dragging = true; tapped = false; }, { passive: true });
+
+        function endDrag(clientX, clientY) {
+            if (!dragging) return;
+            dragging = false;
+            const dx = startX - clientX;
+            const dy = startY - clientY;
+            if (Math.abs(dx) > 48) {
+                // Swipe: advance one step
+                active = dx > 0 ? (active + 1) % n : (active - 1 + n) % n;
+                update();
+            } else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+                // Tap: find which card center is nearest to the tap x position
+                const stageRect = stage.getBoundingClientRect();
+                const tapX = clientX - (stageRect.left + stageRect.width / 2);
+                const posData = isMobile() ? POS_MOBILE : POS_DESKTOP;
+                let best = active, bestDist = Infinity;
+                for (let j = 0; j < n; j++) {
+                    const off = getOffset(j);
+                    if (Math.abs(off) > 2) continue;
+                    const dist = Math.abs(tapX - posData[off + 2].x);
+                    if (dist < bestDist) { bestDist = dist; best = j; }
+                }
+                if (best !== active) { tapped = true; active = best; update(); }
+            }
+        }
+        window.addEventListener('mouseup',  function (e) { endDrag(e.clientX, e.clientY); });
+        window.addEventListener('touchend', function (e) { endDrag(e.changedTouches[0].clientX, e.changedTouches[0].clientY); });
+
+        // Block navigation if the tap just centered a non-active card
+        stage.addEventListener('click', function (e) {
+            if (tapped) { e.preventDefault(); tapped = false; }
+        });
+
+        window.addEventListener('resize', update);
+        update();
+    }());
 </script>
 </body>
 </html>

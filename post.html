@@ -55,16 +55,16 @@
         .not-found p { color: var(--text-muted); }
 
         /* POST */
-        .post-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 96px; }
+        .post-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 64px; }
 
-        .post-header { padding: 56px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+        .post-header { padding: 36px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
         .post-location { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
         .post-date { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 16px; }
         .post-header h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; }
         .post-intro { font-size: 1.1rem; color: var(--text-muted); line-height: 1.75; }
 
         /* POST BODY */
-        .post-body { display: flex; flex-direction: column; gap: 24px; }
+        .post-body { display: flex; flex-direction: column; gap: 18px; }
         .post-body h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin-top: 16px; }
         .post-body p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.8; }
 
@@ -96,9 +96,9 @@
         @media (max-width: 480px) { .masonry { columns: 1; } }
 
         /* MORE POSTS */
-        .more-posts { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--border); }
-        .more-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 8px; }
-        .more-posts h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 32px; }
+        .more-posts { margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .more-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #666666; margin-bottom: 6px; }
+        .more-posts h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; }
         .more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
         .more-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
         .more-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
@@ -107,7 +107,7 @@
         .more-loc { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555555; margin-bottom: 4px; }
         .more-title { font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 8px; }
         .more-date { font-size: 0.72rem; color: var(--text-dim); }
-        .more-cta { text-align: center; margin-top: 32px; }
+        .more-cta { text-align: center; margin-top: 20px; }
 
         /* BUTTONS */
         .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: var(--trans); border: none; cursor: pointer; }
@@ -148,6 +148,49 @@
         .masonry-link img:hover { transform: scale(1.015); opacity: 0.88; }
         .pswp-caption-content { display: none; }
 
+        /* PROGRESS BAR */
+        .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: rgba(255,255,255,0.9); width: 0%; z-index: 200; transition: width 0.08s linear; pointer-events: none; }
+
+        /* CATEGORY BADGE */
+        .post-cat-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; background: var(--bg-card-2); border: 1px solid var(--border-mid); color: var(--text-muted); margin-bottom: 14px; }
+
+        /* DATE + READ TIME */
+        .post-date-row { display: flex; align-items: center; gap: 4px; margin-bottom: 16px; }
+        .post-read-time { font-size: 0.78rem; color: var(--text-dim); }
+        .post-read-time::before { content: '·'; margin: 0 8px; }
+
+        /* TAGS */
+        .post-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .post-tag { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-dim); }
+
+        /* SHARE */
+        .post-share { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 20px 0 0; margin-top: 24px; border-top: 1px solid var(--border); }
+        .post-share-label { font-size: 0.78rem; font-weight: 600; color: var(--text-dim); margin-right: 4px; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border-mid); background: var(--bg-card); color: var(--text-muted); cursor: pointer; transition: var(--trans); font-family: var(--font); text-decoration: none; }
+        .share-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); background: var(--bg-card-2); }
+
+        /* YOUTUBE CTA */
+        .yt-cta { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .yt-cta-text h3 { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+        .yt-cta-text p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+        .yt-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 10px; background: #FF0000; color: #fff; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: var(--trans); white-space: nowrap; flex-shrink: 0; }
+        .yt-btn:hover { background: #cc0000; transform: translateY(-1px); }
+
+        /* PREV / NEXT NAV */
+        .post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .post-nav-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; text-decoration: none; color: inherit; transition: var(--trans); display: block; }
+        .post-nav-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .post-nav-dir { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 6px; }
+        .post-nav-title { font-size: 0.88rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+        .post-nav-card--next { text-align: right; }
+
+        /* BACK BUTTON — mobile only */
+        .back-btn { display: none; }
+        @media (max-width: 768px) {
+            .back-btn { position: fixed; bottom: 24px; left: 20px; z-index: 50; display: flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 30px; background: rgba(17,17,17,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-mid); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+            .post-nav { grid-template-columns: 1fr; }
+        }
+
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: none; }
@@ -169,6 +212,9 @@
     </style>
 </head>
 <body>
+
+<div class="progress-bar" id="progressBar"></div>
+<a href="travel.html" class="back-btn">← Blog</a>
 
 <!-- NAV -->
 <nav class="nav">
@@ -242,6 +288,62 @@
                 <a href="travel.html" class="btn btn-primary" style="margin-top:8px;">← Back to Blog</a>
             </div>`;
         return;
+    }
+
+    /* ── Progress bar ── */
+    window.addEventListener('scroll', function () {
+        const doc = document.documentElement;
+        const scrolled = doc.scrollTop || document.body.scrollTop;
+        const total = doc.scrollHeight - doc.clientHeight;
+        document.getElementById('progressBar').style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    });
+
+    /* ── Read time ── */
+    function calcReadTime(p) {
+        const words = ([p.intro || ''].concat((p.body || []).map(b => b.text || '')).join(' ')).split(/\s+/).filter(Boolean).length;
+        return Math.max(1, Math.ceil(words / 200));
+    }
+
+    /* ── Category label ── */
+    const catLabels = { travel: 'Travel Journal', tutorials: 'Tutorials', gear: 'Gear & Affiliates' };
+
+    /* ── Share HTML ── */
+    function buildShareHTML(title) {
+        const url = window.location.href;
+        const tw = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+        return `
+            <div class="post-share">
+                <span class="post-share-label">Share</span>
+                <button class="share-btn" id="copyLinkBtn">🔗 Copy Link</button>
+                <a href="${tw}" target="_blank" rel="noopener" class="share-btn">𝕏 Post</a>
+            </div>`;
+    }
+
+    /* ── YouTube CTA ── */
+    function ytCtaHTML() {
+        return `
+            <div class="yt-cta reveal">
+                <div class="yt-cta-text">
+                    <h3>Enjoyed this story?</h3>
+                    <p>Subscribe on YouTube for cinematic travel videos every week.</p>
+                </div>
+                <a href="https://www.youtube.com/@jonbontabas" target="_blank" rel="noopener" class="yt-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3 3 0 0 0-2.12-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.57A3 3 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3 3 0 0 0 2.12 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.57a3 3 0 0 0 2.12-2.12A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+                    Subscribe
+                </a>
+            </div>`;
+    }
+
+    /* ── Prev / Next nav ── */
+    function prevNextHTML(currentId) {
+        const keys = Object.keys(POSTS);
+        const idx = keys.indexOf(currentId);
+        const prevKey = idx > 0 ? keys[idx - 1] : null;
+        const nextKey = idx < keys.length - 1 ? keys[idx + 1] : null;
+        if (!prevKey && !nextKey) return '';
+        const prev = prevKey ? `<a href="post.html?id=${prevKey}" class="post-nav-card post-nav-card--prev"><div class="post-nav-dir">← Previous</div><div class="post-nav-title">${POSTS[prevKey].title}</div></a>` : '<div></div>';
+        const next = nextKey ? `<a href="post.html?id=${nextKey}" class="post-nav-card post-nav-card--next"><div class="post-nav-dir">Next →</div><div class="post-nav-title">${POSTS[nextKey].title}</div></a>` : '<div></div>';
+        return `<div class="post-nav">${prev}${next}</div>`;
     }
 
     /* ── Page meta ── */
@@ -352,6 +454,13 @@
         </div>`;
 
     /* ── Assemble ── */
+    const readTime   = calcReadTime(post);
+    const catLabel   = catLabels[post.category] || 'Travel Journal';
+    const tagsHTML   = post.tags && post.tags.length
+        ? `<div class="post-tags">${post.tags.map(t => `<span class="post-tag">#${t}</span>`).join('')}</div>`
+        : '';
+    const shareBlock = buildShareHTML(post.title);
+
     root.innerHTML = `
         ${heroHTML}
         <nav class="breadcrumb">
@@ -363,16 +472,34 @@
         </nav>
         <div class="post-wrap">
             <header class="post-header">
+                <span class="post-cat-badge">${catLabel}</span>
                 <div class="post-location">📍 ${post.location}</div>
-                <div class="post-date">${post.date}</div>
+                <div class="post-date-row">
+                    <span class="post-date">${post.date}</span>
+                    <span class="post-read-time">${readTime} min read</span>
+                </div>
                 <h1>${post.title}</h1>
                 <p class="post-intro">${post.intro}</p>
+                ${tagsHTML}
+                ${shareBlock}
             </header>
             <div class="post-body">
                 ${bodyHTML}
+                ${ytCtaHTML()}
                 ${moreHTML}
             </div>
         </div>`;
+
+    /* ── Copy link button ── */
+    const copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                copyBtn.textContent = '✓ Copied!';
+                setTimeout(() => { copyBtn.textContent = '🔗 Copy Link'; }, 1800);
+            });
+        });
+    }
 
     /* ── Scroll reveal ── */
     const observer = new IntersectionObserver((entries) => {
