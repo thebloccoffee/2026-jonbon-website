@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI–Derma · Glass Skin Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FDF8F3;
+      --glass: rgba(255, 255, 255, 0.62);
+      --glass-border: rgba(255, 255, 255, 0.88);
+      --glass-shadow: rgba(190, 148, 155, 0.13);
+      --rose: #C8717A;
+      --rose-light: #EDB8BE;
+      --rose-pale: rgba(228, 190, 198, 0.35);
+      --gold: #B8864A;
+      --gold-light: #DEBA88;
+      --text: #2A1F1F;
+      --text-muted: #9A8282;
+      --text-light: #C4ADAD;
+      --surface: rgba(253, 248, 243, 0.85);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── Background ─────────────────────────────────────────────────────── */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: floatOrb linear infinite;
+    }
+    .orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(228,185,195,0.52) 0%, transparent 68%);
+      top: -220px; left: -180px;
+      animation-duration: 26s;
+    }
+    .orb-2 {
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(208,188,238,0.38) 0%, transparent 68%);
+      top: 28%; right: -120px;
+      animation-duration: 32s;
+      animation-delay: -9s;
+    }
+    .orb-3 {
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(178,218,238,0.32) 0%, transparent 68%);
+      bottom: 8%; left: 15%;
+      animation-duration: 24s;
+      animation-delay: -16s;
+    }
+    .orb-4 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(218,195,168,0.28) 0%, transparent 68%);
+      top: 58%; left: 55%;
+      animation-duration: 20s;
+      animation-delay: -6s;
+    }
+
+    @keyframes floatOrb {
+      0%   { transform: translate(0, 0) scale(1); }
+      25%  { transform: translate(28px, -38px) scale(1.04); }
+      50%  { transform: translate(-18px, 22px) scale(0.96); }
+      75%  { transform: translate(14px, 30px) scale(1.02); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    /* ─── Layout ──────────────────────────────────────────────────────────── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow:
+        0 8px 40px var(--glass-shadow),
+        inset 0 1px 0 rgba(255,255,255,0.92),
+        inset 0 -1px 0 rgba(210,185,185,0.08);
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      padding: 0 0 0;
+      margin-bottom: 0;
+    }
+
+    .nav-inner {
+      background: rgba(253, 248, 243, 0.78);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(225, 205, 205, 0.28);
+      border-radius: 20px;
+      padding: 14px 22px;
+      max-width: 880px;
+      margin: 16px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 24px rgba(190, 148, 155, 0.09);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .logo-dash { color: var(--rose); margin: 0 1px; }
+    .logo-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      align-self: flex-end;
+      margin-bottom: 2px;
+      margin-left: 8px;
+    }
+
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(245,228,208,0.9), rgba(240,200,196,0.9));
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gold);
+      border: 1px solid rgba(200, 152, 100, 0.25);
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── Hero ────────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 56px 0 36px;
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--rose);
+      font-weight: 300;
+    }
+
+    .hero-subtitle {
+      font-size: 0.68rem;
+      letter-spacing: 0.09em;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 14px;
+      font-family: 'Cormorant Garant', serif;
+      font-weight: 400;
+    }
+
+    .hero-text p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 360px;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 32px;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-value {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* ─── Score Ring ──────────────────────────────────────────────────────── */
+    .score-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+    }
+
+    .score-ring { width: 200px; height: 200px; transform: rotate(-90deg); }
+    .ring-track {
+      fill: none;
+      stroke: rgba(210, 185, 185, 0.18);
+      stroke-width: 7;
+    }
+    .ring-fill {
+      fill: none;
+      stroke: url(#grad);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 565;
+      stroke-dashoffset: 565;
+      transition: stroke-dashoffset 1.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+      filter: drop-shadow(0 0 8px rgba(200, 113, 122, 0.35));
+    }
+
+    .score-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .score-num {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 3.2rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--text);
+    }
+    .score-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .score-mood {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 0.78rem;
+      color: var(--rose);
+      font-style: italic;
+      margin-top: 7px;
+      font-weight: 400;
+    }
+
+    /* Shimmer halo */
+    .score-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        rgba(228, 185, 195, 0.22) 25%,
+        transparent 50%,
+        rgba(196, 168, 220, 0.15) 75%,
+        transparent 100%
+      );
+      animation: haloSpin 10s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes haloSpin { to { transform: rotate(360deg); } }
+
+    /* ─── Log Button ──────────────────────────────────────────────────────── */
+    .cta-row {
+      margin: 28px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-log {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #C8717A 0%, #A85850 50%, #B08040 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 22px rgba(200, 113, 122, 0.38), 0 1px 4px rgba(200,113,122,0.2);
+    }
+    .btn-log:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200, 113, 122, 0.48);
+    }
+    .btn-log:active { transform: translateY(0); }
+
+    .btn-plus {
+      font-size: 1.1rem;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    /* ─── Log Form ────────────────────────────────────────────────────────── */
+    .log-form {
+      padding: 32px;
+      margin-bottom: 36px;
+      display: none;
+    }
+    .log-form.open {
+      display: block;
+      animation: revealForm 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    }
+
+    @keyframes revealForm {
+      from { opacity: 0; transform: translateY(-18px) scale(0.975); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .form-heading {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .form-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group.span2 { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(218, 195, 195, 0.45);
+      border-radius: 13px;
+      padding: 12px 15px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(200, 113, 122, 0.5);
+      box-shadow: 0 0 0 3px rgba(200, 113, 122, 0.09);
+    }
+    textarea { resize: vertical; min-height: 88px; }
+    ::placeholder { color: var(--text-light); }
+
+    /* Skin Rating Slider */
+    .rating-block { grid-column: 1 / -1; }
+
+    .rating-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+    }
+    .rating-num {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .rating-text {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, #EDB8BE, #C8717A, #B8864A);
+      border-radius: 100px;
+      outline: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px; height: 24px;
+      background: white;
+      border: 2px solid var(--rose);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(200,113,122,0.32);
+      transition: transform 0.15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.18); }
+
+    /* Mood Pills */
+    .mood-block { grid-column: 1 / -1; }
+    .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .pill {
+      padding: 7px 16px;
+      border: 1px solid rgba(215, 195, 195, 0.45);
+      border-radius: 100px;
+      background: rgba(255,255,255,0.58);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      user-select: none;
+    }
+    .pill:hover { border-color: var(--rose-light); color: var(--rose); }
+    .pill.on {
+      background: linear-gradient(135deg, rgba(200,113,122,0.12), rgba(184,134,74,0.10));
+      border-color: var(--rose);
+      color: var(--rose);
+      font-weight: 500;
+    }
+
+    /* ─── Stepper Trackers ────────────────────────────────────────────────── */
+    .stepper-field {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stepper-inner {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(218,195,195,0.45);
+      border-radius: 16px;
+      padding: 14px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .stepper-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stepper-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(200,113,122,0.3);
+      background: rgba(255,255,255,0.8);
+      color: var(--rose);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.18s;
+      flex-shrink: 0;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .stepper-btn:hover {
+      background: var(--rose);
+      color: white;
+      border-color: var(--rose);
+      transform: scale(1.08);
+    }
+    .stepper-btn:active { transform: scale(0.95); }
+    .stepper-val {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+      text-align: center;
+      min-width: 56px;
+    }
+    .stepper-val span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      margin-left: 2px;
+    }
+    .stepper-track {
+      height: 4px;
+      background: rgba(215,195,195,0.2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .stepper-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--rose-light), var(--rose));
+      transition: width 0.3s ease;
+    }
+    .stepper-hint {
+      font-size: 0.66rem;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+      text-align: right;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .btn-cancel {
+      padding: 11px 22px;
+      border: 1px solid rgba(215,195,195,0.45);
+      border-radius: 100px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-cancel:hover { background: rgba(255,255,255,0.8); color: var(--text); }
+    .btn-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #C8717A, #A85850);
+      color: white;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s;
+      box-shadow: 0 3px 16px rgba(200,113,122,0.3);
+    }
+    .btn-save:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(200,113,122,0.4); }
+
+    /* ─── Section Headers ─────────────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .section-meta {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Timeline ────────────────────────────────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 14px; }
+
+    .entry {
+      padding: 22px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .entry::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(200,113,122,0.5), transparent 70%);
+    }
+
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 13px;
+    }
+    .entry-date-line {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .entry-mood-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 3px 11px;
+      background: rgba(200,113,122,0.1);
+      border-radius: 100px;
+      color: var(--rose);
+      border: 1px solid rgba(200,113,122,0.18);
+    }
+    .entry-score {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .entry-score span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .entry-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .entry-note {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+    .entry-products {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .del-btn {
+      position: absolute;
+      top: 18px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.18s, color 0.18s, background 0.18s;
+    }
+    .entry:hover .del-btn { opacity: 1; }
+    .del-btn:hover { color: #B05050; background: rgba(176,80,80,0.07); }
+
+    /* Empty */
+    .empty {
+      text-align: center;
+      padding: 64px 20px;
+    }
+    .empty-glyph {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      opacity: 0.3;
+    }
+    .empty-msg {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* ─── Routine ─────────────────────────────────────────────────────────── */
+    .routine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .routine-card { padding: 24px 26px; }
+    .routine-period {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .ritual {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(215,195,195,0.12);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .ritual:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .ritual-check {
+      width: 21px; height: 21px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(200,113,122,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .ritual.done .ritual-check {
+      background: linear-gradient(135deg, var(--rose), #B08040);
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(200,113,122,0.25);
+    }
+    .ritual.done .ritual-check::after {
+      content: '';
+      display: block;
+      width: 5px; height: 9px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+    .ritual-name {
+      font-size: 0.86rem;
+      color: var(--text);
+      transition: color 0.15s;
+    }
+    .ritual.done .ritual-name {
+      color: var(--text-light);
+      text-decoration: line-through;
+    }
+
+    /* ─── Routine completion bar ──────────────────────────────────────────── */
+    .ritual-progress {
+      height: 3px;
+      background: rgba(215,195,195,0.2);
+      border-radius: 100px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+    .ritual-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose-light), var(--rose));
+      border-radius: 100px;
+      transition: width 0.4s ease;
+    }
+    .routine-completion {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    /* ─── Photo Upload ────────────────────────────────────────────────────── */
+    .photo-upload-block { grid-column: 1 / -1; }
+
+    .photo-drop {
+      border: 1.5px dashed rgba(200,113,122,0.35);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.5);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-drop:hover {
+      border-color: var(--rose);
+      background: rgba(255,255,255,0.72);
+    }
+    .photo-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: none;
+      padding: 0;
+      box-shadow: none;
+    }
+    .photo-drop-icon { font-size: 1.5rem; margin-bottom: 6px; opacity: 0.5; }
+    .photo-drop-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .photo-drop-sub {
+      font-size: 0.68rem;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    .photo-preview-wrap {
+      position: relative;
+      display: none;
+    }
+    .photo-preview-wrap.has-photo { display: block; }
+    .photo-preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(218,195,195,0.3);
+      display: block;
+    }
+    .photo-remove {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: rgba(42,31,31,0.7);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: background 0.18s;
+    }
+    .photo-remove:hover { background: rgba(176,80,80,0.85); }
+
+    /* Entry photo */
+    .entry-photo {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(218,195,195,0.25);
+      display: block;
+    }
+
+    /* ─── Toast ───────────────────────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(42, 31, 31, 0.88);
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 100px;
+      font-size: 0.83rem;
+      z-index: 999;
+      pointer-events: none;
+      transition: transform 0.42s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s;
+      opacity: 0;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .toast.on {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 20px 0 0;
+      font-family: 'Cormorant Garant', serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-light);
+    }
+
+    /* ─── Responsive ──────────────────────────────────────────────────────── */
+    @media (max-width: 620px) {
+      .hero { grid-template-columns: 1fr; gap: 28px; }
+      .score-wrap { margin: 0 auto; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.span2 { grid-column: 1; }
+      .rating-block { grid-column: 1; }
+      .mood-block { grid-column: 1; }
+      .routine-grid { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 2.4rem; }
+    }
+
+    /* ─── Entry animation ─────────────────────────────────────────────────── */
+    .entry-appear {
+      animation: entryIn 0.48s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    }
+    @keyframes entryIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ─── Onboarding Overlay ──────────────────────────────────────────────── */
+    .onboard-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(253,248,243,0.97);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .onboard-overlay.fade-out { opacity: 0; pointer-events: none; transform: scale(1.03); }
+    .onboard-overlay.hidden   { display: none; }
+    .onboard-modal {
+      background: var(--glass); backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border: 1px solid var(--glass-border); border-radius: 32px;
+      box-shadow: 0 24px 80px rgba(190,148,155,0.22), inset 0 1px 0 rgba(255,255,255,0.92);
+      width: 100%; max-width: 580px; max-height: 92vh;
+      overflow-y: auto; padding: 44px 48px 40px; position: relative;
+      scrollbar-width: none;
+    }
+    .onboard-modal::-webkit-scrollbar { display: none; }
+    .onboard-steps-bar {
+      display: flex; align-items: center; gap: 6px; justify-content: center; margin-bottom: 34px;
+    }
+    .osdot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(215,195,195,0.35);
+      transition: all 0.35s cubic-bezier(0.34,1.4,0.64,1);
+    }
+    .osdot.active { width: 22px; border-radius: 100px; background: linear-gradient(90deg, var(--rose), var(--gold)); }
+    .osdot.done   { background: var(--rose-light); }
+    .onboard-step { display: none; }
+    .onboard-step.active {
+      display: block;
+      animation: ostepIn 0.42s cubic-bezier(0.34,1.4,0.64,1) both;
+    }
+    @keyframes ostepIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Welcome step */
+    .onboard-logo-big {
+      font-family: 'Cormorant Garant', serif; font-size: 3.2rem; font-weight: 400;
+      text-align: center; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em;
+    }
+    .onboard-logo-big em { color: var(--rose); font-style: italic; font-weight: 300; }
+    .onboard-tagline {
+      text-align: center; font-family: 'Cormorant Garant', serif;
+      font-size: 1.05rem; font-style: italic; color: var(--text-muted); margin-bottom: 34px;
+    }
+    .onboard-journey-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
+    .oj-item {
+      display: flex; align-items: center; gap: 16px; padding: 13px 18px;
+      background: rgba(255,255,255,0.55); border-radius: 16px;
+      border: 1px solid rgba(215,195,195,0.22); transition: background 0.2s;
+    }
+    .oj-item:hover { background: rgba(255,255,255,0.75); }
+    .oj-icon { font-size: 1.3rem; width: 34px; text-align: center; flex-shrink: 0; }
+    .oj-text h4 { font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+    .oj-text p  { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* Form steps */
+    .onboard-title { font-family: 'Cormorant Garant', serif; font-size: 2rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+    .onboard-sub   { font-size: 0.84rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 24px; }
+
+    /* Skin type pills */
+    .skin-type-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 7px; margin-bottom: 20px; }
+    .stype-pill {
+      padding: 13px 10px; border: 1.5px solid rgba(215,195,195,0.38); border-radius: 16px;
+      background: rgba(255,255,255,0.58); text-align: center; cursor: pointer; transition: all 0.2s;
+    }
+    .stype-pill:hover { border-color: var(--rose-light); }
+    .stype-pill .stp-icon { font-size: 1.45rem; display: block; margin-bottom: 5px; }
+    .stype-pill .stp-name { font-size: 0.79rem; font-weight: 500; color: var(--text); display: block; }
+    .stype-pill .stp-desc { font-size: 0.65rem; color: var(--text-muted); display: block; margin-top: 3px; line-height: 1.3; }
+    .stype-pill.on { border-color: var(--rose); background: linear-gradient(135deg,rgba(200,113,122,0.09),rgba(184,134,74,0.07)); box-shadow: 0 0 0 3px rgba(200,113,122,0.1); }
+    .stype-pill.on .stp-name { color: var(--rose); }
+
+    /* Skin photo upload (onboarding) */
+    .photo-upload-zone {
+      border: 2px dashed rgba(200,113,122,0.25); border-radius: 18px; padding: 24px 20px;
+      text-align: center; cursor: pointer; transition: all 0.2s;
+      background: rgba(255,255,255,0.38); position: relative; overflow: hidden;
+    }
+    .photo-upload-zone:hover { border-color: var(--rose-light); background: rgba(255,255,255,0.58); }
+    .photo-upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; width: 100%; height: 100%; }
+    .puz-icon { font-size: 1.8rem; margin-bottom: 7px; }
+    .puz-text { font-size: 0.83rem; color: var(--text-muted); }
+    .puz-hint { font-size: 0.69rem; color: var(--text-light); margin-top: 3px; }
+    .puz-content { pointer-events: none; }
+    .skin-photo-thumb { width: 100%; max-height: 170px; object-fit: cover; border-radius: 12px; display: none; }
+    .skin-photo-thumb.show { display: block; }
+
+    /* AI Analysis step */
+    .analysis-center { text-align: center; padding: 14px 0 6px; }
+    .scanner-wrap { width: 136px; height: 136px; margin: 0 auto 24px; position: relative; }
+    .scanner-bg   { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(200,113,122,0.13); }
+    .scanner-spin {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid transparent; border-top-color: var(--rose); border-right-color: rgba(184,134,74,0.6);
+      animation: sSpin 1.1s linear infinite;
+    }
+    .scanner-spin2 {
+      position: absolute; inset: 8px; border-radius: 50%;
+      border: 1.5px solid transparent; border-bottom-color: rgba(200,113,122,0.4);
+      animation: sSpin2 1.8s linear infinite;
+    }
+    @keyframes sSpin  { to { transform: rotate(360deg); } }
+    @keyframes sSpin2 { to { transform: rotate(-360deg); } }
+    .scanner-face-wrap {
+      position: absolute; inset: 14px; border-radius: 50%;
+      background: linear-gradient(135deg,rgba(228,185,195,0.28),rgba(196,168,220,0.18));
+      display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 2.6rem;
+    }
+    .scanner-face-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .scan-beam {
+      position: absolute; left: 14px; right: 14px; height: 2px;
+      background: linear-gradient(90deg,transparent,rgba(200,113,122,0.7),transparent);
+      top: 50%; animation: beamMove 2.2s ease-in-out infinite;
+    }
+    @keyframes beamMove { 0%,100% { top:18px; opacity:0; } 15% { opacity:1; } 85% { opacity:1; } 50% { top:calc(100% - 20px); } }
+    .analysis-h      { font-family:'Cormorant Garant',serif; font-size:1.85rem; font-weight:400; color:var(--text); margin-bottom:7px; }
+    .analysis-status { font-size:0.82rem; color:var(--text-muted); min-height:22px; margin-bottom:20px; }
+    .a-bar-track { background:rgba(215,195,195,0.2); border-radius:100px; height:5px; overflow:hidden; max-width:280px; margin:0 auto; }
+    .a-bar-fill  { height:100%; background:linear-gradient(90deg,var(--rose-light),var(--rose),var(--gold)); border-radius:100px; width:0%; transition:width 0.22s ease; }
+
+    /* Assessment result */
+    .skin-profile-card {
+      background: linear-gradient(135deg,rgba(228,185,195,0.18),rgba(196,168,220,0.12));
+      border: 1px solid rgba(200,113,122,0.18); border-radius: 20px;
+      padding: 18px 22px; display: flex; align-items: center; gap: 18px; margin-bottom: 14px;
+    }
+    .spc-icon { font-size: 2.4rem; flex-shrink: 0; }
+    .spc-info h3 { font-family:'Cormorant Garant',serif; font-size:1.4rem; font-weight:500; color:var(--text); margin-bottom:4px; }
+    .spc-info p  { font-size:0.79rem; color:var(--text-muted); line-height:1.55; }
+    .concern-row { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px; }
+    .ctag { font-size:0.71rem; padding:4px 12px; border-radius:100px; background:rgba(200,113,122,0.09); color:var(--rose); border:1px solid rgba(200,113,122,0.18); }
+
+    /* Product cards (in onboarding steps) */
+    .o-section-label { font-size:0.64rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); font-weight:500; margin-bottom:12px; }
+    .prod-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-bottom:20px; }
+    .prod-card {
+      background:rgba(255,255,255,0.65); border:1px solid rgba(215,195,195,0.28); border-radius:16px;
+      padding:12px; display:flex; gap:11px; align-items:flex-start;
+    }
+    .prod-img  { width:52px; height:52px; border-radius:11px; object-fit:cover; flex-shrink:0; background:linear-gradient(135deg,rgba(228,185,195,0.35),rgba(196,168,220,0.25)); }
+    .prod-info { flex:1; min-width:0; }
+    .prod-cat  { font-size:0.57rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--rose); font-weight:500; margin-bottom:3px; }
+    .prod-name { font-size:0.75rem; font-weight:500; color:var(--text); margin-bottom:4px; line-height:1.28; }
+    .prod-why  { font-size:0.68rem; color:var(--text-muted); line-height:1.4; }
+
+    /* Routine preview (in onboarding) */
+    .routine-prev-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+    .rpcard { background:rgba(255,255,255,0.58); border:1px solid rgba(215,195,195,0.28); border-radius:16px; padding:16px; }
+    .rpcard-period { font-size:0.61rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--text-muted); margin-bottom:11px; }
+    .rp-step { font-size:0.75rem; color:var(--text); padding:5px 0; border-bottom:1px solid rgba(215,195,195,0.1); display:flex; align-items:center; gap:7px; }
+    .rp-step:last-child { border-bottom:none; padding-bottom:0; }
+    .rp-step::before { content:'·'; color:var(--rose); font-size:1rem; font-weight:700; flex-shrink:0; }
+
+    /* Nav: profile avatar */
+    .nav-right { display:flex; align-items:center; gap:10px; }
+    .profile-avatar {
+      width:34px; height:34px; border-radius:50%;
+      background:linear-gradient(135deg,var(--rose-light),var(--gold-light));
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.78rem; font-weight:600; color:white; cursor:pointer; flex-shrink:0;
+      border:2px solid rgba(255,255,255,0.85); box-shadow:0 2px 8px rgba(200,113,122,0.22);
+      overflow:hidden; transition:transform 0.18s; display:none;
+    }
+    .profile-avatar.show { display:flex; }
+    .profile-avatar:hover { transform:scale(1.09); }
+    .profile-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+    /* Skin badge in hero */
+    .skin-badge {
+      display:none; align-items:center; gap:6px;
+      background:linear-gradient(135deg,rgba(200,113,122,0.1),rgba(184,134,74,0.08));
+      padding:5px 12px; border-radius:100px; font-size:0.73rem; color:var(--rose);
+      border:1px solid rgba(200,113,122,0.2); margin-top:13px; cursor:pointer; transition:all 0.18s;
+    }
+    .skin-badge.show { display:inline-flex; }
+    .skin-badge:hover { background:linear-gradient(135deg,rgba(200,113,122,0.16),rgba(184,134,74,0.12)); }
+
+    /* Recommended products section (main page) */
+    .rec-products-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(192px,1fr));
+      gap:16px; margin-bottom:14px;
+    }
+    .rec-prod-card { padding:18px; position:relative; overflow:hidden; }
+    .rec-prod-img {
+      width:100%; height:126px; object-fit:cover; border-radius:14px; margin-bottom:12px;
+      background:linear-gradient(135deg,rgba(228,185,195,0.3),rgba(196,168,220,0.2)); display:block;
+    }
+    .rec-prod-cat  { font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--rose); font-weight:500; margin-bottom:4px; }
+    .rec-prod-name { font-size:0.85rem; font-weight:500; color:var(--text); margin-bottom:5px; line-height:1.3; }
+    .rec-prod-why  { font-size:0.73rem; color:var(--text-muted); line-height:1.5; }
+
+    /* Onboarding nav */
+    .onboard-nav { display:flex; justify-content:space-between; align-items:center; margin-top:26px; padding-top:20px; border-top:1px solid rgba(215,195,195,0.18); }
+    .btn-oback { padding:10px 20px; border:1px solid rgba(215,195,195,0.4); border-radius:100px; background:transparent; font-family:'DM Sans',sans-serif; font-size:0.83rem; color:var(--text-muted); cursor:pointer; transition:all 0.18s; }
+    .btn-oback:hover { background:rgba(255,255,255,0.8); color:var(--text); }
+    .btn-onext {
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(135deg,#C8717A 0%,#A85850 55%,#B08040 100%);
+      color:white; border:none; padding:12px 26px; border-radius:100px;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; font-weight:500; cursor:pointer;
+      transition:transform 0.18s, box-shadow 0.18s; box-shadow:0 4px 18px rgba(200,113,122,0.34);
+    }
+    .btn-onext:hover { transform:translateY(-2px); box-shadow:0 8px 26px rgba(200,113,122,0.44); }
+    .btn-onext:disabled { opacity:0.45; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+    @media (max-width: 620px) {
+      .onboard-modal { padding:28px 22px 26px; }
+      .skin-type-grid { grid-template-columns:repeat(2,1fr); }
+      .prod-grid { grid-template-columns:1fr; }
+      .routine-prev-grid { grid-template-columns:1fr; }
+      .rec-products-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Onboarding Overlay ────────────────────────────────────────────────── -->
+<div id="onboarding" class="onboard-overlay">
+  <div class="onboard-modal">
+    <div class="onboard-steps-bar" id="onboardStepBar" style="display:none">
+      <div class="osdot" id="osd0"></div>
+      <div class="osdot" id="osd1"></div>
+      <div class="osdot" id="osd2"></div>
+      <div class="osdot" id="osd3"></div>
+      <div class="osdot" id="osd4"></div>
+    </div>
+
+    <!-- Step 0: Welcome -->
+    <div class="onboard-step active" id="oStep0">
+      <div class="onboard-logo-big">AI<em>–</em>Derma</div>
+      <p class="onboard-tagline">Your personalized glass skin companion</p>
+      <div class="onboard-journey-steps">
+        <div class="oj-item"><div class="oj-icon">👤</div><div class="oj-text"><h4>Your Profile</h4><p>Tell us about yourself for a personalized experience</p></div></div>
+        <div class="oj-item"><div class="oj-icon">📸</div><div class="oj-text"><h4>Skin Photo & Type</h4><p>Upload a photo and describe your skin</p></div></div>
+        <div class="oj-item"><div class="oj-icon">🔬</div><div class="oj-text"><h4>AI Assessment</h4><p>We analyze your skin profile and concerns</p></div></div>
+        <div class="oj-item"><div class="oj-icon">✨</div><div class="oj-text"><h4>Products & Routine</h4><p>Curated recommendations built just for you</p></div></div>
+        <div class="oj-item"><div class="oj-icon">📊</div><div class="oj-text"><h4>Daily Tracking</h4><p>Log rituals and watch your glass skin journey unfold</p></div></div>
+      </div>
+      <div style="text-align:center">
+        <button class="btn-onext" style="font-size:1rem;padding:16px 44px" onclick="onboardNext()">Begin My Skin Journey →</button>
+      </div>
+    </div>
+
+    <!-- Step 1: Personal Details -->
+    <div class="onboard-step" id="oStep1">
+      <h2 class="onboard-title">About You</h2>
+      <p class="onboard-sub">Help us personalize your glass skin journey.</p>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="oName" placeholder="e.g. Sofia, James, Alex...">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group"><label>Age</label><input type="number" id="oAge" placeholder="e.g. 26" min="13" max="99"></div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="oGender">
+              <option value="">Select...</option>
+              <option value="she">She / Her</option>
+              <option value="he">He / Him</option>
+              <option value="they">They / Them</option>
+              <option value="prefer-not">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-oback" onclick="onboardBack()">← Back</button>
+        <button class="btn-onext" onclick="onboardNext()">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Skin Profile -->
+    <div class="onboard-step" id="oStep2">
+      <h2 class="onboard-title">Your Skin</h2>
+      <p class="onboard-sub">Select what best describes your skin — this builds your personalized routine.</p>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Skin Type</label>
+        <div class="skin-type-grid">
+          <div class="stype-pill" data-type="normal"      onclick="pickSkinType(this)"><span class="stp-icon">🌿</span><span class="stp-name">Normal</span><span class="stp-desc">Balanced, minimal issues</span></div>
+          <div class="stype-pill" data-type="oily"        onclick="pickSkinType(this)"><span class="stp-icon">✨</span><span class="stp-name">Oily</span><span class="stp-desc">Shiny T-zone or all over</span></div>
+          <div class="stype-pill" data-type="dry"         onclick="pickSkinType(this)"><span class="stp-icon">🌙</span><span class="stp-name">Dry</span><span class="stp-desc">Tight, flaky, or dull</span></div>
+          <div class="stype-pill" data-type="combination" onclick="pickSkinType(this)"><span class="stp-icon">⚖️</span><span class="stp-name">Combination</span><span class="stp-desc">Oily T-zone, dry cheeks</span></div>
+          <div class="stype-pill" data-type="sensitive"   onclick="pickSkinType(this)"><span class="stp-icon">🌸</span><span class="stp-name">Sensitive</span><span class="stp-desc">Reacts easily, redness</span></div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Skin Concerns (select all that apply)</label>
+        <div class="pill-group" id="concernPills">
+          <div class="pill" data-concern="Acne & Breakouts"   onclick="toggleConcern(this)">Acne & Breakouts</div>
+          <div class="pill" data-concern="Hyperpigmentation"  onclick="toggleConcern(this)">Hyperpigmentation</div>
+          <div class="pill" data-concern="Dullness"           onclick="toggleConcern(this)">Dullness</div>
+          <div class="pill" data-concern="Fine Lines & Aging" onclick="toggleConcern(this)">Fine Lines & Aging</div>
+          <div class="pill" data-concern="Uneven Texture"     onclick="toggleConcern(this)">Uneven Texture</div>
+          <div class="pill" data-concern="Dark Circles"       onclick="toggleConcern(this)">Dark Circles</div>
+          <div class="pill" data-concern="Enlarged Pores"     onclick="toggleConcern(this)">Enlarged Pores</div>
+          <div class="pill" data-concern="Redness"            onclick="toggleConcern(this)">Redness</div>
+          <div class="pill" data-concern="Dehydration"        onclick="toggleConcern(this)">Dehydration</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Skin Photo <span style="color:var(--text-light);font-weight:400;text-transform:none;letter-spacing:0">(optional — for more accurate analysis)</span></label>
+        <div class="photo-upload-zone" id="photoZone">
+          <input type="file" id="skinPhotoInput" accept="image/*" onchange="handleSkinPhoto(this)">
+          <img class="skin-photo-thumb" id="skinPhotoThumb" alt="Skin photo">
+          <div class="puz-content" id="puzContent">
+            <div class="puz-icon">📸</div>
+            <div class="puz-text">Tap to upload a close-up of your skin</div>
+            <div class="puz-hint">Clear, natural lighting works best</div>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-oback" onclick="onboardBack()">← Back</button>
+        <button class="btn-onext" onclick="onboardNext()">Analyze My Skin →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: AI Analysis -->
+    <div class="onboard-step" id="oStep3">
+      <div class="analysis-center">
+        <div class="scanner-wrap">
+          <div class="scanner-bg"></div>
+          <div class="scanner-spin"></div>
+          <div class="scanner-spin2"></div>
+          <div class="scanner-face-wrap" id="scannerFace">🫧</div>
+          <div class="scan-beam"></div>
+        </div>
+        <h2 class="analysis-h">Analyzing Your Skin</h2>
+        <p class="analysis-status" id="analysisStatus">Initializing AI assessment...</p>
+        <div class="a-bar-track"><div class="a-bar-fill" id="aBarFill"></div></div>
+      </div>
+    </div>
+
+    <!-- Step 4: Assessment + Product Recommendations -->
+    <div class="onboard-step" id="oStep4">
+      <h2 class="onboard-title">Your Assessment</h2>
+      <p class="onboard-sub">Based on your profile, here's what our AI found.</p>
+      <div class="skin-profile-card" id="skinProfileCard"></div>
+      <div class="concern-row" id="concernTagRow"></div>
+      <div class="o-section-label">Recommended For You</div>
+      <div class="prod-grid" id="prodGrid"></div>
+      <div class="onboard-nav">
+        <button class="btn-oback" onclick="onboardBack()">← Back</button>
+        <button class="btn-onext" onclick="onboardNext()">See My Routine →</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Routine Preview -->
+    <div class="onboard-step" id="oStep5">
+      <h2 class="onboard-title">Your Ritual</h2>
+      <p class="onboard-sub">A routine personalized to your skin type. Tracked daily — results compound over time.</p>
+      <div class="routine-prev-grid" id="routinePreview"></div>
+      <div style="padding:14px 18px;background:rgba(255,255,255,0.55);border-radius:14px;border:1px solid rgba(215,195,195,0.22);margin-bottom:4px">
+        <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6"><strong style="color:var(--text)">Pro tip:</strong> Consistency reveals results. Log each ritual daily and watch your glass score climb over the weeks.</p>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-oback" onclick="onboardBack()">← Back</button>
+        <button class="btn-onext" style="font-size:0.95rem;padding:14px 34px" onclick="completeOnboarding()">Begin My Journey ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Background -->
+<div class="bg-canvas">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      AI<span class="logo-dash">–</span>Derma
+      <span class="logo-sub">Glass Skin Log</span>
+    </div>
+    <div class="nav-right">
+      <div class="streak-badge">🔥 <span id="streakNum">0</span>&thinsp;day streak</div>
+      <div class="profile-avatar" id="profileAvatar" title="Retake Assessment" onclick="retakeAssessment()"></div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 id="heroHeading">Track your path<br>to <em>glass skin</em></h1>
+      <p class="hero-subtitle" id="heroSub">A tool created by blocked creatives &copy;</p>
+      <p id="heroDesc">Log your daily rituals, monitor what's working, and watch consistency reveal your most luminous self.</p>
+      <div class="skin-badge" id="skinBadge" onclick="retakeAssessment()"></div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value" id="statTotal">0</span>
+          <span class="stat-label">Days logged</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statAvg">—</span>
+          <span class="stat-label">Avg clarity</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statBest">—</span>
+          <span class="stat-label">Best day</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score Ring -->
+    <div class="score-wrap">
+      <svg class="score-ring" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#EDB8BE"/>
+            <stop offset="45%"  stop-color="#C8717A"/>
+            <stop offset="100%" stop-color="#B8864A"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-track" cx="100" cy="100" r="90"/>
+        <circle class="ring-fill"  id="ringFill"  cx="100" cy="100" r="90"/>
+      </svg>
+      <div class="score-center">
+        <span class="score-num"  id="scoreNum">—</span>
+        <span class="score-tag">Glass Score</span>
+        <span class="score-mood" id="scoreMood">Start logging</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-row">
+    <button class="btn-log" id="logBtn" onclick="toggleForm()">
+      <span class="btn-plus">+</span> Log Today's Skin
+    </button>
+  </div>
+
+  <!-- Log Form -->
+  <div class="glass log-form" id="logForm">
+    <h2 class="form-heading">Today's Skin Log</h2>
+    <p class="form-date" id="formDate"></p>
+
+    <div class="form-grid">
+
+      <!-- Rating -->
+      <div class="rating-block form-group span2">
+        <label>Skin Clarity</label>
+        <div class="rating-header">
+          <span class="rating-num" id="ratingNum">7</span>
+          <span class="rating-text" id="ratingText">Looking good</span>
+        </div>
+        <input type="range" id="ratingSlider" min="1" max="10" value="7" oninput="onRating(this.value)">
+      </div>
+
+      <!-- Mood -->
+      <div class="mood-block form-group span2">
+        <label>Skin Mood</label>
+        <div class="pill-group" id="pillGroup">
+          <div class="pill" data-mood="Glowing"     onclick="pickMood(this)">Glowing</div>
+          <div class="pill" data-mood="Dewy"        onclick="pickMood(this)">Dewy</div>
+          <div class="pill" data-mood="Clear"       onclick="pickMood(this)">Clear</div>
+          <div class="pill" data-mood="Plump"       onclick="pickMood(this)">Plump</div>
+          <div class="pill" data-mood="Dry"         onclick="pickMood(this)">Dry</div>
+          <div class="pill" data-mood="Oily"        onclick="pickMood(this)">Oily</div>
+          <div class="pill" data-mood="Sensitive"   onclick="pickMood(this)">Sensitive</div>
+          <div class="pill" data-mood="Dull"        onclick="pickMood(this)">Dull</div>
+          <div class="pill" data-mood="Breaking out" onclick="pickMood(this)">Breaking out</div>
+          <div class="pill" data-mood="Irritated"   onclick="pickMood(this)">Irritated</div>
+        </div>
+      </div>
+
+      <!-- Sleep Stepper -->
+      <div class="stepper-field">
+        <label>Hours of Sleep 😴</label>
+        <div class="stepper-inner">
+          <div class="stepper-controls">
+            <button type="button" class="stepper-btn" onclick="stepSleep(-0.5)">−</button>
+            <div class="stepper-val" id="sleepDisplay">7<span>hrs</span></div>
+            <button type="button" class="stepper-btn" onclick="stepSleep(0.5)">+</button>
+          </div>
+          <div class="stepper-track">
+            <div class="stepper-fill" id="sleepBar" style="width:87.5%"></div>
+          </div>
+          <div class="stepper-hint" id="sleepHint">Goal: 8 hrs</div>
+        </div>
+      </div>
+
+      <!-- Water Stepper -->
+      <div class="stepper-field">
+        <label>Water Intake 💧</label>
+        <div class="stepper-inner">
+          <div class="stepper-controls">
+            <button type="button" class="stepper-btn" onclick="stepWater(-0.25)">−</button>
+            <div class="stepper-val" id="waterDisplay">1.0<span>L</span></div>
+            <button type="button" class="stepper-btn" onclick="stepWater(0.25)">+</button>
+          </div>
+          <div class="stepper-track">
+            <div class="stepper-fill" id="waterBar" style="width:40%"></div>
+          </div>
+          <div class="stepper-hint" id="waterHint">Goal: 2.5 L</div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="form-group span2">
+        <label>Products Used ✨</label>
+        <input type="text" id="fProducts" placeholder="e.g. Vitamin C serum, snail mucin, SPF 50+...">
+      </div>
+
+      <!-- Notes -->
+      <div class="form-group span2">
+        <label>Notes & Observations</label>
+        <textarea id="fNotes" placeholder="Anything you noticed? Diet changes, sleep quality, new reactions, skin wins..."></textarea>
+      </div>
+
+      <!-- Photo Upload -->
+      <div class="photo-upload-block">
+        <label>Today's Skin Photo 📸</label>
+        <div class="photo-preview-wrap" id="previewWrap">
+          <img class="photo-preview" id="photoPreview" src="" alt="Skin photo preview">
+          <button type="button" class="photo-remove" onclick="removePhoto()">✕ Remove</button>
+        </div>
+        <div class="photo-drop" id="photoDrop">
+          <input type="file" id="photoInput" accept="image/*" onchange="handlePhoto(this)">
+          <div class="photo-drop-icon">📷</div>
+          <div class="photo-drop-text">Tap to upload a photo</div>
+          <div class="photo-drop-sub">JPG, PNG, HEIC — stored locally</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="toggleForm()">Cancel</button>
+      <button class="btn-save"   onclick="saveEntry()">Save Entry ✦</button>
+    </div>
+  </div>
+
+  <!-- Recommended Products (shown after onboarding) -->
+  <div id="recProductsSection" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">Your Products</h2>
+      <span class="section-meta" id="recProductsMeta"></span>
+    </div>
+    <div class="rec-products-grid" id="recProductsGrid"></div>
+  </div>
+
+  <!-- Journey Timeline -->
+  <div class="section-header">
+    <h2 class="section-title">Your Journey</h2>
+    <span class="section-meta" id="entryMeta"></span>
+  </div>
+  <div class="timeline" id="timeline"></div>
+
+  <!-- Daily Rituals -->
+  <div class="section-header" style="margin-top:52px">
+    <h2 class="section-title">Daily Rituals</h2>
+    <span class="section-meta" id="ritualMeta"></span>
+  </div>
+  <div class="routine-grid">
+    <div class="glass routine-card">
+      <div class="routine-period">Morning Ritual ☀️</div>
+      <div id="amList"></div>
+      <div class="ritual-progress"><div class="ritual-progress-fill" id="amBar" style="width:0%"></div></div>
+      <div class="routine-completion" id="amPct"></div>
+    </div>
+    <div class="glass routine-card">
+      <div class="routine-period">Evening Ritual 🌙</div>
+      <div id="pmList"></div>
+      <div class="ritual-progress"><div class="ritual-progress-fill" id="pmBar" style="width:0%"></div></div>
+      <div class="routine-completion" id="pmPct"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>AI–Derma &nbsp;·&nbsp; Your personal glass skin companion &nbsp;·&nbsp; <span id="yr"></span></p>
+  </footer>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ─── Constants ────────────────────────────────────────────────────────────
+  const LOG_KEY     = 'ai-derma-v1-logs';
+  const RITUAL_KEY  = 'ai-derma-v1-rituals';
+  const PROFILE_KEY = 'ai-derma-v1-profile';
+  const CIRC        = 2 * Math.PI * 90; // ~565.5
+
+  const RATINGS = {
+    1:  'Very rough skin day',
+    2:  'Noticeably struggling',
+    3:  'Significant concerns',
+    4:  'Below average',
+    5:  'Average',
+    6:  'Decent',
+    7:  'Looking good',
+    8:  'Glowing',
+    9:  'Nearly flawless',
+    10: 'Glass skin achieved ✦',
+  };
+
+  const SCORE_MOODS = [
+    { min: 0,  label: 'Early days'      },
+    { min: 30, label: 'Building up'     },
+    { min: 48, label: 'Improving'       },
+    { min: 62, label: 'Radiant'         },
+    { min: 76, label: 'Luminous'        },
+    { min: 88, label: 'Glass skin ✦'   },
+  ];
+
+  const AM = [
+    'Gentle cleanser',
+    'Toner / essence',
+    'Vitamin C serum',
+    'Eye cream',
+    'Moisturizer',
+    'SPF 50+',
+  ];
+
+  const PM = [
+    'Oil cleanser (double cleanse)',
+    'Foam / gel cleanser',
+    'Exfoliant (2–3×/week)',
+    'Treatment serum',
+    'Niacinamide or retinol',
+    'Night cream / sleeping mask',
+  ];
+
+  // ─── State ────────────────────────────────────────────────────────────────
+  let logs      = [];
+  let rituals   = {};
+  let mood      = '';
+  let sleepVal  = 7;
+  let waterVal  = 1.0;
+  let photoData = null;
+  let profile   = null;
+
+  // ─── Init ─────────────────────────────────────────────────────────────────
+  function init() {
+    logs    = JSON.parse(localStorage.getItem(LOG_KEY)    || '[]');
+    rituals = JSON.parse(localStorage.getItem(RITUAL_KEY) || '{}');
+    profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    document.getElementById('formDate').textContent = today().toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+    if (profile && profile.setupDone) {
+      document.getElementById('onboarding').classList.add('hidden');
+      applyProfile();
+    } else {
+      document.getElementById('onboarding').classList.remove('hidden');
+    }
+    render();
+  }
+
+  function render() {
+    renderTimeline();
+    renderStats();
+    renderRing();
+    renderRituals();
+  }
+
+  // ─── Score ────────────────────────────────────────────────────────────────
+  function glassScore() {
+    if (!logs.length) return null;
+    const recent  = logs.slice(-14);
+    const avgR    = avg(recent.map(l => l.rating));
+    const sleepLs = recent.filter(l => l.sleep);
+    const waterLs = recent.filter(l => l.water);
+    const avgS    = sleepLs.length ? avg(sleepLs.map(l => l.sleep)) : 6;
+    const avgW    = waterLs.length ? avg(waterLs.map(l => l.water)) : 1.5;
+    const streak  = calcStreak();
+
+    let s = (avgR / 10) * 70;          // 70% skin clarity
+    s += clamp(avgS / 8) * 15;         // 15% sleep
+    s += clamp(avgW / 2.5) * 10;       // 10% hydration
+    s += clamp(streak / 14) * 5;       // 5%  consistency
+    return Math.round(s);
+  }
+
+  function calcStreak() {
+    if (!logs.length) return 0;
+    const dates = [...new Set(logs.map(l => l.date))].sort().reverse();
+    let streak = 0, cur = todayStr();
+    for (const d of dates) {
+      if (d === cur) {
+        streak++;
+        cur = prevDay(cur);
+      } else if (d < cur) break;
+    }
+    return streak;
+  }
+
+  function renderRing() {
+    const score  = glassScore();
+    const streak = calcStreak();
+    document.getElementById('streakNum').textContent = streak;
+
+    if (score === null) {
+      document.getElementById('scoreNum').textContent  = '—';
+      document.getElementById('scoreMood').textContent = 'Start logging';
+      document.getElementById('ringFill').style.strokeDashoffset = CIRC;
+      return;
+    }
+
+    document.getElementById('scoreNum').textContent = score;
+    const offset = CIRC - (score / 100) * CIRC;
+    setTimeout(() => {
+      document.getElementById('ringFill').style.strokeDashoffset = offset;
+    }, 80);
+
+    const mood = [...SCORE_MOODS].reverse().find(m => score >= m.min) || SCORE_MOODS[0];
+    document.getElementById('scoreMood').textContent = mood.label;
+  }
+
+  function renderStats() {
+    document.getElementById('statTotal').textContent = logs.length;
+    if (!logs.length) {
+      document.getElementById('statAvg').textContent  = '—';
+      document.getElementById('statBest').textContent = '—';
+      return;
+    }
+    document.getElementById('statAvg').textContent  = avg(logs.map(l => l.rating)).toFixed(1);
+    document.getElementById('statBest').textContent = Math.max(...logs.map(l => l.rating)) + '/10';
+  }
+
+  // ─── Timeline ─────────────────────────────────────────────────────────────
+  function renderTimeline() {
+    const el   = document.getElementById('timeline');
+    const meta = document.getElementById('entryMeta');
+
+    if (!logs.length) {
+      meta.textContent = '';
+      el.innerHTML = `
+        <div class="glass empty">
+          <div class="empty-glyph">✦</div>
+          <p class="empty-msg">Your skin story begins with the first entry...</p>
+        </div>`;
+      return;
+    }
+
+    meta.textContent = logs.length + (logs.length === 1 ? ' entry' : ' entries');
+
+    const sorted = [...logs].sort((a, b) => b.date.localeCompare(a.date));
+    el.innerHTML = sorted.map((log, i) => {
+      const d      = new Date(log.date + 'T12:00:00');
+      const dStr   = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+      const chips  = [];
+      if (log.sleep)    chips.push(`<span class="chip">😴 ${log.sleep}h sleep</span>`);
+      if (log.water)    chips.push(`<span class="chip">💧 ${log.water} L water</span>`);
+      return `
+        <div class="glass entry entry-appear" style="animation-delay:${i * 0.04}s">
+          <button class="del-btn" onclick="deleteEntry('${log.id}')">✕ delete</button>
+          ${log.photo ? `<img class="entry-photo" src="${log.photo}" alt="Skin photo">` : ''}
+          <div class="entry-top">
+            <div>
+              <div class="entry-date-line">${dStr}</div>
+              ${log.mood ? `<span class="entry-mood-tag">${log.mood}</span>` : ''}
+            </div>
+            <div class="entry-score">${log.rating}<span>/10</span></div>
+          </div>
+          ${chips.length ? `<div class="entry-chips">${chips.join('')}</div>` : ''}
+          ${log.products ? `<p class="entry-products">✨ ${log.products}</p>` : ''}
+          ${log.notes    ? `<p class="entry-note">"${log.notes}"</p>` : ''}
+        </div>`;
+    }).join('');
+  }
+
+  // ─── Rituals ──────────────────────────────────────────────────────────────
+  function renderRituals() {
+    const amSteps = (profile && profile.skinType && ROUTINES[profile.skinType]) ? ROUTINES[profile.skinType].am : AM;
+    const pmSteps = (profile && profile.skinType && ROUTINES[profile.skinType]) ? ROUTINES[profile.skinType].pm : PM;
+    renderRitualList('amList', 'amBar', 'amPct', amSteps, 'am');
+    renderRitualList('pmList', 'pmBar', 'pmPct', pmSteps, 'pm');
+
+    const amDone = amSteps.filter((_, i) => rituals[`am-${i}`]).length;
+    const pmDone = pmSteps.filter((_, i) => rituals[`pm-${i}`]).length;
+    const total  = amSteps.length + pmSteps.length;
+    const done   = amDone + pmDone;
+    document.getElementById('ritualMeta').textContent =
+      done + '/' + total + ' steps complete today';
+  }
+
+  function renderRitualList(listId, barId, pctId, steps, prefix) {
+    const list = document.getElementById(listId);
+    const done = steps.filter((_, i) => rituals[`${prefix}-${i}`]).length;
+    const pct  = Math.round((done / steps.length) * 100);
+
+    list.innerHTML = steps.map((s, i) => {
+      const key = `${prefix}-${i}`;
+      const on  = rituals[key] ? 'done' : '';
+      return `
+        <div class="ritual ${on}" onclick="toggleRitual('${key}')">
+          <div class="ritual-check"></div>
+          <span class="ritual-name">${s}</span>
+        </div>`;
+    }).join('');
+
+    document.getElementById(barId).style.width = pct + '%';
+    document.getElementById(pctId).textContent = pct + '%';
+  }
+
+  function toggleRitual(key) {
+    rituals[key] = !rituals[key];
+    localStorage.setItem(RITUAL_KEY, JSON.stringify(rituals));
+    renderRituals();
+  }
+
+  // ─── Form ─────────────────────────────────────────────────────────────────
+  function toggleForm() {
+    const f = document.getElementById('logForm');
+    f.classList.toggle('open');
+    if (f.classList.contains('open')) {
+      requestAnimationFrame(() => f.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+    }
+  }
+
+  function onRating(v) {
+    document.getElementById('ratingNum').textContent  = v;
+    document.getElementById('ratingText').textContent = RATINGS[v] || '';
+  }
+
+  function pickMood(el) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+    el.classList.add('on');
+    mood = el.dataset.mood;
+  }
+
+  // ─── Steppers ─────────────────────────────────────────────────────────────
+  function stepSleep(delta) {
+    sleepVal = Math.min(12, Math.max(0, +(sleepVal + delta).toFixed(1)));
+    renderStepper('sleepDisplay', 'sleepBar', 'sleepHint', sleepVal, 8, 'hrs', 'Goal: 8 hrs');
+  }
+
+  function stepWater(delta) {
+    waterVal = Math.min(5, Math.max(0, +(waterVal + delta).toFixed(2)));
+    renderStepper('waterDisplay', 'waterBar', 'waterHint', waterVal, 2.5, 'L', 'Goal: 2.5 L');
+  }
+
+  function renderStepper(displayId, barId, hintId, val, goal, unit, hintText) {
+    const display = document.getElementById(displayId);
+    const bar     = document.getElementById(barId);
+    const hint    = document.getElementById(hintId);
+    display.innerHTML = val + `<span>${unit}</span>`;
+    bar.style.width   = Math.min(100, (val / goal) * 100) + '%';
+    const pct = Math.round((val / goal) * 100);
+    hint.textContent  = pct >= 100 ? `Goal reached ✦` : hintText + ` (${pct}%)`;
+    if (pct >= 100) hint.style.color = 'var(--rose)';
+    else hint.style.color = '';
+  }
+
+  function saveEntry() {
+    const rating   = parseInt(document.getElementById('ratingSlider').value);
+    const sleep    = sleepVal || null;
+    const water    = waterVal || null;
+    const products = document.getElementById('fProducts').value.trim();
+    const notes    = document.getElementById('fNotes').value.trim();
+    const photo    = photoData;
+    const date     = todayStr();
+
+    if (logs.find(l => l.date === date)) {
+      toast('Already logged today. Delete the existing entry first.');
+      return;
+    }
+
+    logs.push({ id: Date.now().toString(), date, rating, sleep, water, products, notes, mood, photo });
+    localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+
+    // Reset
+    document.getElementById('ratingSlider').value = 7;
+    onRating(7);
+    sleepVal = 7; waterVal = 1.0;
+    renderStepper('sleepDisplay', 'sleepBar', 'sleepHint', sleepVal, 8, 'hrs', 'Goal: 8 hrs');
+    renderStepper('waterDisplay', 'waterBar', 'waterHint', waterVal, 2.5, 'L', 'Goal: 2.5 L');
+    document.getElementById('fProducts').value = '';
+    document.getElementById('fNotes').value    = '';
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+    removePhoto();
+    mood = '';
+
+    toggleForm();
+    render();
+    toast('Entry saved. Keep glowing ✦');
+  }
+
+  // ─── Photo ────────────────────────────────────────────────────────────────
+  function handlePhoto(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      photoData = e.target.result;
+      document.getElementById('photoPreview').src = photoData;
+      document.getElementById('previewWrap').classList.add('has-photo');
+      document.getElementById('photoDrop').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removePhoto() {
+    photoData = null;
+    document.getElementById('photoPreview').src = '';
+    document.getElementById('previewWrap').classList.remove('has-photo');
+    document.getElementById('photoDrop').style.display = '';
+    document.getElementById('photoInput').value = '';
+  }
+
+  function deleteEntry(id) {
+    logs = logs.filter(l => l.id !== id);
+    localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+    render();
+    toast('Entry deleted.');
+  }
+
+  // ─── Toast ────────────────────────────────────────────────────────────────
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('on'), 3000);
+  }
+
+  // ─── Utils ────────────────────────────────────────────────────────────────
+  function today()    { return new Date(); }
+  function todayStr() { return today().toISOString().split('T')[0]; }
+  function prevDay(str) {
+    const d = new Date(str + 'T12:00:00');
+    d.setDate(d.getDate() - 1);
+    return d.toISOString().split('T')[0];
+  }
+  function avg(arr)       { return arr.reduce((a, b) => a + b, 0) / arr.length; }
+  function clamp(v)       { return Math.min(1, Math.max(0, v)); }
+
+  // ─── Onboarding Data ──────────────────────────────────────────────────────
+  const SKIN_TYPE_DATA = {
+    normal:      { icon: '🌿', label: 'Normal Skin',      desc: 'Your skin is naturally balanced. Focus on maintaining radiance and protection from environmental stressors.' },
+    oily:        { icon: '✨', label: 'Oily Skin',         desc: 'Your skin produces excess sebum. The goal is balanced oil control while keeping the skin barrier strong.' },
+    dry:         { icon: '🌙', label: 'Dry Skin',          desc: 'Your skin needs deep hydration and moisture retention. Rich, nourishing formulas are your best friends.' },
+    combination: { icon: '⚖️', label: 'Combination Skin', desc: 'You have an oily T-zone with drier cheeks. Your routine addresses both zones for balanced, even skin.' },
+    sensitive:   { icon: '🌸', label: 'Sensitive Skin',   desc: 'Your skin reacts easily. Gentle, fragrance-free formulas that calm and strengthen your barrier are key.' },
+  };
+
+  const PRODUCT_DB = {
+    oily: [
+      { name: 'La Roche-Posay Effaclar Gel Cleanser', category: 'Cleanser',    why: 'Controls sebum without stripping', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=120&h=120' },
+      { name: 'The Ordinary Niacinamide 10% + Zinc',  category: 'Serum',       why: 'Minimizes pores and balances oil',   img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Neutrogena Hydro Boost Water Gel',     category: 'Moisturizer', why: 'Lightweight hydration, zero grease',  img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=120&h=120' },
+      { name: 'EltaMD UV Clear SPF 46',               category: 'Sunscreen',   why: 'Non-comedogenic, calming formula',    img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=120&h=120' },
+    ],
+    dry: [
+      { name: 'CeraVe Hydrating Facial Cleanser',     category: 'Cleanser',    why: 'Restores barrier while cleansing',    img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=120&h=120' },
+      { name: 'The Ordinary Hyaluronic Acid 2% + B5', category: 'Serum',       why: 'Multi-level deep hydration',          img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Laneige Water Sleeping Mask',          category: 'Treatment',   why: 'Deep overnight repair and glow',      img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Isntree Hyaluronic Acid Watery Sun',   category: 'Sunscreen',   why: 'Hydrating SPF 50+ formula',           img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=120&h=120' },
+    ],
+    combination: [
+      { name: 'Cetaphil Gentle Skin Cleanser',        category: 'Cleanser',    why: 'Balanced cleanse for mixed skin',     img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=120&h=120' },
+      { name: "Paula's Choice Vitamin C Booster",     category: 'Serum',       why: 'Brightens and evens skin tone',       img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Belif True Cream Aqua Bomb',           category: 'Moisturizer', why: 'Hydrates without clogging pores',     img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Biore UV Aqua Rich SPF 50+',           category: 'Sunscreen',   why: 'Weightless, dewy-finish SPF',         img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=120&h=120' },
+    ],
+    sensitive: [
+      { name: 'Vanicream Gentle Facial Cleanser',     category: 'Cleanser',    why: 'Fragrance-free, ultra-gentle wash',   img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Dr. Jart+ Cicapair Tiger Grass Serum', category: 'Serum',       why: 'Calms redness and strengthens barrier', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=120&h=120' },
+      { name: 'La Roche-Posay Toleriane Double Repair', category: 'Moisturizer', why: 'Ceramide-rich barrier repair cream',  img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Blue Lizard Sensitive Mineral SPF 50', category: 'Sunscreen',   why: 'Mineral filters, zero irritants',     img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=120&h=120' },
+    ],
+    normal: [
+      { name: 'Fresh Soy Face Cleanser',              category: 'Cleanser',    why: 'Gentle brightening daily wash',       img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=120&h=120' },
+      { name: 'SkinCeuticals C E Ferulic',            category: 'Serum',       why: 'Gold-standard vitamin C antioxidant', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=120&h=120' },
+      { name: 'Tatcha The Water Cream',               category: 'Moisturizer', why: 'Plumps and refines skin texture',     img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=120&h=120' },
+      { name: "Supergoop! Play SPF 50",               category: 'Sunscreen',   why: 'Broad spectrum everyday protection',  img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=120&h=120' },
+    ],
+  };
+
+  const ROUTINES = {
+    normal:      { am: ['Gentle foaming cleanser','Hydrating toner','Vitamin C serum','Eye cream','Lightweight moisturizer','SPF 50+'], pm: ['Oil cleanser','Gentle cleanser','Treatment serum','Niacinamide or retinol','Eye cream','Night moisturizer'] },
+    oily:        { am: ['Gel cleanser','BHA toner','Niacinamide serum','Oil-free moisturizer (gel)','Non-comedogenic SPF 50'], pm: ['Micellar water','Gel cleanser','BHA exfoliant (3x/week)','Niacinamide serum','Lightweight night cream'] },
+    dry:         { am: ['Hydrating cream cleanser','Hyaluronic acid serum','Peptide serum','Rich moisturizer','Hydrating SPF 50+'], pm: ['Balm cleanser','Hydrating toner','Retinol (2x/week)','Ceramide serum','Sleeping mask'] },
+    combination: { am: ['Gentle cleanser','Hydrating toner','Vitamin C serum','Gel-cream moisturizer','SPF 50+ (mattifying)'], pm: ['Cleansing oil','Foam cleanser','Niacinamide serum (T-zone)','Hydrating serum (cheeks)','Gel-cream night moisturizer'] },
+    sensitive:   { am: ['Fragrance-free gentle cleanser','Centella / cica toner','Barrier serum','Calming moisturizer','Mineral SPF 50+'], pm: ['Micellar water (fragrance-free)','Gentle cleanser','Centella serum','Ceramide-rich moisturizer','Overnight barrier mask'] },
+  };
+
+  // ─── Onboarding State ─────────────────────────────────────────────────────
+  let oStep = 0;
+  let oSkinType = '';
+  let oConcerns = [];
+  let oSkinPhoto = null;
+
+  function onboardNav(dir) {
+    const steps = document.querySelectorAll('.onboard-step');
+    const bar   = document.getElementById('onboardStepBar');
+    const prev  = oStep;
+    oStep = Math.max(0, Math.min(5, oStep + dir));
+    if (prev === oStep) return;
+
+    // Show/hide step dots (not on welcome)
+    bar.style.display = oStep === 0 ? 'none' : 'flex';
+    updateStepDots();
+
+    steps.forEach((s, i) => s.classList.toggle('active', i === oStep));
+
+    // Auto-run analysis when entering step 3
+    if (oStep === 3) runAnalysis();
+    // Populate assessment when entering step 4
+    if (oStep === 4) populateAssessment();
+    // Populate routine when entering step 5
+    if (oStep === 5) populateRoutine();
+
+    // Scroll modal to top
+    document.querySelector('.onboard-modal').scrollTop = 0;
+  }
+
+  function onboardNext() { onboardNav(1); }
+  function onboardBack() { onboardNav(-1); }
+
+  function updateStepDots() {
+    for (let i = 0; i < 5; i++) {
+      const dot = document.getElementById('osd' + i);
+      if (!dot) continue;
+      dot.className = 'osdot';
+      if (i === oStep - 1) dot.classList.add('active');
+      else if (i < oStep - 1) dot.classList.add('done');
+    }
+  }
+
+  function pickSkinType(el) {
+    document.querySelectorAll('.stype-pill').forEach(p => p.classList.remove('on'));
+    el.classList.add('on');
+    oSkinType = el.dataset.type;
+  }
+
+  function toggleConcern(el) {
+    el.classList.toggle('on');
+    const c = el.dataset.concern;
+    if (el.classList.contains('on')) {
+      if (!oConcerns.includes(c)) oConcerns.push(c);
+    } else {
+      oConcerns = oConcerns.filter(x => x !== c);
+    }
+  }
+
+  function handleSkinPhoto(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      oSkinPhoto = e.target.result;
+      const thumb = document.getElementById('skinPhotoThumb');
+      const content = document.getElementById('puzContent');
+      thumb.src = oSkinPhoto;
+      thumb.classList.add('show');
+      content.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function runAnalysis() {
+    const face = document.getElementById('scannerFace');
+    // Show uploaded photo or skin type emoji in scanner
+    if (oSkinPhoto) {
+      face.innerHTML = `<img src="${oSkinPhoto}" alt="Skin">`;
+    } else {
+      const skinIcons = { normal:'🌿', oily:'✨', dry:'🌙', combination:'⚖️', sensitive:'🌸' };
+      face.textContent = skinIcons[oSkinType] || '🫧';
+    }
+
+    const statusEl = document.getElementById('analysisStatus');
+    const barFill   = document.getElementById('aBarFill');
+    const messages  = [
+      'Analyzing skin texture...',
+      'Identifying skin type markers...',
+      'Detecting surface concerns...',
+      'Matching ingredient profiles...',
+      'Building your personalized routine...',
+      'Finalizing recommendations...',
+    ];
+
+    let step = 0;
+    const totalDuration = 3200;
+    const stepInterval  = totalDuration / messages.length;
+
+    statusEl.textContent = messages[0];
+    barFill.style.width  = '0%';
+
+    const ticker = setInterval(() => {
+      step++;
+      if (step < messages.length) {
+        statusEl.textContent = messages[step];
+        barFill.style.width  = Math.round((step / (messages.length - 1)) * 100) + '%';
+      } else {
+        clearInterval(ticker);
+        barFill.style.width = '100%';
+        setTimeout(() => onboardNav(1), 420);
+      }
+    }, stepInterval);
+  }
+
+  function populateAssessment() {
+    const type    = oSkinType || 'normal';
+    const data    = SKIN_TYPE_DATA[type];
+    const prods   = PRODUCT_DB[type] || PRODUCT_DB.normal;
+
+    // Skin profile card
+    document.getElementById('skinProfileCard').innerHTML = `
+      <div class="spc-icon">${data.icon}</div>
+      <div class="spc-info">
+        <h3>${data.label}</h3>
+        <p>${data.desc}</p>
+      </div>`;
+
+    // Concern tags
+    const concerns = oConcerns.length ? oConcerns : ['General maintenance'];
+    document.getElementById('concernTagRow').innerHTML =
+      concerns.map(c => `<span class="ctag">${c}</span>`).join('');
+
+    // Products
+    document.getElementById('prodGrid').innerHTML = prods.map(p => `
+      <div class="prod-card">
+        <img class="prod-img" src="${p.img}" alt="${p.name}"
+             onerror="this.style.background='linear-gradient(135deg,rgba(228,185,195,0.4),rgba(196,168,220,0.3))';this.removeAttribute('src')">
+        <div class="prod-info">
+          <div class="prod-cat">${p.category}</div>
+          <div class="prod-name">${p.name}</div>
+          <div class="prod-why">${p.why}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  function populateRoutine() {
+    const type    = oSkinType || 'normal';
+    const routine = ROUTINES[type] || ROUTINES.normal;
+    document.getElementById('routinePreview').innerHTML = `
+      <div class="rpcard">
+        <div class="rpcard-period">Morning Ritual ☀️</div>
+        ${routine.am.map(s => `<div class="rp-step">${s}</div>`).join('')}
+      </div>
+      <div class="rpcard">
+        <div class="rpcard-period">Evening Ritual 🌙</div>
+        ${routine.pm.map(s => `<div class="rp-step">${s}</div>`).join('')}
+      </div>`;
+  }
+
+  function completeOnboarding() {
+    const name   = (document.getElementById('oName').value || '').trim();
+    const age    = document.getElementById('oAge').value || '';
+    const gender = document.getElementById('oGender').value || '';
+
+    profile = {
+      name,
+      age,
+      gender,
+      skinType:  oSkinType || 'normal',
+      concerns:  oConcerns,
+      skinPhoto: oSkinPhoto,
+      products:  PRODUCT_DB[oSkinType || 'normal'] || PRODUCT_DB.normal,
+      setupDone: true,
+    };
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+
+    const overlay = document.getElementById('onboarding');
+    overlay.classList.add('fade-out');
+    setTimeout(() => overlay.classList.add('hidden'), 600);
+
+    applyProfile();
+    render();
+    toast('Welcome' + (name ? ', ' + name : '') + '. Your journey begins now ✦');
+  }
+
+  function applyProfile() {
+    if (!profile) return;
+
+    // Update hero greeting
+    const name = profile.name;
+    if (name) {
+      document.getElementById('heroHeading').innerHTML = `Your path to<br><em>glass skin</em>, ${name}`;
+      document.getElementById('heroSub').textContent = 'Personalized by AI · Your skin, your ritual';
+    }
+
+    // Show skin badge
+    const badgeEl = document.getElementById('skinBadge');
+    const typeData = SKIN_TYPE_DATA[profile.skinType];
+    if (typeData) {
+      badgeEl.textContent = typeData.icon + ' ' + typeData.label + ' · Tap to reassess';
+      badgeEl.classList.add('show');
+    }
+
+    // Show profile avatar in nav
+    const avatarEl = document.getElementById('profileAvatar');
+    avatarEl.classList.add('show');
+    if (profile.skinPhoto) {
+      avatarEl.innerHTML = `<img src="${profile.skinPhoto}" alt="${name}">`;
+    } else if (name) {
+      avatarEl.textContent = name.charAt(0).toUpperCase();
+    } else {
+      avatarEl.textContent = '✦';
+    }
+
+    // Render recommended products on main page
+    renderRecProducts();
+  }
+
+  function renderRecProducts() {
+    if (!profile || !profile.products) return;
+    const section = document.getElementById('recProductsSection');
+    const grid    = document.getElementById('recProductsGrid');
+    const meta    = document.getElementById('recProductsMeta');
+    const prods   = profile.products;
+
+    section.style.display = 'block';
+    meta.textContent = prods.length + ' curated picks for ' + (SKIN_TYPE_DATA[profile.skinType]?.label || 'your skin');
+
+    grid.innerHTML = prods.map(p => `
+      <div class="glass rec-prod-card">
+        <img class="rec-prod-img" src="${p.img.replace('w=120&h=120','w=400&h=200')}" alt="${p.name}"
+             onerror="this.style.background='linear-gradient(135deg,rgba(228,185,195,0.3),rgba(196,168,220,0.2))';this.removeAttribute('src')">
+        <div class="rec-prod-cat">${p.category}</div>
+        <div class="rec-prod-name">${p.name}</div>
+        <div class="rec-prod-why">${p.why}</div>
+      </div>`).join('');
+  }
+
+  function retakeAssessment() {
+    oStep = 0;
+    oSkinType = '';
+    oConcerns = [];
+    oSkinPhoto = null;
+    document.querySelectorAll('.onboard-step').forEach((s, i) => s.classList.toggle('active', i === 0));
+    document.getElementById('onboardStepBar').style.display = 'none';
+    // Reset form fields
+    document.getElementById('oName').value = profile?.name || '';
+    document.getElementById('oAge').value  = profile?.age  || '';
+    const overlay = document.getElementById('onboarding');
+    overlay.classList.remove('fade-out', 'hidden');
+  }
+
+  init();
+</script>
+</body>
+</html>
