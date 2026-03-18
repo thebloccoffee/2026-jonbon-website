@@ -3,11 +3,50 @@ const express = require('express');
 const stripe  = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const path    = require('path');
 const crypto  = require('crypto');
+const fs      = require('fs');
+const POSTS   = require('./src/posts.js');
 
 const app = express();
 
 // Block direct access to downloads folder before static middleware
 app.use('/downloads', (req, res) => res.status(403).send('Forbidden'));
+
+// Server-side OG tag injection for post pages (social media crawlers don't run JS)
+app.get('/post.html', (req, res) => {
+  const id   = req.query.id;
+  const post = id && POSTS[id];
+
+  if (!post) {
+    return res.sendFile(path.join(__dirname, 'post.html'));
+  }
+
+  const pageTitle = post.title.trim() + ' — Jon Bon';
+  const pageDesc  = (post.excerpt || post.intro || '').slice(0, 160);
+  const pageUrl   = 'https://tabasjonbon.com/post.html?id=' + id;
+  const pageImage = post.hero
+    ? 'https://tabasjonbon.com/' + post.hero
+    : 'https://tabasjonbon.com/assets/og-default.jpg';
+
+  let html = fs.readFileSync(path.join(__dirname, 'post.html'), 'utf8');
+
+  // Escape $ so JS replacement strings don't misinterpret $1, $2, etc.
+  const esc = s => s.replace(/\$/g, '$$$$');
+
+  html = html
+    .replace(/(<title[^>]*>)[^<]*(<\/title>)/,                             `$1${esc(pageTitle)}$2`)
+    .replace(/(<meta\s+name="description"[^>]*content=")[^"]*(")/,         `$1${esc(pageDesc)}$2`)
+    .replace(/(<link\s+rel="canonical"[^>]*href=")[^"]*(")/,               `$1${esc(pageUrl)}$2`)
+    .replace(/(<meta\s+property="og:title"[^>]*content=")[^"]*(")/,        `$1${esc(pageTitle)}$2`)
+    .replace(/(<meta\s+property="og:description"[^>]*content=")[^"]*(")/,  `$1${esc(pageDesc)}$2`)
+    .replace(/(<meta\s+property="og:url"[^>]*content=")[^"]*(")/,          `$1${esc(pageUrl)}$2`)
+    .replace(/(<meta\s+property="og:image"[^>]*content=")[^"]*(")/,        `$1${esc(pageImage)}$2`)
+    .replace(/(<meta\s+name="twitter:title"[^>]*content=")[^"]*(")/,       `$1${esc(pageTitle)}$2`)
+    .replace(/(<meta\s+name="twitter:description"[^>]*content=")[^"]*(")/,`$1${esc(pageDesc)}$2`)
+    .replace(/(<meta\s+name="twitter:image"[^>]*content=")[^"]*(")/,       `$1${esc(pageImage)}$2`);
+
+  res.setHeader('Content-Type', 'text/html');
+  res.send(html);
+});
 
 app.use(express.static(path.join(__dirname)));
 

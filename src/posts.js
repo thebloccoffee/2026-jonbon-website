@@ -423,7 +423,7 @@ const POSTS = {
       "emoji": "🌍",
       "excerpt": "We flew into Tofino on a seaplane from Vancouver and spent two days watching blue hours, sunsets, and surfers at Cox Bay. Here is what it was like.",
       "featured": true,
-      "title": "Tofino ",
+      "title": "24 Hours in Tofino ",
       "location": "",
       "date": "February 19, 2026",
       "category": "travel",
@@ -508,7 +508,8 @@ const POSTS = {
               "type": "p",
               "text": "Two days in Tofino is not enough, but it is enough to understand why people keep coming back. The seaplane ride in, the beach right outside your door, the surfers at Cox Bay as the sky turns orange. It all adds up. If you get the chance to go, take it. And if you can, take the seaplane."
           }
-      ]
+      ],
+      "hidden": true
   },
 
   "lunar-new-year-parade-in-vancouver-chinatown": {
@@ -636,3 +637,5 @@ const POSTS = {
   },
 
 };
+
+if (typeof module !== 'undefined') module.exports = POSTS;
