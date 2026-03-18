@@ -7,6 +7,8 @@
       "config": {
         "includeFiles": [
           "*.html",
+          "*.xml",
+          "*.txt",
           "src/**",
           "assets/**",
           "posts/**",
