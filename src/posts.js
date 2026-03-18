@@ -234,52 +234,150 @@ const POSTS = {
   },
 
   telesingrip: {
-    // ── CMS FIELDS ──────────────────────────────────────────────
-    emoji:    "📱",
-    excerpt:  "The iPhone filmmaking grip that changed how I shoot on the go. Honest review after real-world use.",
-    featured: true,
-    // ────────────────────────────────────────────────────────────
-    title:    "Telesin Fun Shot Magnetic Grip — iPhone Filmmaking Upgrade",
-    location: "Gear Review",
-    date:     "October 2025",
-    category: "gear",
-    tags:     ["Gear", "iPhone", "Mobile Filmmaking", "Review", "Affiliate"],
-    hero:     null, // TODO: add hero photo — clean product shot or you holding it
-    intro:    "I've been looking for a way to get more cinematic shots from my iPhone without lugging extra gear. The Telesin Fun Shot Magnetic Grip changed how I film on the go — here's my honest take after using it on real trips.",
-    body: [
-      { type: "h2", text: "Why I Picked This Up" },
-      { type: "p",  text: "I was skeptical of phone grips. Most of them feel like plastic toys that you use once and throw in a drawer. But the Telesin Fun Shot kept coming up in my research for lightweight travel filmmaking — specifically because of the magnetic lens mount system. That got my attention." },
-      { type: "p",  text: "I wanted something I could slip into a jacket pocket and still get shots that didn't look like they came from a phone. That's the bar I tested this against." },
-      { type: "h2", text: "The Specs That Actually Matter" },
-      { type: "specs", title: "Telesin Fun Shot — Key Specs", highlights: [
-        { value: "MagSafe", label: "Mount Type" },
-        { value: "52mm",    label: "Lens Ring" },
-        { value: "~85g",    label: "Weight" },
-        { value: "iPhone 12+", label: "Compatible" },
-      ], items: [
-        { label: "Attachment",      value: "MagSafe magnetic" },
-        { label: "Lens mount",      value: "52mm screw-on filter ring" },
-        { label: "Top mount",       value: "Universal cold shoe" },
-        { label: "Tripod thread",   value: "1/4\"-20 on base" },
-        { label: "Grip material",   value: "Rubber-coated ABS" },
-        { label: "Compatibility",   value: "iPhone 12 and later" },
-        { label: "In the box",      value: "Grip, wrist strap, lens cloth" },
-      ]},
-      { type: "p",  text: "The magnetic lens mount is the standout feature. Swap lenses in seconds without unscrewing anything. For run-and-gun travel filming, that's not a convenience — it's a game changer." },
-      { type: "h2", text: "In the Field" },
-      { type: "p",  text: "I used this across multiple shoots — handheld street filming, golden hour wide shots, tight interior scenes. The grip gives you a real handle on your phone, which sounds simple but completely changes how steady your footage is. Your wrist has something to anchor against." },
-      { type: "p",  text: "The cold shoe on top let me mount a small microphone for sit-down pieces. Paired with an anamorphic lens on the magnetic ring, I was pulling shots I would've needed a full camera rig to get before." }, // TODO: add specific location/trip details where you used it
-      { type: "video", id: "zmtcBjIQPqw" },
-      { type: "h2", text: "What I Love" },
-      { type: "p",  text: "The magnetic lens swap is instant and secure — never had a lens fall off mid-shot. The grip itself is comfortable for extended handheld use. Cold shoe + tripod thread means it plays well with the rest of your kit. Fits in any pocket. Genuinely improves footage quality." },
-      { type: "h2", text: "What Could Be Better" },
-      { type: "p",  text: "The magnetic mount, while convenient, means you're locked into Telesin's lens ecosystem unless you buy adapters. The grip also doesn't have a built-in battery or charging pass-through, which would've been a nice addition for longer shoots." }, // TODO: add any other real drawbacks you noticed
-      { type: "blockquote", text: "If you film travel content on an iPhone and you're not using a grip like this, you're leaving quality on the table — and not just because of stability.", author: "— Jon Bon" },
-      { type: "h2", text: "Where to Get It" },
-      { type: "p",  text: "You can pick it up on Amazon or directly from Telesin. Affiliate link below — I earn a small commission at no cost to you, which helps keep this blog running. I only recommend gear I actually use." }, // TODO: add your actual affiliate link here
-      { type: "gallery", images: [] }, // TODO: add sample shots taken with this grip
-      { type: "p",  text: "Mobile filmmaking has come a long way, and tools like this close the gap between phone and camera footage fast. What iPhone accessories are you currently using on your travels? Drop them in the comments — I'm always looking for what other creators are running with." },
-    ],
+      "emoji": "📱",
+      "excerpt": "The iPhone filmmaking grip that changed how I shoot on the go. Honest review after real-world use.",
+      "featured": true,
+      "title": "Telesin Fun Shot Magnetic Grip  iPhone Filmmaking Upgrade",
+      "location": "Gear Review",
+      "date": "October 2025",
+      "category": "gear",
+      "tags": [
+          "Gear",
+          "iPhone",
+          "Mobile Filmmaking",
+          "Review",
+          "Affiliate"
+      ],
+      "hero": null,
+      "intro": "I've been looking for a way to get more cinematic shots from my iPhone without lugging extra gear. The Telesin Fun Shot Magnetic Grip changed how I film on the go — here's my honest take after using it on real trips.",
+      "body": [
+          {
+              "type": "h2",
+              "text": "Why I Picked This Up"
+          },
+          {
+              "type": "p",
+              "text": "I was skeptical of phone grips. Most of them feel like plastic toys that you use once and throw in a drawer. But the Telesin Fun Shot kept coming up in my research for lightweight travel filmmaking — specifically because of the magnetic lens mount system. That got my attention."
+          },
+          {
+              "type": "p",
+              "text": "I wanted something I could slip into a jacket pocket and still get shots that didn't look like they came from a phone. That's the bar I tested this against."
+          },
+          {
+              "type": "h2",
+              "text": "The Specs That Actually Matter"
+          },
+          {
+              "type": "specs",
+              "title": "Telesin Fun Shot — Key Specs",
+              "highlights": [
+                  {
+                      "value": "MagSafe",
+                      "label": "Mount Type"
+                  },
+                  {
+                      "value": "52mm",
+                      "label": "Lens Ring"
+                  },
+                  {
+                      "value": "~85g",
+                      "label": "Weight"
+                  },
+                  {
+                      "value": "iPhone 12+",
+                      "label": "Compatible"
+                  }
+              ],
+              "items": [
+                  {
+                      "label": "Attachment",
+                      "value": "MagSafe magnetic"
+                  },
+                  {
+                      "label": "Lens mount",
+                      "value": "52mm screw-on filter ring"
+                  },
+                  {
+                      "label": "Top mount",
+                      "value": "Universal cold shoe"
+                  },
+                  {
+                      "label": "Tripod thread",
+                      "value": "1/4\"-20 on base"
+                  },
+                  {
+                      "label": "Grip material",
+                      "value": "Rubber-coated ABS"
+                  },
+                  {
+                      "label": "Compatibility",
+                      "value": "iPhone 12 and later"
+                  },
+                  {
+                      "label": "In the box",
+                      "value": "Grip, wrist strap, lens cloth"
+                  }
+              ]
+          },
+          {
+              "type": "p",
+              "text": "The magnetic lens mount is the standout feature. Swap lenses in seconds without unscrewing anything. For run-and-gun travel filming, that's not a convenience — it's a game changer."
+          },
+          {
+              "type": "h2",
+              "text": "In the Field"
+          },
+          {
+              "type": "p",
+              "text": "I used this across multiple shoots — handheld street filming, golden hour wide shots, tight interior scenes. The grip gives you a real handle on your phone, which sounds simple but completely changes how steady your footage is. Your wrist has something to anchor against."
+          },
+          {
+              "type": "p",
+              "text": "The cold shoe on top let me mount a small microphone for sit-down pieces. Paired with an anamorphic lens on the magnetic ring, I was pulling shots I would've needed a full camera rig to get before."
+          },
+          {
+              "type": "video",
+              "id": "zmtcBjIQPqw"
+          },
+          {
+              "type": "h2",
+              "text": "What I Love"
+          },
+          {
+              "type": "p",
+              "text": "The magnetic lens swap is instant and secure — never had a lens fall off mid-shot. The grip itself is comfortable for extended handheld use. Cold shoe + tripod thread means it plays well with the rest of your kit. Fits in any pocket. Genuinely improves footage quality."
+          },
+          {
+              "type": "h2",
+              "text": "What Could Be Better"
+          },
+          {
+              "type": "p",
+              "text": "The magnetic mount, while convenient, means you're locked into Telesin's lens ecosystem unless you buy adapters. The grip also doesn't have a built-in battery or charging pass-through, which would've been a nice addition for longer shoots."
+          },
+          {
+              "type": "blockquote",
+              "text": "If you film travel content on an iPhone and you're not using a grip like this, you're leaving quality on the table — and not just because of stability.",
+              "author": "— Jon Bon"
+          },
+          {
+              "type": "h2",
+              "text": "Where to Get It"
+          },
+          {
+              "type": "p",
+              "text": "You can pick it up on Amazon or directly from Telesin. Affiliate link below — I earn a small commission at no cost to you, which helps keep this blog running. I only recommend gear I actually use."
+          },
+          {
+              "type": "gallery",
+              "images": []
+          },
+          {
+              "type": "p",
+              "text": "Mobile filmmaking has come a long way, and tools like this close the gap between phone and camera footage fast. What iPhone accessories are you currently using on your travels? Drop them in the comments — I'm always looking for what other creators are running with."
+          }
+      ],
+      "hidden": false
   },
 
   cinematicresolve: {
