@@ -35,6 +35,7 @@
             --warm-bg:      rgba(0,0,0,0.05);
             --border:       rgba(0,0,0,0.08);
             --border-mid:   rgba(0,0,0,0.15);
+            --accent-warm:  #A07028;
         }
 
         /* ── Nav ── */
@@ -98,15 +99,21 @@
             background: #0A0A0A !important;
             color: #FFFFFF !important;
         }
-        html[data-theme="light"] .shop-tabs .shop-tab.active {
-            color: #0A0A0A !important;
-            border-bottom-color: #0A0A0A !important;
-            background: none !important;
-        }
         html[data-theme="light"] .blog-cat.active {
             background: #0A0A0A !important;
             color: #FFFFFF !important;
             border-color: transparent !important;
+        }
+
+        /* ── Product card image areas (hardcoded dark gradients) ── */
+        html[data-theme="light"] .product-img.blue {
+            background: linear-gradient(135deg, #D8D5CF, #C8C5BF) !important;
+        }
+        html[data-theme="light"] .product-img.warm {
+            background: linear-gradient(135deg, #DDD9D2, #CECAC2) !important;
+        }
+        html[data-theme="light"] .product-img.purple {
+            background: linear-gradient(135deg, #D4D1CB, #C8C4BD) !important;
         }
 
         /* ── Product modal ── */
@@ -134,9 +141,9 @@
         /* ── Badge ── */
         html[data-theme="light"] .badge-blue,
         html[data-theme="light"] .badge-warm {
-            background: rgba(0,0,0,0.05) !important;
-            color: #444444 !important;
-            border-color: rgba(0,0,0,0.12) !important;
+            background: rgba(160,112,40,0.08) !important;
+            color: #8A6020 !important;
+            border-color: rgba(160,112,40,0.22) !important;
         }
 
         /* ── Carousel ── */

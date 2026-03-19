@@ -146,7 +146,7 @@
         /* FOOTER */
         .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
         .footer-inner { max-width: 1140px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 1.4fr auto auto auto; gap: 64px; margin-bottom: 48px; align-items: start; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
         .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
         .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
         .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
@@ -200,12 +200,77 @@
             .why-grid { grid-template-columns: 1fr; }
             .affiliate-grid { grid-template-columns: 1fr; }
             .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
-            .nav-links { gap: 0; }
-            .nav-link { padding: 6px 8px; font-size: 0.78rem; }
         }
         @media (max-width: 520px) {
             .footer-top { grid-template-columns: 1fr; gap: 24px; }
             .footer-bottom { flex-direction: column; gap: 4px; }
+        }
+        /* HAMBURGER NAV */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-bg, rgba(255,255,255,0.07));
+            border: 1px solid var(--border-mid);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .nav-hamburger .bar {
+            display: block;
+            width: 15px;
+            height: 1.5px;
+            background: var(--text);
+            border-radius: 1px;
+            transition: transform 0.22s ease, opacity 0.18s ease;
+        }
+        .nav-hamburger.is-open .bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-hamburger.is-open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.is-open .bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        @media (max-width: 680px) {
+            .nav-hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg);
+                border-top: 1px solid var(--border);
+                padding: 12px 20px 40px;
+                gap: 2px;
+                z-index: 99;
+                overflow-y: auto;
+            }
+            .nav-links.mobile-open li { width: 100%; }
+            .nav-links.mobile-open .nav-link {
+                font-size: 1rem;
+                padding: 14px 16px;
+                border-radius: 10px;
+                width: 100%;
+                display: block;
+            }
+            .nav-links.mobile-open .nav-link.yt {
+                margin-left: 0;
+                margin-top: 8px;
+                text-align: center;
+            }
+            .nav-links.mobile-open .theme-toggle {
+                margin-left: 0;
+                margin-top: 8px;
+                width: 100%;
+                border-radius: 10px;
+                height: 48px;
+            }
         }
     </style>
 </head>
@@ -223,6 +288,11 @@
             <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
             <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button></li>
         </ul>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
     </div>
 </nav>
 
@@ -715,5 +785,6 @@
         }
     }
 </script>
+<script src="src/nav.js"></script>
 </body>
 </html>
