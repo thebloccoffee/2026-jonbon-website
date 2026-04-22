@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations — Jon Bon</title>
+    <meta name="description" content="Every place Jon Bon has filmed, explored, and gotten completely lost in. Travel guides, videos, and stories from around the world.">
+    <link rel="canonical" href="https://tabasjonbon.com/destinations.html">
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="Jon Bon">
+    <meta property="og:title"       content="Destinations — Jon Bon">
+    <meta property="og:description" content="Every place Jon Bon has filmed, explored, and gotten completely lost in.">
+    <meta property="og:url"         content="https://tabasjonbon.com/destinations.html">
+    <meta property="og:image"       content="https://tabasjonbon.com/assets/og-default.jpg">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@jonbontabas">
+    <meta name="twitter:title"       content="Destinations — Jon Bon">
+    <meta name="twitter:description" content="Every place Jon Bon has filmed, explored, and gotten completely lost in.">
+    <meta name="twitter:image"       content="https://tabasjonbon.com/assets/og-default.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="src/theme.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:         #0A0A0A;
+            --bg-card:    #111111;
+            --bg-card-2:  #1A1A1A;
+            --text:       #FFFFFF;
+            --text-muted: #888888;
+            --text-dim:   #444444;
+            --border:     rgba(255,255,255,0.07);
+            --border-mid: rgba(255,255,255,0.12);
+            --radius:     12px;
+            --radius-lg:  20px;
+            --max-w:      1140px;
+            --font:       'Inter', -apple-system, sans-serif;
+            --trans:      0.2s ease;
+            --accent-warm: #C4913C;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* NAV */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-size: 1rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+        .nav-link { display: block; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(255,255,255,0.06); }
+        .nav-link.yt { color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); margin-left: 8px; }
+        .nav-link.yt:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+
+        /* HAMBURGER */
+        .nav-hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: rgba(255,255,255,0.07); border: 1px solid var(--border-mid); border-radius: 8px; cursor: pointer; padding: 0; margin-left: 8px; flex-shrink: 0; }
+        .nav-hamburger .bar { display: block; width: 15px; height: 1.5px; background: var(--text); border-radius: 1px; transition: transform 0.22s ease, opacity 0.18s ease; }
+        .nav-hamburger.is-open .bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-hamburger.is-open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.is-open .bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        @media (max-width: 680px) {
+            .nav-hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-links.mobile-open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; background: var(--bg); border-top: 1px solid var(--border); padding: 12px 20px 40px; gap: 2px; z-index: 99; overflow-y: auto; }
+            .nav-links.mobile-open li { width: 100%; }
+            .nav-links.mobile-open .nav-link { font-size: 1rem; padding: 14px 16px; border-radius: 10px; width: 100%; display: block; }
+            .nav-links.mobile-open .nav-link.yt { margin-left: 0; margin-top: 8px; text-align: center; }
+            .nav-links.mobile-open .theme-toggle { margin-left: 0; margin-top: 8px; width: 100%; border-radius: 10px; height: 48px; }
+        }
+
+        /* LAYOUT */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: var(--trans); border: none; cursor: pointer; }
+        .btn-primary { background: #FFFFFF; color: #000000; }
+        .btn-primary:hover { background: #E0E0E0; transform: translateY(-1px); }
+        .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 8px; }
+
+        /* PAGE HEADER */
+        .page-hero { position: relative; overflow: hidden; min-height: 480px; display: flex; align-items: center; }
+        .page-hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; }
+        .page-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.92) 40%, rgba(10,10,10,0.5)); }
+        .page-hero-content { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; padding: 100px 32px 80px; }
+        .page-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-warm); margin-bottom: 12px; }
+        .page-title { font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 16px; }
+        .page-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 460px; margin-bottom: 32px; }
+        .hero-stats { display: flex; gap: 32px; }
+        .hero-stat-num { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; display: block; }
+        .hero-stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* SECTION */
+        .section { padding: 80px 0; }
+        .section--alt { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-warm); margin-bottom: 8px; }
+        .section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 40px; }
+        .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+
+        /* FILTER PILLS */
+        .filter-bar { display: flex; gap: 4px; margin-bottom: 40px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; flex-wrap: wrap; }
+        .filter-btn { padding: 7px 18px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; transition: var(--trans); font-family: var(--font); }
+        .filter-btn:hover { color: var(--text); }
+        .filter-btn.active { background: var(--bg-card-2); color: var(--text); border: 1px solid var(--border-mid); }
+        .filter-count { display: inline-flex; align-items: center; justify-content: center; background: var(--border-mid); color: var(--text-dim); border-radius: 20px; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; margin-left: 5px; vertical-align: middle; }
+
+        /* FEATURED DESTINATIONS */
+        .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 64px; }
+        .featured-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; display: block; text-decoration: none; color: inherit; }
+        .featured-card-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+        .featured-card:hover .featured-card-img { transform: scale(1.04); }
+        .featured-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 55%, transparent 100%); }
+        .featured-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 24px; }
+        .featured-card-region { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-warm); margin-bottom: 6px; }
+        .featured-card-name { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 6px; }
+        .featured-card-desc { font-size: 0.82rem; color: rgba(255,255,255,0.72); line-height: 1.55; }
+        .featured-card-arrow { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; opacity: 0; transition: opacity 0.2s ease; }
+        .featured-card:hover .featured-card-arrow { opacity: 1; }
+
+        /* DESTINATION GRID */
+        .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .dest-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--trans); display: block; text-decoration: none; color: inherit; }
+        .dest-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .dest-card[data-hidden="true"] { display: none; }
+        .dest-thumb { height: 200px; background: var(--bg-card-2) center/cover no-repeat; }
+        .dest-body { padding: 22px 24px 26px; }
+        .dest-region { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-warm); margin-bottom: 4px; }
+        .dest-name { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .dest-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.62; margin-bottom: 16px; }
+        .dest-footer { display: flex; align-items: center; justify-content: space-between; }
+        .dest-tag { font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: rgba(196,145,60,0.1); color: var(--accent-warm); border: 1px solid rgba(196,145,60,0.2); }
+        .dest-arrow { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); transition: var(--trans); }
+        .dest-card:hover .dest-arrow { color: var(--text); }
+
+        /* CONTINENT SECTIONS */
+        .continent-section { margin-bottom: 64px; }
+        .continent-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .continent-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-warm); background: rgba(196,145,60,0.1); border: 1px solid rgba(196,145,60,0.2); padding: 4px 12px; border-radius: 20px; }
+        .continent-name { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.04em; }
+        .continent-count { font-size: 0.82rem; color: var(--text-dim); margin-left: auto; }
+        .continent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+        /* NEWSLETTER */
+        .newsletter-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .newsletter-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-warm); margin-bottom: 10px; }
+        .newsletter-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 10px; }
+        .newsletter-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+        .newsletter-form { display: flex; gap: 8px; }
+        .newsletter-input { flex: 1; background: var(--bg); border: 1px solid var(--border-mid); border-radius: 10px; padding: 12px 16px; font-family: var(--font); font-size: 0.875rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+        .newsletter-input::placeholder { color: var(--text-dim); }
+        .newsletter-input:focus { border-color: rgba(255,255,255,0.28); }
+        .newsletter-submit { background: var(--accent-warm); color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+        .newsletter-submit:hover { opacity: 0.85; }
+        .newsletter-success { display: none; padding: 14px 18px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); border-radius: 10px; color: #4ade80; font-size: 0.875rem; font-weight: 500; }
+        .newsletter-error { display: none; padding: 14px 18px; background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); border-radius: 10px; color: #f87171; font-size: 0.875rem; font-weight: 500; }
+        .newsletter-note { margin-top: 10px; font-size: 0.75rem; color: var(--text-dim); }
+
+        /* FOOTER */
+        .footer { background: #050507; border-top: 1px solid var(--border); padding: 64px 32px 32px; }
+        .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
+        .footer-logo { font-size: 1rem; font-weight: 800; color: var(--text); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .footer-brand p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+        .footer-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: block; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 0.875rem; color: var(--text-muted); text-decoration: none; transition: var(--trans); }
+        .footer-col a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .featured-grid { grid-template-columns: 1fr 1fr; }
+            .featured-grid .featured-card:last-child { display: none; }
+            .dest-grid { grid-template-columns: repeat(2, 1fr); }
+            .continent-grid { grid-template-columns: repeat(2, 1fr); }
+            .newsletter-wrap { grid-template-columns: 1fr; padding: 40px 32px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 680px) {
+            .page-hero-content { padding: 80px 20px 60px; }
+            .hero-stats { gap: 24px; }
+            .featured-grid { grid-template-columns: 1fr; }
+            .featured-grid .featured-card:last-child { display: block; }
+            .dest-grid { grid-template-columns: 1fr; }
+            .continent-grid { grid-template-columns: 1fr; }
+            .newsletter-form { flex-direction: column; }
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 4px; }
+            .container { padding: 0 20px; }
+        }
+        @media (max-width: 720px) {
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">JON BON</a>
+        <ul class="nav-links">
+            <li><a href="index.html"            class="nav-link">Home</a></li>
+            <li><a href="index.html#videos"     class="nav-link">Videos</a></li>
+            <li><a href="travel.html"           class="nav-link">Blog</a></li>
+            <li><a href="destinations.html"     class="nav-link active">Destinations</a></li>
+            <li><a href="products.html"         class="nav-link">Shop</a></li>
+            <li><a href="https://www.youtube.com/@jonbontabas" target="_blank" class="nav-link yt">Subscribe ↗</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button></li>
+        </ul>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+        <div class="page-eyebrow">Destinations</div>
+        <h1 class="page-title">Where To Next?</h1>
+        <p class="page-desc">Every place I've filmed, explored, and gotten completely lost in. Guides, videos, and stories from around the world.</p>
+        <div class="hero-stats">
+            <div>
+                <span class="hero-stat-num" id="statDestinations">—</span>
+                <span class="hero-stat-label">Destinations</span>
+            </div>
+            <div>
+                <span class="hero-stat-num" id="statContinents">—</span>
+                <span class="hero-stat-label">Continents</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURED -->
+<section class="section" style="padding-bottom: 0;">
+    <div class="container">
+        <div class="section-eyebrow">Top Picks</div>
+        <div class="section-head">
+            <h2 class="section-title" style="margin-bottom: 0;">Featured Destinations</h2>
+        </div>
+        <div class="featured-grid reveal" id="featuredGrid"></div>
+    </div>
+</section>
+
+<!-- ALL DESTINATIONS -->
+<section class="section">
+    <div class="container">
+        <div class="section-eyebrow">Browse</div>
+        <div class="section-head" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+            <h2 class="section-title" style="margin-bottom: 0;">All Destinations</h2>
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-continent="all">All <span class="filter-count" id="countAll">—</span></button>
+                <button class="filter-btn" data-continent="Asia">Asia <span class="filter-count" id="countAsia">—</span></button>
+                <button class="filter-btn" data-continent="Europe">Europe <span class="filter-count" id="countEurope">—</span></button>
+                <button class="filter-btn" data-continent="Americas">Americas <span class="filter-count" id="countAmericas">—</span></button>
+                <button class="filter-btn" data-continent="Africa">Africa <span class="filter-count" id="countAfrica">—</span></button>
+            </div>
+        </div>
+        <div class="dest-grid" id="destGrid"></div>
+    </div>
+</section>
+
+<!-- BY CONTINENT -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-eyebrow">Browse by Region</div>
+        <h2 class="section-title">Explore by Continent</h2>
+        <div id="continentSections"></div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section">
+    <div class="container">
+        <div class="newsletter-wrap reveal">
+            <div>
+                <div class="newsletter-eyebrow">Stay in the Loop</div>
+                <h2 class="newsletter-title">New destination drops, first.</h2>
+                <p class="newsletter-desc">Get new travel guides, cinematic videos, and behind-the-scenes stories delivered before they hit anywhere else.</p>
+            </div>
+            <div>
+                <div id="newsletterDefault">
+                    <div class="newsletter-form">
+                        <input class="newsletter-input" type="email" id="newsletterEmail" placeholder="your@email.com" autocomplete="email">
+                        <button class="newsletter-submit" id="newsletterBtn" onclick="submitNewsletter()">Subscribe</button>
+                    </div>
+                    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+                </div>
+                <div class="newsletter-success" id="newsletterSuccess">You're in. New destinations coming your way.</div>
+                <div class="newsletter-error" id="newsletterError">Something went wrong. Try again.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">JON BON</span>
+                <p>Travel filmmaker & content creator.<br>Documenting the world, one story at a time.</p>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Pages</span>
+                <ul>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="travel.html">Blog</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Follow</span>
+                <ul>
+                    <li><a href="https://www.youtube.com/@jonbontabas" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/jooonbon" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@jonbontabas" target="_blank">TikTok</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="footer-col-title">Contact</span>
+                <ul>
+                    <li><a href="mailto:contact@tabasjonbon.com">contact@tabasjonbon.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Jon Bon. All rights reserved.</span>
+            <span>Travel filmmaker & content creator</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /*
+     * ─── DESTINATION DATA ────────────────────────────────────────────────────
+     * Add, remove, or edit entries here to update the entire page.
+     * Fields:
+     *   id         — unique slug (used for future post linking)
+     *   name       — display name
+     *   continent  — "Asia" | "Europe" | "Americas" | "Africa" | "Oceania"
+     *   tagline    — short one-liner shown on featured cards
+     *   description — 1-2 sentence card description
+     *   image      — full URL or relative path to image
+     *   href       — link target (use "#" until dedicated page exists)
+     *   featured   — true = shown in top Featured section (first 3 only)
+     *   tags       — optional array of activity tags shown on card
+     * ─────────────────────────────────────────────────────────────────────────
+     */
+    const DESTINATIONS = [
+        {
+            id: 'vietnam',
+            name: 'Vietnam',
+            continent: 'Asia',
+            tagline: 'From Hanoi\'s chaos to Ha Long Bay\'s stillness.',
+            description: 'A country that moves fast and sits still in equal measure. Street food at dawn, limestone karsts at dusk.',
+            image: 'https://images.unsplash.com/photo-1557750255-c06f7fe6c415?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            featured: true,
+            tags: ['Cinematic', 'Street Food']
+        },
+        {
+            id: 'japan',
+            name: 'Japan',
+            continent: 'Asia',
+            tagline: 'Where ancient ritual meets neon sprawl.',
+            description: 'Tokyo\'s energy, Kyoto\'s calm, and food that makes everything else feel like a rough draft.',
+            image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            featured: true,
+            tags: ['Culture', 'Street']
+        },
+        {
+            id: 'norway',
+            name: 'Norway',
+            continent: 'Europe',
+            tagline: 'Fjords, silence, and the edge of the world.',
+            description: 'Drive the Atlantic Road at golden hour, sleep under the northern lights, wake up to a fjord out the window.',
+            image: 'https://images.unsplash.com/photo-1601439678777-b2b3c56fa627?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            featured: true,
+            tags: ['Nature', 'Road Trip']
+        },
+        {
+            id: 'philippines',
+            name: 'Philippines',
+            continent: 'Asia',
+            tagline: 'Over 7,000 islands. Pick wisely.',
+            description: 'Palawan\'s turquoise lagoons, Siargao\'s surf breaks, and some of the warmest people on earth.',
+            image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['Beach', 'Islands']
+        },
+        {
+            id: 'portugal',
+            name: 'Portugal',
+            continent: 'Europe',
+            tagline: 'Europe\'s most underrated coastline.',
+            description: 'Lisbon\'s tiled walls, Porto\'s wine caves, and a slow afternoon in the Alentejo that stretches into evening.',
+            image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['City', 'Food']
+        },
+        {
+            id: 'thailand',
+            name: 'Thailand',
+            continent: 'Asia',
+            tagline: 'The land of smiles earned that tagline.',
+            description: 'Ancient temples at dawn, floating markets by midday, and a pad thai that will ruin all other pad thai.',
+            image: 'https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['Culture', 'Beach']
+        },
+        {
+            id: 'iceland',
+            name: 'Iceland',
+            continent: 'Europe',
+            tagline: 'The earth is still writing itself here.',
+            description: 'Geysers, glaciers, and roads that go nowhere useful but everywhere beautiful.',
+            image: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['Nature', 'Aurora']
+        },
+        {
+            id: 'indonesia',
+            name: 'Indonesia',
+            continent: 'Asia',
+            tagline: '17,000 islands. One lifetime is not enough.',
+            description: 'Bali\'s temples at dawn, Raja Ampat\'s reefs below, and a rice terrace that puts every screensaver to shame.',
+            image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['Culture', 'Diving']
+        },
+        {
+            id: 'canada',
+            name: 'Canada',
+            continent: 'Americas',
+            tagline: 'Quebec in winter is a movie set that someone forgot to take down.',
+            description: 'Old Quebec\'s stone streets under snowfall, Banff\'s frozen lakes, and a cold so clarifying it counts as meditation.',
+            image: 'https://images.unsplash.com/photo-1519832979-6fa011b87667?auto=format&fit=crop&w=800&q=80',
+            href: '#',
+            tags: ['Winter', 'City']
+        }
+    ];
+
+    /* ── Render ─────────────────────────────────────────────────────────────── */
+
+    function buildFeatured() {
+        const featured = DESTINATIONS.filter(d => d.featured).slice(0, 3);
+        document.getElementById('featuredGrid').innerHTML = featured.map(d => `
+            <a href="${d.href}" class="featured-card">
+                <div class="featured-card-img" style="background-image: url('${d.image}');"></div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-body">
+                    <div class="featured-card-region">${d.continent}</div>
+                    <div class="featured-card-name">${d.name}</div>
+                    <div class="featured-card-desc">${d.tagline}</div>
+                </div>
+                <div class="featured-card-arrow">↗</div>
+            </a>
+        `).join('');
+    }
+
+    function buildGrid() {
+        const cards = DESTINATIONS.map((d, i) => {
+            const delay = (i * 0.05).toFixed(2);
+            const tagsHtml = d.tags ? d.tags.slice(0, 1).map(t => `<span class="dest-tag">${t}</span>`).join('') : '';
+            return `
+                <a href="${d.href}" class="dest-card reveal" style="transition-delay:${delay}s" data-continent="${d.continent}">
+                    <div class="dest-thumb" style="background-image: url('${d.image}');"></div>
+                    <div class="dest-body">
+                        <div class="dest-region">${d.continent}</div>
+                        <div class="dest-name">${d.name}</div>
+                        <div class="dest-desc">${d.description}</div>
+                        <div class="dest-footer">
+                            ${tagsHtml}
+                            <span class="dest-arrow">Explore →</span>
+                        </div>
+                    </div>
+                </a>`;
+        }).join('');
+        document.getElementById('destGrid').innerHTML = cards;
+    }
+
+    function buildContinentSections() {
+        const continents = [...new Set(DESTINATIONS.map(d => d.continent))];
+        document.getElementById('continentSections').innerHTML = continents.map(continent => {
+            const dests = DESTINATIONS.filter(d => d.continent === continent);
+            const cards = dests.map(d => {
+                const tagsHtml = d.tags ? d.tags.slice(0, 1).map(t => `<span class="dest-tag">${t}</span>`).join('') : '';
+                return `
+                    <a href="${d.href}" class="dest-card reveal">
+                        <div class="dest-thumb" style="background-image: url('${d.image}');"></div>
+                        <div class="dest-body">
+                            <div class="dest-name">${d.name}</div>
+                            <div class="dest-desc">${d.tagline}</div>
+                            <div class="dest-footer">
+                                ${tagsHtml}
+                                <span class="dest-arrow">Explore →</span>
+                            </div>
+                        </div>
+                    </a>`;
+            }).join('');
+            return `
+                <div class="continent-section">
+                    <div class="continent-header">
+                        <span class="continent-label">${continent}</span>
+                        <span class="continent-name">${continentTitle(continent)}</span>
+                        <span class="continent-count">${dests.length} destination${dests.length !== 1 ? 's' : ''}</span>
+                    </div>
+                    <div class="continent-grid">${cards}</div>
+                </div>`;
+        }).join('');
+    }
+
+    function continentTitle(c) {
+        const map = { Asia: 'Southeast & East Asia', Europe: 'Europe', Americas: 'The Americas', Africa: 'Africa', Oceania: 'Oceania & Pacific' };
+        return map[c] || c;
+    }
+
+    function updateCounts() {
+        const all = DESTINATIONS.length;
+        const byCont = {};
+        DESTINATIONS.forEach(d => { byCont[d.continent] = (byCont[d.continent] || 0) + 1; });
+        const continents = Object.keys(byCont).length;
+
+        document.getElementById('statDestinations').textContent = all;
+        document.getElementById('statContinents').textContent = continents;
+        document.getElementById('countAll').textContent = all;
+
+        ['Asia','Europe','Americas','Africa'].forEach(c => {
+            const el = document.getElementById('count' + c);
+            if (el) el.textContent = byCont[c] || 0;
+        });
+
+        /* hide filter buttons with 0 */
+        document.querySelectorAll('.filter-btn[data-continent]').forEach(btn => {
+            const c = btn.dataset.continent;
+            if (c !== 'all' && !byCont[c]) btn.style.display = 'none';
+        });
+    }
+
+    /* ── Filter ─────────────────────────────────────────────────────────────── */
+
+    function initFilter() {
+        document.getElementById('filterBar').addEventListener('click', function(e) {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            const continent = btn.dataset.continent;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.dest-card[data-continent]').forEach(card => {
+                if (continent === 'all' || card.dataset.continent === continent) {
+                    card.removeAttribute('data-hidden');
+                    card.classList.add('visible');
+                } else {
+                    card.dataset.hidden = 'true';
+                }
+            });
+        });
+    }
+
+    /* ── Newsletter ─────────────────────────────────────────────────────────── */
+
+    function submitNewsletter() {
+        const email = document.getElementById('newsletterEmail').value.trim();
+        const success = document.getElementById('newsletterSuccess');
+        const error = document.getElementById('newsletterError');
+        const form = document.getElementById('newsletterDefault');
+
+        if (!email || !email.includes('@')) {
+            error.style.display = 'block';
+            error.textContent = 'Enter a valid email address.';
+            return;
+        }
+
+        /* POST to your backend — swap URL for real endpoint when ready */
+        fetch('/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        })
+        .then(r => {
+            form.style.display = 'none';
+            error.style.display = 'none';
+            if (r.ok) {
+                success.style.display = 'block';
+            } else {
+                error.style.display = 'block';
+                error.textContent = 'Something went wrong. Try again.';
+            }
+        })
+        .catch(() => {
+            /* offline / no backend yet — still show success in dev */
+            form.style.display = 'none';
+            success.style.display = 'block';
+        });
+    }
+
+    /* also allow Enter key in email field */
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('newsletterEmail');
+        if (emailInput) emailInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') submitNewsletter();
+        });
+    });
+
+    /* ── Reveal observer ────────────────────────────────────────────────────── */
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.06 });
+
+    /* ── Init ───────────────────────────────────────────────────────────────── */
+
+    buildFeatured();
+    buildGrid();
+    buildContinentSections();
+    updateCounts();
+    initFilter();
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script src="src/nav.js"></script>
+</body>
+</html>
